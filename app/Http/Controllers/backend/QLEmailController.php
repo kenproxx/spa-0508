@@ -12,7 +12,7 @@ class QLEmailController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend/pages/quan-ly-email/index');
     }
 
     /**

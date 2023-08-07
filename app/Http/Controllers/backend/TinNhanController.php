@@ -12,7 +12,7 @@ class TinNhanController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend/pages/tin-nhan/index');
     }
 
     /**

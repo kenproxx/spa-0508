@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\backend\BackendController;
+use App\Http\Controllers\backend\QL_UserController;
+use App\Http\Controllers\backend\QL_VoucherController;
+use App\Http\Controllers\backend\QLEmailController;
 use App\Http\Controllers\backend\ThongKeController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\backend\TinNhanController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,10 +20,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [HomeController::class, 'index'])->name('backend.home.show');
 
 Route::prefix('/backend')->group(function () {
+    Route::get('/dang-nhap', [BackendController::class, 'login'])->name('backend.dang-nhap.show');
     Route::get('/thong-ke', [ThongKeController::class, 'index'])->name('backend.thong-ke.show');
+    Route::get('/tin-nhan', [TinNhanController::class, 'index'])->name('backend.tin-nhan.show');
+    Route::get('/email', [QLEmailController::class, 'index'])->name('backend.email.show');
+    Route::get('/nguoi-dung', [QL_UserController::class, 'index'])->name('backend.user.show');
+    Route::get('/ma-giam-gia', [QL_VoucherController::class, 'index'])->name('backend.voucher.show');
+
 });
 
 Route::prefix('/frontend')->group(function () {

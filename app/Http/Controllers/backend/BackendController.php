@@ -5,17 +5,20 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ThongKeController extends Controller
+class BackendController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return response()->json('123');
-        return view('backend/pages/thong-ke/index');
+        //
     }
 
+    public function login()
+    {
+        return view('backend/pages/dang-nhap/index');
+    }
     /**
      * Show the form for creating a new resource.
      */

@@ -5,15 +5,14 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ThongKeController extends Controller
+class QL_SpaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return response()->json('123');
-        return view('backend/pages/thong-ke/index');
+        //
     }
 
     /**
