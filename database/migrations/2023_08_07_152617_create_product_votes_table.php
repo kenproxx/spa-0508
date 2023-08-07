@@ -11,19 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('agencys', function (Blueprint $table) {
+        Schema::create('product_votes', function (Blueprint $table) {
             $table->id();
-            $table->string('user_id');
-            $table->string('ten_quan_ly')->nullable();
-            $table->string('ten_co_so');
-            $table->string('nganh_nghe');
-            $table->string('address');
-            $table->string('avatar')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('product_id')->nullable();
+            $table->string('content')->nullable();
             $table->string('gallery')->nullable();
-            $table->string('mo_ta_ngan')->nullable();
-            $table->string('mo_ta_chi_tiet')->nullable();
-            $table->string('link_map')->nullable();
-            $table->string('slug')->nullable();
+            $table->string('star')->nullable();
             $table->string('status')->nullable();
 
             $table->string('created_by')->nullable();
@@ -37,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('agencys');
+        Schema::dropIfExists('product_votes');
     }
 };

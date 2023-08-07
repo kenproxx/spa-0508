@@ -20,6 +20,9 @@ return new class extends Migration
             $table->mediumText('avatar')->nullable();
             $table->string('kakao_talk_id')->nullable();
             $table->integer('number_phone')->nullable();
+            $table->integer('role_id');
+            $table->string('zalo_id')->nullable();
+            $table->string('address')->nullable();
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
             $table->rememberToken();
