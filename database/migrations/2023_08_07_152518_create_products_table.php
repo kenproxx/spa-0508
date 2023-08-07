@@ -20,16 +20,11 @@ return new class extends Migration
             $table->string('mo_ta_chi_tiet')->nullable();
             $table->string('avatar')->nullable();
             $table->string('gallery')->nullable();
-            $table->string('id_nguoi_dat')->nullable();
-            $table->string('id_nguoi_dat')->nullable();
-            $table->string('id_nguoi_dat')->nullable();
-            $table->string('id_nguoi_dat')->nullable();
+            $table->string('user_id')->nullable();
             $table->string('ban_chay')->nullable();
             $table->string('yeu_thich')->nullable();
             $table->string('hot')->nullable();
             $table->string('flash_sale')->nullable();
-            $table->string('address')->nullable();
-
 
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
