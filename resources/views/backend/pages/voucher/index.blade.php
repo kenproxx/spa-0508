@@ -3,26 +3,6 @@
 
 
 @section('content')
-    <div class="card bg-light-info shadow-none position-relative overflow-hidden">
-        <div class="card-body px-4 py-3">
-            <div class="row align-items-center">
-                <div class="col-9">
-                    <h4 class="fw-semibold mb-8">Notes Application</h4>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a class="text-muted text-decoration-none" href="./index.html">Dashboard</a></li>
-                            <li class="breadcrumb-item" aria-current="page">Notes Application</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="col-3">
-                    <div class="text-center mb-n5">
-                        <img src="../../dist/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     <ul class="nav nav-pills p-3 mb-3 rounded align-items-center card flex-row">
         <li class="nav-item">
             <a href="javascript:void(0)" class="
@@ -650,7 +630,7 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content border-0">
                 <div class="modal-header bg-primary">
-                    <h6 class="modal-title text-white">Add Notes</h6>
+                    <h6 class="modal-title text-white">Thêm Mã giảm giá</h6>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -660,14 +640,28 @@
                                 <div class="row">
                                     <div class="col-md-12 mb-3">
                                         <div class="note-title">
-                                            <label>Note Title</label>
-                                            <input type="text" id="note-has-title" class="form-control" minlength="25" placeholder="Title" />
+                                            <label>Tên mã</label>
+                                            <input type="text" class="form-control" placeholder="Title" />
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="note-description">
-                                            <label>Note Description</label>
-                                            <textarea id="note-has-description" class="form-control" minlength="60" placeholder="Description" rows="3"></textarea>
+                                        <div class="note-title">
+                                            <label>CODE</label>
+                                            <input type="text" class="form-control" placeholder="Title" />
+                                        </div>
+                                        <div class="note-title">
+                                            <label>Bắt đầu</label>
+                                            <input type="datetime-local" class="form-control" placeholder="Title" />
+                                        </div>
+                                        <div class="note-title">
+                                            <label>Kết thúc</label>
+                                            <input type="datetime-local" class="form-control" placeholder="Title" />
+                                        </div>
+                                        <div class="note-title">
+                                            <label>Sản phẩm áp dụng</label>
+                                            <input type="text" class="form-control" placeholder="Title" />
+                                        </div>
+                                        <div class="note-title">
+                                            <label>Số lượng</label>
+                                            <input type="number" class="form-control" placeholder="Title" />
                                         </div>
                                     </div>
                                 </div>
@@ -683,4 +677,6 @@
         </div>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../../dist/js/apps/notes.js"></script>
 @endsection

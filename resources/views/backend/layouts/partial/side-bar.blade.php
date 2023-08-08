@@ -58,7 +58,7 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="./index6.html" aria-expanded="false">
+            <a class="sidebar-link" href="{{ route('backend.san-pham.show') }}" aria-expanded="false">
                   <span>
                     <i class="ti ti-playlist"></i>
                   </span>
