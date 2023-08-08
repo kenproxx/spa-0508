@@ -12,7 +12,6 @@ class ThongKeController extends Controller
      */
     public function index()
     {
-        return response()->json('123');
         return view('backend/pages/thong-ke/index');
     }
 

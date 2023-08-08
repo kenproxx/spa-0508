@@ -1,308 +1,147 @@
 @extends('backend.layouts.master')
 @section('title', 'Thống kê')
-
-
 @section('content')
-    <div class="card bg-light-info shadow-none position-relative overflow-hidden">
-        <div class="card-body px-4 py-3">
-            <div class="row align-items-center">
-                <div class="col-9">
-                    <h4 class="fw-semibold mb-8">Basic Table</h4>
-                    <nav aria-label="breadcrumb">
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item">
-                                <a class="text-muted text-decoration-none" href="./index.html">Dashboard</a>
-                            </li>
-                            <li class="breadcrumb-item" aria-current="page">Basic Table</li>
-                        </ol>
-                    </nav>
-                </div>
-                <div class="col-3">
-                    <div class="text-center mb-n5">
-                        <img src="../../dist/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4">
-                    </div>
-                </div>
-            </div>
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
         </div>
-    </div>
+    @endif
     <div class="card w-100 position-relative overflow-hidden">
         <div class="px-4 py-3 border-bottom">
-            <h5 class="card-title fw-semibold mb-0 lh-sm">Basic Table</h5>
+            <h5 class="card-title fw-semibold mb-0 lh-sm">Quản lý người dùng</h5>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Thêm mới
+            </button>
         </div>
         <div class="card-body p-4">
             <div class="table-responsive rounded-2 mb-4">
                 <table class="table border text-nowrap customize-table mb-0 align-middle">
                     <thead class="text-dark fs-4">
                     <tr>
-                        <th><h6 class="fs-4 fw-semibold mb-0">User</h6></th>
-                        <th><h6 class="fs-4 fw-semibold mb-0">Project Name</h6></th>
-                        <th><h6 class="fs-4 fw-semibold mb-0">Users</h6></th>
-                        <th><h6 class="fs-4 fw-semibold mb-0">Status</h6></th>
+                        <th><h6 class="fs-4 fw-semibold mb-0">Họ và tên</h6></th>
+                        <th><h6 class="fs-4 fw-semibold mb-0">Số điện thoại</h6></th>
+                        <th><h6 class="fs-4 fw-semibold mb-0">Email</h6></th>
+                        <th><h6 class="fs-4 fw-semibold mb-0">Kakao</h6></th>
+                        <th><h6 class="fs-4 fw-semibold mb-0">Loại User</h6></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/profile/user-1.jpg" class="rounded-circle" width="40" height="40" />
-                                <div class="ms-3">
-                                    <h6 class="fs-4 fw-semibold mb-0">Olivia Rhye</h6>
+                    @foreach($listUser as $user)
+                        <tr>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="../../dist/images/profile/user-1.jpg" class="rounded-circle" width="40"
+                                         height="40"/>
+                                    <div class="ms-3">
+                                        <h6 class="fs-4 fw-semibold mb-0">{{ $user->name }}</h6>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td><p class="mb-0 fw-normal">Xtreme admin</p></td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-1.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-2.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="badge bg-light-primary rounded-3 py-8 text-primary fw-semibold fs-2">active</span>
-                        </td>
-                        <td>
-                            <div class="dropdown dropstart">
-                                <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-dots-vertical fs-6"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-plus"></i>Add</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-edit"></i>Edit</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Delete</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/profile/user-2.jpg" class="rounded-circle" width="40" height="40" />
-                                <div class="ms-3">
-                                    <h6 class="fs-4 fw-semibold mb-0">Barbara Steele</h6>
+                            </td>
+                            <td><p class="mb-0 fw-normal">{{ $user->number_phone }}</p></td>
+                            <td>
+                                <p class="mb-0 fw-normal">{{ $user->email }}</p>
+                            </td>
+                            <td>
+                                <p class="mb-0 fw-normal">{{ $user->kakao_talk_id }}</p>
+                            </td>
+                            <td>
+                           <span class="badge <?php echo $user->role_id == '1' ? 'bg-light-primary' : ($user->role_id == '2' ? 'bg-light-secondary' : 'bg-light-danger') ?> rounded-3 py-8 text-primary fw-semibold fs-2">
+                                {{ $user->role_id == '1' ? 'SUPER_ADMIN' : ($user->role_id == '2' ? 'ADMIN' : 'GUEST') }}
+                           </span>
+                            </td>
+                            <td>
+                                <div class="dropdown dropstart">
+                                    <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                       aria-expanded="false">
+                                        <i class="ti ti-dots-vertical fs-6"></i>
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <li data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                            <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i
+                                                    class="fs-4 ti ti-edit"></i>Sửa</a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i
+                                                    class="fs-4 ti ti-trash"></i>Xóa</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </div>
-                        </td>
-                        <td><p class="mb-0 fw-normal">Adminpro admin</p></td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-1.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-2.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-3.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="badge bg-light-danger rounded-3 py-8 text-danger fw-semibold fs-2">cancel</span>
-                        </td>
-                        <td>
-                            <div class="dropdown dropstart">
-                                <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-dots-vertical fs-6"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-plus"></i>Add</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-edit"></i>Edit</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Delete</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/profile/user-3.jpg" class="rounded-circle" width="40" height="40" />
-                                <div class="ms-3">
-                                    <h6 class="fs-4 fw-semibold mb-0">Leonard Gordon</h6>
-                                </div>
-                            </div>
-                        </td>
-                        <td><p class="mb-0 fw-normal">Monster admin</p></td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-3.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-2.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="badge bg-light-primary rounded-3 py-8 text-primary fw-semibold fs-2">active</span>
-                        </td>
-                        <td>
-                            <div class="dropdown dropstart">
-                                <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-dots-vertical fs-6"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-plus"></i>Add</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-edit"></i>Edit</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Delete</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/profile/user-4.jpg" class="rounded-circle" width="40" height="40" />
-                                <div class="ms-3">
-                                    <h6 class="fs-4 fw-semibold mb-0">Evelyn Pope</h6>
-                                </div>
-                            </div>
-                        </td>
-                        <td><p class="mb-0 fw-normal">Materialpro admin</p></td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-3.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-2.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-5.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="badge bg-light-success rounded-3 py-8 text-success fw-semibold fs-2">pending</span>
-                        </td>
-                        <td>
-                            <div class="dropdown dropstart">
-                                <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-dots-vertical fs-6"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-plus"></i>Add</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-edit"></i>Edit</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Delete</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/profile/user-5.jpg" class="rounded-circle" width="40" height="40" />
-                                <div class="ms-3">
-                                    <h6 class="fs-4 fw-semibold mb-0">Tommy Garza</h6>
-                                </div>
-                            </div>
-                        </td>
-                        <td><p class="mb-0 fw-normal">Elegant admin</p></td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-5.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-6.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="badge bg-light-danger rounded-3 py-8 text-danger fw-semibold fs-2">cancel</span>
-                        </td>
-                        <td>
-                            <div class="dropdown dropstart">
-                                <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-dots-vertical fs-6"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-plus"></i>Add</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-edit"></i>Edit</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Delete</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/profile/user-6.jpg" class="rounded-circle" width="40" height="40" />
-                                <div class="ms-3">
-                                    <h6 class="fs-4 fw-semibold mb-0">Isabel Vasquez</h6>
-                                </div>
-                            </div>
-                        </td>
-                        <td><p class="mb-0 fw-normal">Modernize admin</p></td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-2.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                                <a href="#">
-                                    <img src="../../dist/images/profile/user-4.jpg" class="rounded-circle me-n2 card-hover border border-2 border-white" width="39" height="39">
-                                </a>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="badge bg-light-success rounded-3 py-8 text-success fw-semibold fs-2">pending</span>
-                        </td>
-                        <td>
-                            <div class="dropdown dropstart">
-                                <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-dots-vertical fs-6"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-plus"></i>Add</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-edit"></i>Edit</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Delete</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="{{ route('backend.nguoi-dung.store') }}" method="post">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="note-title">
+                            <label>Họ và tên</label>
+                            <input type="text" class="form-control" name="name" id="name"
+                                   placeholder="Nhập Họ và tên"/>
+                        </div>
+                        <div class="note-title">
+                            <label>Email</label>
+                            <input type="text" class="form-control" name="email" id="email"
+                                   placeholder="Nhập Email"/>
+                        </div>
+                        <div class="note-title">
+                            <label>Mật khẩu</label>
+                            <input type="password" class="form-control" name="password" id="password"
+                                   placeholder="Nhập Mật khẩu"/>
+                        </div>
+                        <div class="note-title">
+                            <label>Số điện thoại</label>
+                            <input type="number" class="form-control" name="number_phone" id="number_phone"
+                                   placeholder="Nhập Số điện thoại"/>
+                        </div>
+                        <div class="note-title">
+                            <label>Zalo</label>
+                            <input type="text" class="form-control" name="zalo_id" id="zalo_id"
+                                   placeholder="Nhập Zalo"/>
+                        </div>
+                        <div class="note-title">
+                            <label>Kakao</label>
+                            <input type="text" class="form-control" name="kakao_talk_id" id="kakao_talk_id"
+                                   placeholder="Nhập Kakao"/>
+                        </div>
+                        <div class="note-title">
+                            <label>Địa chỉ</label>
+                            <input type="text" class="form-control" name="address" id="address"
+                                   placeholder="Nhập Địa chỉ"/>
+                        </div>
+                        <div class="note-title">
+                            <label>Phân quyền</label>
+                            <select class="form-select" aria-label="Default select example" name="role_id" id="role_id">
+                                @foreach($listRole as $role)
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="note-title">
+                            <label>Ảnh đại diện</label>
+                            <input type="file" class="form-control" name="avatar"
+                                   placeholder="Title"/>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
+
