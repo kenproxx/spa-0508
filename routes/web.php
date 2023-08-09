@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\backend\BackendController;
+use App\Http\Controllers\backend\MoreServiceController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\QL_UserController;
 use App\Http\Controllers\backend\QL_VoucherController;
@@ -30,6 +31,7 @@ Route::prefix('/backend')->group(function () {
     Route::get('/nguoi-dung', [QL_UserController::class, 'index'])->name('backend.user.show');
     Route::get('/ma-giam-gia', [QL_VoucherController::class, 'index'])->name('backend.voucher.show');
     Route::get('/san-pham', [ProductController::class, 'index'])->name('backend.san-pham.show');
+    Route::get('/dich_vu_them', [MoreServiceController::class, 'index'])->name('backend.dich-vu-them.show');
 });
 Route::prefix('/backend/nguoi-dung')->group(function () {
     Route::post('/store', [QL_UserController::class, 'store'])->name('backend.nguoi-dung.store');

@@ -65,5 +65,13 @@
                 <span class="hide-menu">Sản phẩm</span>
             </a>
         </li>
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="{{ route('backend.dich-vu-them.show') }}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-playlist"></i>
+                  </span>
+                <span class="hide-menu">Dịch vụ thêm</span>
+            </a>
+        </li>
     </ul>
 </nav>
