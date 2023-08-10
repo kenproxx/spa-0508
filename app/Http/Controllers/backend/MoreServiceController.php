@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Agency;
+use App\Models\MoreService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class MoreServiceController extends Controller
 {
@@ -12,7 +15,9 @@ class MoreServiceController extends Controller
      */
     public function index()
     {
-        return view('backend/pages/dich_vu_them/index');
+        $listDaiLy = Agency::all();
+        $listService = MoreService::get(['service_name', 'agencys_id']);
+        return view('backend/pages/dich_vu_them/index', compact('listDaiLy', 'listService'));
     }
 
     /**
@@ -28,7 +33,19 @@ class MoreServiceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $service = new MoreService();
+
+        $arrInput = $request->input();
+        foreach (array_keys($request->input()) as $key) {
+            if ($key != '_token') {
+                $service->{$key} = $arrInput[$key];
+            }
+        }
+
+        $service->save();
+
+        return redirect()->back()->with('success', 'Tạo dịch vụ thành công');
+
     }
 
     /**
