@@ -12,7 +12,7 @@ class DonHangController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend/pages/don_hang/index');
     }
 
     /**
