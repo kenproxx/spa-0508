@@ -1,202 +1,189 @@
 @extends('backend.layouts.master')
 @section('title', 'Sản phẩm')
 @section('content')
-
+    <a href="{{ route('backend.san-pham.create') }}">
+    <button type="button" class="btn btn-primary">
+        Thêm mới
+    </button>
+    </a>
     <div class="card w-100 position-relative overflow-hidden">
         <div class="card-body p-4">
-            <div class="table-responsive rounded-2">
-                <table class="table border text-nowrap customize-table mb-0 align-middle">
-                    <thead class="text-dark fs-4">
+            <div class="table-responsive border rounded">
+                <table class="table align-middle text-nowrap mb-0">
+                    <thead>
                     <tr>
-                        <th><h6 class="fs-4 fw-semibold mb-0">Authors</h6></th>
-                        <th><h6 class="fs-4 fw-semibold mb-0">Courses</h6></th>
-                        <th><h6 class="fs-4 fw-semibold mb-0">Users</h6></th>
-                        <th></th>
+                        <th scope="col">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            </div>
+                        </th>
+                        <th scope="col">Products</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            </div>
+                        </td>
+                        <td>
                             <div class="d-flex align-items-center">
-                                <img src="../../dist/images/blog/blog-img1.jpg" class="rounded-2" width="42" height="42" />
+                                <img src="../../dist/images/products/s1.jpg" class="rounded-circle" alt="..." width="56" height="56">
                                 <div class="ms-3">
-                                    <h6 class="fw-semibold mb-1">Top Authors</h6>
-                                    <span class="fw-normal">Successful Fellas</span>
+                                    <h6 class="fw-semibold mb-0 fs-4">How Innovation Works</h6>
+                                    <p class="mb-0">books</p>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="badge bg-light-danger text-danger rounded-3 fw-semibold fs-2">Angular</span>
-                                <span class="badge bg-light-primary text-primary rounded-3 fw-semibold fs-2">PHP</span>
-                            </div>
+                            <p class="mb-0">Thu, Jan 12 2023</p>
                         </td>
-                        <td><p class="mb-0 fw-normal">4300 Users</p></td>
                         <td>
-                            <div class="dropdown dropstart">
-                                <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-dots fs-5"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-plus"></i>Add</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-edit"></i>Edit</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Delete</a>
-                                    </li>
-                                </ul>
+                            <div class="d-flex align-items-center">
+                                <span class="bg-success p-1 rounded-circle"></span>
+                                <p class="mb-0 ms-2">InStock</p>
                             </div>
                         </td>
+                        <td><h6 class="mb-0 fs-4">$275</h6></td>
+                        <td><a class="fs-6 text-muted" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ti ti-dots-vertical"></i></a></td>
                     </tr>
                     <tr>
                         <td>
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            </div>
+                        </td>
+                        <td>
                             <div class="d-flex align-items-center">
-                                <img src="../../dist/images/blog/blog-img2.jpg" class="rounded-2" width="42" height="42" />
+                                <img src="../../dist/images/products/s2.jpg" class="rounded-circle" alt="..." width="56" height="56">
                                 <div class="ms-3">
-                                    <h6 class="fw-semibold mb-1">Popular Authors</h6>
-                                    <span class="fw-normal">Most Successful</span>
+                                    <h6 class="fw-semibold mb-0 fs-4">Psalms Book for Growth</h6>
+                                    <p class="mb-0">books</p>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="badge bg-light-primary text-primary rounded-3 fw-semibold fs-2">Bootstrap</span>
-                            </div>
+                            <p class="mb-0">Thu, Jan 10 2023</p>
                         </td>
-                        <td><p class="mb-0 fw-normal">1200 Users</p></td>
                         <td>
-                            <div class="dropdown dropstart">
-                                <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-dots fs-5"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-plus"></i>Add</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-edit"></i>Edit</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Delete</a>
-                                    </li>
-                                </ul>
+                            <div class="d-flex align-items-center">
+                                <span class="bg-danger p-1 rounded-circle"></span>
+                                <p class="mb-0 ms-2">Out of Stock</p>
                             </div>
                         </td>
+                        <td><h6 class="mb-0 fs-4">$89</h6></td>
+                        <td><a class="fs-6 text-muted" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ti ti-dots-vertical"></i></a></td>
                     </tr>
                     <tr>
                         <td>
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            </div>
+                        </td>
+                        <td>
                             <div class="d-flex align-items-center">
-                                <img src="../../dist/images/blog/blog-img3.jpg" class="rounded-2" width="42" height="42" />
+                                <img src="../../dist/images/products/s3.jpg" class="rounded-circle" alt="..." width="56" height="56">
                                 <div class="ms-3">
-                                    <h6 class="fw-semibold mb-1">New Users</h6>
-                                    <span class="fw-normal">Awesome Users</span>
+                                    <h6 class="fw-semibold mb-0 fs-4">The Psychology of Money</h6>
+                                    <p class="mb-0">fashionbooks</p>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="badge bg-light-success text-success rounded-3 fw-semibold fs-2">Reactjs</span>
-                                <span class="badge bg-light-danger text-danger rounded-3 fw-semibold fs-2">Angular</span>
-                            </div>
+                            <p class="mb-0">Thu, Jan 12 2023</p>
                         </td>
-                        <td><p class="mb-0 fw-normal">2000 Users</p></td>
                         <td>
-                            <div class="dropdown dropstart">
-                                <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-dots fs-5"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-plus"></i>Add</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-edit"></i>Edit</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Delete</a>
-                                    </li>
-                                </ul>
+                            <div class="d-flex align-items-center">
+                                <span class="bg-success p-1 rounded-circle"></span>
+                                <p class="mb-0 ms-2">InStock</p>
                             </div>
                         </td>
+                        <td><h6 class="mb-0 fs-4">$125</h6></td>
+                        <td><a class="fs-6 text-muted" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ti ti-dots-vertical"></i></a></td>
                     </tr>
                     <tr>
                         <td>
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            </div>
+                        </td>
+                        <td>
                             <div class="d-flex align-items-center">
-                                <img src="../../dist/images/blog/blog-img4.jpg" class="rounded-2" width="42" height="42" />
+                                <img src="../../dist/images/products/s4.jpg" class="rounded-circle" alt="..." width="56" height="56">
                                 <div class="ms-3">
-                                    <h6 class="fw-semibold mb-1">Active Customers</h6>
-                                    <span class="fw-normal">Best Customers</span>
+                                    <h6 class="fw-semibold mb-0 fs-4">Boat Headphone</h6>
+                                    <p class="mb-0">electronics</p>
                                 </div>
                             </div>
                         </td>
                         <td>
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="badge bg-light-primary text-primary rounded-3 fw-semibold fs-2">Bootstrap</span>
-                            </div>
+                            <p class="mb-0">Mon, Jan 16 2023</p>
                         </td>
-                        <td><p class="mb-0 fw-normal">1500 Users</p></td>
                         <td>
-                            <div class="dropdown dropstart">
-                                <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-dots fs-5"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-plus"></i>Add</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-edit"></i>Edit</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Delete</a>
-                                    </li>
-                                </ul>
+                            <div class="d-flex align-items-center">
+                                <span class="bg-success p-1 rounded-circle"></span>
+                                <p class="mb-0 ms-2">InStock</p>
                             </div>
                         </td>
+                        <td><h6 class="mb-0 fs-4">$50</h6></td>
+                        <td><a class="fs-6 text-muted" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ti ti-dots-vertical"></i></a></td>
                     </tr>
                     <tr>
-                        <td>
+                        <td class="border-bottom-0">
+                            <div class="form-check mb-0">
+                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                            </div>
+                        </td>
+                        <td class="border-bottom-0">
                             <div class="d-flex align-items-center">
-                                <img src="../../dist/images/blog/blog-img5.jpg" class="rounded-2" width="42" height="42" />
+                                <img src="../../dist/images/products/s5.jpg" class="rounded-circle" alt="..." width="56" height="56">
                                 <div class="ms-3">
-                                    <h6 class="fw-semibold mb-1">Bestseller Theme</h6>
-                                    <span class="fw-normal">Amazing Templates</span>
+                                    <h6 class="fw-semibold mb-0 fs-4">MacBook Air Pro</h6>
+                                    <p class="mb-0">fashionelectronics</p>
                                 </div>
                             </div>
                         </td>
-                        <td>
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="badge bg-light-danger text-danger rounded-3 fw-semibold fs-2">Angular</span>
-                                <span class="badge bg-light-success text-success rounded-3 fw-semibold fs-2">Reactjs</span>
+                        <td class="border-bottom-0">
+                            <p class="mb-0">Wed, Jan 18 2023</p>
+                        </td>
+                        <td class="border-bottom-0">
+                            <div class="d-flex align-items-center">
+                                <span class="bg-danger p-1 rounded-circle"></span>
+                                <p class="mb-0 ms-2">Out of Stock</p>
                             </div>
                         </td>
-                        <td><p class="mb-0 fw-normal">9500 Users</p></td>
-                        <td>
-                            <div class="dropdown dropstart">
-                                <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <i class="ti ti-dots fs-5"></i>
-                                </a>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-plus"></i>Add</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-edit"></i>Edit</a>
-                                    </li>
-                                    <li>
-                                        <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Delete</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </td>
+                        <td class="border-bottom-0"><h6 class="mb-0 fs-4">$650</h6></td>
+                        <td class="border-bottom-0"><a class="fs-6 text-muted" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ti ti-dots-vertical"></i></a></td>
                     </tr>
                     </tbody>
                 </table>
+                <div class="d-flex align-items-center justify-content-end py-1">
+                    <p class="mb-0 fs-2">Rows per page:</p>
+                    <select class="form-select w-auto ms-0 ms-sm-2 me-8 me-sm-4 py-1 pe-7 ps-2 border-0" aria-label="Default select example">
+                        <option selected>5</option>
+                        <option value="1">10</option>
+                        <option value="2">25</option>
+                    </select>
+                    <p class="mb-0 fs-2">1–5 of 12</p>
+                    <nav aria-label="...">
+                        <ul class="pagination justify-content-center mb-0 ms-8 ms-sm-9">
+                            <li class="page-item p-1">
+                                <a class="page-link border-0 rounded-circle text-dark fs-6 round-32 d-flex align-items-center justify-content-center" href="#"><i class="ti ti-chevron-left"></i></a>
+                            </li>
+                            <li class="page-item p-1">
+                                <a class="page-link border-0 rounded-circle text-dark fs-6 round-32 d-flex align-items-center justify-content-center" href="#"><i class="ti ti-chevron-right"></i></a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
 @endsection
+<script src="../../dist/js/apps/chat.js"></script>
 

@@ -21,7 +21,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $listAdmin = User::where('role_id', 2)->get(['id', 'name']);
+        return view('backend/pages/quan_ly_san_pham/create', compact('listAdmin'));
     }
 
     /**
