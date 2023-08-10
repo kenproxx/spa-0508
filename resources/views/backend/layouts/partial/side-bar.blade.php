@@ -26,7 +26,7 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="./index2.html" aria-expanded="false">
+            <a class="sidebar-link" href="{{ route('backend.don-hang.show') }}" aria-expanded="false">
                   <span>
                     <i class="ti ti-shopping-cart"></i>
                   </span>
@@ -72,6 +72,88 @@
                   </span>
                 <span class="hide-menu">Dịch vụ thêm</span>
             </a>
+        </li>
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="{{ route('backend.dai-ly.show') }}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-playlist"></i>
+                  </span>
+                <span class="hide-menu">Đại lý</span>
+            </a>
+        </li>
+        <li class="sidebar-item">
+            <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
+                  <span class="d-flex">
+                    <i class="ti ti-chart-donut-3"></i>
+                  </span>
+                <span class="hide-menu">Cấu hình chung</span>
+            </a>
+            <ul aria-expanded="false" class="collapse first-level">
+                <li class="sidebar-item">
+                    <a href="!#" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-circle"></i>
+                        </div>
+                        <span class="hide-menu">Cấu hình tiêu đề</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="!#" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-circle"></i>
+                        </div>
+                        <span class="hide-menu">Cấu hình Logo</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="!#" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-circle"></i>
+                        </div>
+                        <span class="hide-menu">Cấu hình banner top</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="!#" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-circle"></i>
+                        </div>
+                        <span class="hide-menu">Cấu hình Menu</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="!#" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-circle"></i>
+                        </div>
+                        <span class="hide-menu">Cấu hình API VNPAY</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="!#" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-circle"></i>
+                        </div>
+                        <span class="hide-menu">Cấu hình SMTP Email</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="!#" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-circle"></i>
+                        </div>
+                        <span class="hide-menu">Cấu hình API Zalo</span>
+                    </a>
+                </li>
+                <li class="sidebar-item">
+                    <a href="!#" class="sidebar-link">
+                        <div class="round-16 d-flex align-items-center justify-content-center">
+                            <i class="ti ti-circle"></i>
+                        </div>
+                        <span class="hide-menu">Cấu hình Footer</span>
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
 </nav>

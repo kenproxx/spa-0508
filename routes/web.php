@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\backend\AgencyController;
 use App\Http\Controllers\backend\BackendController;
+use App\Http\Controllers\backend\DonHangController;
 use App\Http\Controllers\backend\MoreServiceController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\ProfileController;
@@ -26,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/backend')->group(function () {
     Route::get('/dang-nhap', [BackendController::class, 'login'])->name('backend.dang-nhap.show');
+    Route::get('/dai-ly', [AgencyController::class, 'index'])->name('backend.dai-ly.show');
     Route::get('/thong-ke', [ThongKeController::class, 'index'])->name('backend.thong-ke.show');
     Route::get('/tin-nhan', [TinNhanController::class, 'index'])->name('backend.tin-nhan.show');
     Route::get('/email', [QLEmailController::class, 'index'])->name('backend.email.show');
@@ -34,13 +37,19 @@ Route::prefix('/backend')->group(function () {
     Route::get('/san-pham', [ProductController::class, 'index'])->name('backend.san-pham.show');
     Route::get('/dich-vu-them', [MoreServiceController::class, 'index'])->name('backend.dich-vu-them.show');
     Route::get('/trang-ca-nhan', [ProfileController::class, 'index'])->name('backend.trang-ca-nhan.show');
+    Route::get('/don-hang', [DonHangController::class, 'index'])->name('backend.don-hang.show');
 });
 Route::prefix('/backend/nguoi-dung')->group(function () {
     Route::post('/store', [QL_UserController::class, 'store'])->name('backend.nguoi-dung.store');
 });
 
-
-
-Route::prefix('/frontend')->group(function () {
-    Route::get('/thong-ke', [ThongKeController::class, 'index'])->name('backend.thong-ke.show');
+Route::prefix('/backend/san-pham')->group(function () {
+    Route::get('/create', [ProductController::class, 'create'])->name('backend.san-pham.create');
 });
+
+Route::prefix('/backend/dich-vu-them')->group(function () {
+    Route::post('/store', [MoreServiceController::class, 'store'])->name('backend.dich-vu-them.store');
+});
+
+
+
