@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title', 'Sản phẩm')
+@section('title', 'Trang cá nhân')
 @section('content')
     <div class="card bg-light-info shadow-none position-relative overflow-hidden">
         <div class="card-body px-4 py-3">

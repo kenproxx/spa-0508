@@ -1,11 +1,9 @@
 @extends('backend.layouts.master')
-@section('title', 'Thống kê')
+@section('title', 'Người dùng')
 @section('content')
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
+
+    @include('backend.widgets.thong-bao')
+
     <div class="card w-100 position-relative overflow-hidden">
         <div class="px-4 py-3 border-bottom">
             <h5 class="card-title fw-semibold mb-0 lh-sm">Quản lý người dùng</h5>

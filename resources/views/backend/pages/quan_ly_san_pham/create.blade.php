@@ -1,5 +1,5 @@
 @extends('backend.layouts.master')
-@section('title', 'Sản phẩm')
+@section('title', 'Tạo sản phẩm')
 @section('content')
 
     <form action="">

@@ -1,16 +1,7 @@
 @extends('backend.layouts.master')
-@section('title', 'Sản phẩm')
+@section('title', 'Dịch vụ thêm')
 @section('content')
-    @if(session('error'))
-        <div class="alert alert-danger">
-            {{ session('error') }}
-        </div>
-    @endif
-    @if(session('success'))
-        <div class="alert alert-success">
-            {{ session('success') }}
-        </div>
-    @endif
+   @include('backend.widgets.thong-bao')
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Launch demo modal
     </button>
