@@ -69,6 +69,7 @@
                                                             <option value="{{ $daiLy->id }}">{{ $daiLy->ten_quan_ly }} - {{ $daiLy->ten_co_so }}</option>
                                                         @endforeach
                                                     </select>
+
                                                 </div>
                                                 <input type="text" value="" hidden name="created_by">
                                             </div>

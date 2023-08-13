@@ -28,6 +28,13 @@ class MoreServiceController extends Controller
         //
     }
 
+    public function getAllByAgency($agency_id)
+    {
+        $listService = MoreService::where('agencys_id', $agency_id)->get(['id', 'service_name']);
+        return response()->json($listService);
+    }
+
+
     /**
      * Store a newly created resource in storage.
      */
