@@ -555,4 +555,9 @@
             </div>
         </div>
     </div>
+
+    <script src="../../dist/libs/owl.carousel/dist/owl.carousel.min.js"></script>
+    <script src="../../dist/libs/apexcharts/dist/apexcharts.min.js"></script>
+    <script src="../../dist/js/dashboard.js"></script>
 @endsection
+
