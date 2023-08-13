@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enum\UserRole;
 use App\Enum\UserStatus;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -28,8 +29,13 @@ class AuthController extends Controller
         $user = User::where('email' , $emailLogin)->first();
 
 
-        if ($user && $user->status !== UserStatus::ACTIVE) {
-            return back()->with('error', 'Tài khoản của bạn đã bị khóa.');
+        if ($user) {
+            if ($user->status !== UserStatus::ACTIVE) {
+                return back()->with('error', 'Tài khoản của bạn đã bị khóa.');
+            }
+            if ($user->role_id == UserRole::GUEST) {
+
+            }
         }
 
         if (Auth::attempt($credentials)) {
@@ -46,6 +52,6 @@ class AuthController extends Controller
         Auth::logout();
         Session::forget('login');
 
-        return route('login');
+        return redirect(route('login'));
     }
 }

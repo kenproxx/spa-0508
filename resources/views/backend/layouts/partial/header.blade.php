@@ -127,14 +127,14 @@
                               <img src="../../dist/images/svgs/icon-account.svg" alt="" width="24" height="24">
                             </span>
                                         <div class="w-75 d-inline-block v-middle ps-3">
-                                            <h6 class="mb-1 bg-hover-primary fw-semibold"> My Profile </h6>
-                                            <span class="d-block text-dark">Account Settings</span>
+                                            <h6 class="mb-1 bg-hover-primary fw-semibold">Trang cá nhân</h6>
+                                            <span class="d-block text-dark">Cài đặt tài khoản</span>
                                         </div>
                                     </a>
 
                                 </div>
                                 <div class="d-grid py-4 px-7 pt-8">
-                                    <a href="./authentication-login.html" class="btn btn-outline-primary">Log Out</a>
+                                    <a href="{{ route('log-out') }}" class="btn btn-outline-primary">Đăng xuất</a>
                                 </div>
                             </div>
                         </div>

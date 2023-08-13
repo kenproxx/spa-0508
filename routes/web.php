@@ -26,11 +26,10 @@ use Illuminate\Support\Facades\Route;
 */
 Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('sign-in');
-Route::post('/logout', [AuthController::class, 'logout'])->name('log-out');
+Route::get('/logout', [AuthController::class, 'logout'])->name('log-out');
 
 
-Route::middleware(['auth'])->group(function () {
-
+Route::middleware(['role.admin.super_admin'])->group(function () {
 
     Route::prefix('/backend')->group(function () {
         Route::get('/dai-ly', [AgencyController::class, 'index'])->name('backend.dai-ly.show');
@@ -44,6 +43,7 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/trang-ca-nhan', [ProfileController::class, 'index'])->name('backend.trang-ca-nhan.show');
         Route::get('/don-hang', [DonHangController::class, 'index'])->name('backend.don-hang.show');
     });
+
     Route::prefix('/backend/nguoi-dung')->group(function () {
         Route::post('/store', [QL_UserController::class, 'store'])->name('backend.nguoi-dung.store');
         Route::get('/show/{id}', [QL_UserController::class, 'show'])->name('backend.nguoi-dung.show');
