@@ -7,7 +7,7 @@
     <div class="card w-100 position-relative overflow-hidden">
         <div class="px-4 py-3 border-bottom">
             <h5 class="card-title fw-semibold mb-0 lh-sm">Quản lý người dùng</h5>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-user">
                 Thêm mới
             </button>
         </div>
@@ -44,7 +44,8 @@
                                 <p class="mb-0 fw-normal">{{ $user->kakao_talk_id }}</p>
                             </td>
                             <td>
-                           <span class="badge <?php echo $user->role_id == '1' ? 'bg-light-primary' : ($user->role_id == '2' ? 'bg-light-secondary' : 'bg-light-danger') ?> rounded-3 py-8 text-primary fw-semibold fs-2">
+                           <span
+                               class="badge <?php echo $user->role_id == '1' ? 'bg-light-primary' : ($user->role_id == '2' ? 'bg-light-secondary' : 'bg-light-danger') ?> rounded-3 py-8 text-primary fw-semibold fs-2">
                                 {{ $user->role_id == '1' ? 'SUPER_ADMIN' : ($user->role_id == '2' ? 'ADMIN' : 'GUEST') }}
                            </span>
                             </td>
@@ -55,14 +56,15 @@
                                         <i class="ti ti-dots-vertical fs-6"></i>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <li data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <li data-bs-toggle="modal" data-bs-target="#modal-user"
+                                            onclick="editUser({{ $user->id }})">
                                             <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i
                                                     class="fs-4 ti ti-edit"></i>Sửa</a>
                                         </li>
-                                        <li>
-                                            <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i
-                                                    class="fs-4 ti ti-trash"></i>Xóa</a>
-                                        </li>
+{{--                                        <li>--}}
+{{--                                            <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i--}}
+{{--                                                    class="fs-4 ti ti-trash"></i>Xóa</a>--}}
+{{--                                        </li>--}}
                                     </ul>
                                 </div>
                             </td>
@@ -74,14 +76,14 @@
         </div>
     </div>
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="modal-user" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="modalLabel">Tạo mới</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form action="{{ route('backend.nguoi-dung.store') }}" method="post">
+                <form id="form" action="{{ route('backend.nguoi-dung.store') }}" method="post">
                     @csrf
                     <div class="modal-body">
                         <div class="note-title">
@@ -106,7 +108,7 @@
                         </div>
                         <div class="note-title">
                             <label>Zalo</label>
-                            <input type="text" class="form-control" name="zalo_id" id="zalo_id"
+                            <input type="tel" class="form-control" name="zalo_id" id="zalo_id"
                                    placeholder="Nhập Zalo"/>
                         </div>
                         <div class="note-title">
@@ -143,3 +145,65 @@
     </div>
 @endsection
 
+<script>
+
+    let isFormAdd = true
+
+    function editUser(id) {
+        $('#modalLabel').text('Chỉnh sửa');
+        let url = '{{ route('backend.nguoi-dung.show', ['id' => ':id']) }}'
+        url = url.replace(':id', id);
+
+        $.ajax({
+            url: url,
+            type: "GET",
+            success: function (response) {
+                importDataToModal(response, id);
+            },
+            error: function (xhr, status, error) {
+                console.error("Error resetting form:", error);
+            }
+        });
+    }
+
+    function importDataToModal(data, id) {
+        let isExistZalo = false
+
+        if (data.zalo_id) {
+            isExistZalo = true;
+        }
+
+        $('#name').val(data.name);
+        $('#email').val(data.email).prop('disabled', true);
+        $('#password').val(data.password);
+        $('#number_phone').val(data.number_phone);
+        $('#zalo_id').val(data.zalo_id).prop('disabled', isExistZalo);
+        $('#kakao_talk_id').val(data.kakao_talk_id);
+        $('#address').val(data.address);
+        $('#role_id').val(data.role_id);
+
+        let url = '{{ route('backend.nguoi-dung.update', ['id' => ':id']) }}';
+        url = url.replace(':id', id);
+        document.getElementById('form').action = url;
+        isFormAdd = false;
+    }
+
+
+    function resetFormModal() {
+        $('#modalLabel').text('Thêm mới');
+        $('input[type="text"]').val('').prop('disabled', false);
+        $('input[type="password"]').val('');
+        $('input[type="number"]').val('');
+        $('input[type="tel"]').val('').prop('disabled', false);
+        $('select').prop('selectedIndex', 0);
+        $('input[type="file"]').val('');
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const modalUser = document.getElementById('modal-user');
+        modalUser.addEventListener('hidden.bs.modal', function() {
+            resetFormModal();
+        });
+    });
+
+</script>

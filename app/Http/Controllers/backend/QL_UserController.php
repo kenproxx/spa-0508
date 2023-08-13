@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Testing\Fluent\Concerns\Has;
 use Prologue\Alerts\Facades\Alert;
+use SebastianBergmann\Diff\Exception;
 use function Laravel\Prompts\alert;
 
 class QL_UserController extends Controller
@@ -36,27 +37,32 @@ class QL_UserController extends Controller
      */
     public function store(Request $request)
     {
-        $existingUser = User::where('email', $request->input('email'))->first();
+        try {
 
-        if ($existingUser) {
-            return redirect()->back()->with('error', 'Địa chỉ email đã tồn tại.');
-        }
+            $existingUser = User::where('email', $request->input('email'))->first();
 
-        $user = new User();
-        $arrInput = $request->input();
-        foreach (array_keys($request->input()) as $key) {
-            if ($key != '_token') {
-                $user->{$key} = $arrInput[$key];
+            if ($existingUser) {
+                return redirect()->back()->with('error', 'Địa chỉ email đã tồn tại.');
             }
-            if ($key == 'password') {
-                $user->{$key} = Hash::make($arrInput[$key]);
+
+            $user = new User();
+
+            foreach ($request->except('_token') as $key => $value) {
+                if ($key == 'password') {
+                    $user->{$key} = Hash::make($value);
+                } else {
+                    $user->{$key} = $value;
+                }
             }
+
+            $result = $user->save();
+            if ($result) {
+                return redirect()->route('backend.user.show')->with('success', 'Tạo mới thành công');
+            }
+            return redirect()->back();
+        } catch (Exception $exception) {
+            return redirect()->back()->with('error', 'Lỗi');
         }
-        $result = $user->save();
-        if ($result) {
-            return redirect()->route('backend.user.show');
-        }
-        return redirect()->back();
     }
 
 
@@ -66,7 +72,12 @@ class QL_UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $user = User::where('id',$id)->first(['id', 'name', 'number_phone', 'email', 'kakao_talk_id', 'zalo_id', 'role_id']);
+            return response()->json($user);
+        } catch (Exception $e) {
+            return $e;
+        }
     }
 
     /**
@@ -82,7 +93,27 @@ class QL_UserController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $user = User::first('id', $id);
+
+            foreach ($request->except('_token') as $key => $value) {
+                if ($key == 'password') {
+                    if ($value) {
+                        $user->{$key} = Hash::make($value);
+                    }
+                } else {
+                    $user->{$key} = $value;
+                }
+            }
+
+            $result = $user->save();
+            if ($result) {
+                return redirect()->route('backend.user.show')->with('success', 'Sửa thành công');
+            }
+            return redirect()->back();
+        } catch (Exception $exception) {
+            return redirect()->back()->with('error', 'Lỗi');
+        }
     }
 
     /**
@@ -90,6 +121,6 @@ class QL_UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
     }
 }

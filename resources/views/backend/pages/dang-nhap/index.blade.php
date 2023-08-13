@@ -40,6 +40,7 @@
                     </div>
                 </div>
                 <div class="col-xl-5 col-xxl-4">
+                    @include('backend.widgets.thong-bao')
                     <div class="authentication-login min-vh-100 bg-body row justify-content-center align-items-center p-4">
                         <div class="col-sm-8 col-md-6 col-xl-9">
                             <h2 class="mb-3 fs-7 fw-bolder">Welcome to Modernize</h2>
@@ -62,14 +63,15 @@
                                 <p class="mb-0 fs-4 px-3 d-inline-block bg-white text-dark z-index-5 position-relative">or sign in with</p>
                                 <span class="border-top w-100 position-absolute top-50 start-50 translate-middle"></span>
                             </div>
-                            <form>
+                            <form action="{{ route('sign-in') }}" method="post">
+                                @csrf
                                 <div class="mb-3">
                                     <label for="exampleInputEmail1" class="form-label">Username</label>
-                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                                    <input type="email" class="form-control" name="email" aria-describedby="emailHelp">
                                 </div>
                                 <div class="mb-4">
                                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="exampleInputPassword1">
+                                    <input type="password" class="form-control" name="password">
                                 </div>
                                 <div class="d-flex align-items-center justify-content-between mb-4">
                                     <div class="form-check">
@@ -80,12 +82,13 @@
                                     </div>
                                     <a class="text-primary fw-medium" href="./authentication-forgot-password.html">Forgot Password ?</a>
                                 </div>
-                                <a href="./index.html" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Sign In</a>
+                                <button type="submit" class="btn btn-primary w-100 py-8 mb-4 rounded-2">Đăng nhập</button>
+                            </form>
+
                                 <div class="d-flex align-items-center justify-content-center">
                                     <p class="fs-4 mb-0 fw-medium">New to Modernize?</p>
                                     <a class="text-primary fw-medium ms-2" href="./authentication-register.html">Create an account</a>
                                 </div>
-                            </form>
                         </div>
                     </div>
                 </div>
