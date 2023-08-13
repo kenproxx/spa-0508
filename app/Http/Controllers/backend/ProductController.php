@@ -3,8 +3,13 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Agency;
+use App\Models\Product;
+use App\Models\ProductMoreservices;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProductController extends Controller
 {
@@ -13,7 +18,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('backend/pages/quan_ly_san_pham/index');
+        $listProduct = Product::get(['id','title','created_at',
+            'avatar','gia_goc','gia_khuyen_mai', 'status']);
+        return view('backend/pages/quan_ly_san_pham/index',
+            compact('listProduct'));
     }
 
     /**
@@ -21,8 +29,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $listAdmin = User::where('role_id', 2)->get(['id', 'name']);
-        return view('backend/pages/quan_ly_san_pham/create', compact('listAdmin'));
+        $listSpa = Agency::where('status', 1)->get(['id', 'ten_quan_ly', 'ten_co_so', 'user_id']);
+        return view('backend/pages/quan_ly_san_pham/create', compact('listSpa'));
     }
 
     /**
@@ -30,7 +38,21 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product = new Product();
+        foreach ($request->except(['_token', 'service_id']) as $key => $value) {
+            $product->{$key} = $value;
+        }
+        $product->save();
+
+        $product_service = new ProductMoreservices();
+
+        $product_service->product_id = $product->id;
+        $product_service->agency_id = $product->agency_id;
+        $product_service->user_id = 1;
+        $product_service->service_id = implode(',', $request->service_id);
+
+        $product_service->save();
+        dd($product_service);
     }
 
     /**

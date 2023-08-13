@@ -25,141 +25,35 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>
-                            <div class="form-check mb-0">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/products/s1.jpg" class="rounded-circle" alt="..." width="56" height="56">
-                                <div class="ms-3">
-                                    <h6 class="fw-semibold mb-0 fs-4">How Innovation Works</h6>
-                                    <p class="mb-0">books</p>
+                    @foreach($listProduct as $product)
+                        <tr>
+                            <td>
+                                <div class="form-check mb-0">
+                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0">Thu, Jan 12 2023</p>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="bg-success p-1 rounded-circle"></span>
-                                <p class="mb-0 ms-2">InStock</p>
-                            </div>
-                        </td>
-                        <td><h6 class="mb-0 fs-4">$275</h6></td>
-                        <td><a class="fs-6 text-muted" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ti ti-dots-vertical"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-check mb-0">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/products/s2.jpg" class="rounded-circle" alt="..." width="56" height="56">
-                                <div class="ms-3">
-                                    <h6 class="fw-semibold mb-0 fs-4">Psalms Book for Growth</h6>
-                                    <p class="mb-0">books</p>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <img src="../../dist/images/products/s1.jpg" class="rounded-circle" alt="..." width="56" height="56">
+                                    <div class="ms-3">
+                                        <h6 class="fw-semibold mb-0 fs-4">{{ $product->title }}</h6>
+                                        <p class="mb-0">books</p>
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0">Thu, Jan 10 2023</p>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="bg-danger p-1 rounded-circle"></span>
-                                <p class="mb-0 ms-2">Out of Stock</p>
-                            </div>
-                        </td>
-                        <td><h6 class="mb-0 fs-4">$89</h6></td>
-                        <td><a class="fs-6 text-muted" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ti ti-dots-vertical"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-check mb-0">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/products/s3.jpg" class="rounded-circle" alt="..." width="56" height="56">
-                                <div class="ms-3">
-                                    <h6 class="fw-semibold mb-0 fs-4">The Psychology of Money</h6>
-                                    <p class="mb-0">fashionbooks</p>
+                            </td>
+                            <td>
+                                <p class="mb-0">{{ $product->created_at }}</p>
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center">
+                                    <span class="bg-success p-1 rounded-circle"></span>
+                                    <p class="mb-0 ms-2">{{ $product->status }}</p>
                                 </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0">Thu, Jan 12 2023</p>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="bg-success p-1 rounded-circle"></span>
-                                <p class="mb-0 ms-2">InStock</p>
-                            </div>
-                        </td>
-                        <td><h6 class="mb-0 fs-4">$125</h6></td>
-                        <td><a class="fs-6 text-muted" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ti ti-dots-vertical"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="form-check mb-0">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            </div>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/products/s4.jpg" class="rounded-circle" alt="..." width="56" height="56">
-                                <div class="ms-3">
-                                    <h6 class="fw-semibold mb-0 fs-4">Boat Headphone</h6>
-                                    <p class="mb-0">electronics</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <p class="mb-0">Mon, Jan 16 2023</p>
-                        </td>
-                        <td>
-                            <div class="d-flex align-items-center">
-                                <span class="bg-success p-1 rounded-circle"></span>
-                                <p class="mb-0 ms-2">InStock</p>
-                            </div>
-                        </td>
-                        <td><h6 class="mb-0 fs-4">$50</h6></td>
-                        <td><a class="fs-6 text-muted" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ti ti-dots-vertical"></i></a></td>
-                    </tr>
-                    <tr>
-                        <td class="border-bottom-0">
-                            <div class="form-check mb-0">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            </div>
-                        </td>
-                        <td class="border-bottom-0">
-                            <div class="d-flex align-items-center">
-                                <img src="../../dist/images/products/s5.jpg" class="rounded-circle" alt="..." width="56" height="56">
-                                <div class="ms-3">
-                                    <h6 class="fw-semibold mb-0 fs-4">MacBook Air Pro</h6>
-                                    <p class="mb-0">fashionelectronics</p>
-                                </div>
-                            </div>
-                        </td>
-                        <td class="border-bottom-0">
-                            <p class="mb-0">Wed, Jan 18 2023</p>
-                        </td>
-                        <td class="border-bottom-0">
-                            <div class="d-flex align-items-center">
-                                <span class="bg-danger p-1 rounded-circle"></span>
-                                <p class="mb-0 ms-2">Out of Stock</p>
-                            </div>
-                        </td>
-                        <td class="border-bottom-0"><h6 class="mb-0 fs-4">$650</h6></td>
-                        <td class="border-bottom-0"><a class="fs-6 text-muted" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ti ti-dots-vertical"></i></a></td>
-                    </tr>
+                            </td>
+                            <td><h6 class="mb-0 fs-4">{{ $product->gia_goc }} - {{ $product->gia_khuyen_mai }}</h6></td>
+                            <td><a class="fs-6 text-muted" href="javascript:void(0)" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Edit"><i class="ti ti-dots-vertical"></i></a></td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
                 <div class="d-flex align-items-center justify-content-end py-1">
@@ -184,6 +78,7 @@
             </div>
         </div>
     </div>
+
+
 @endsection
-<script src="../../dist/js/apps/chat.js"></script>
 
