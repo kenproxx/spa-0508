@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->dropColumn(['ban_chay','yeu_thich','hot','flash_sale']);
+        Schema::table('vouchers', function (Blueprint $table) {
+            $table->integer('gia_ap_dung_toi_thieu')->nullable()->default(0);
+            $table->integer('phan_tram_giam')->nullable();
+            $table->integer('gia_giam_toi_thieu')->nullable();
+            $table->integer('gia_giam_toi_da')->nullable();
+
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            //
-        });
+        //
     }
 };

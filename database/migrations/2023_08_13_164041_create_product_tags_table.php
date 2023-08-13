@@ -11,11 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            $table->boolean('ban_chay')->nullable();
-            $table->boolean('yeu_thich')->nullable();
-            $table->boolean('hot')->nullable();
-            $table->boolean('flash_sale')->nullable();
+        Schema::create('product_tags', function (Blueprint $table) {
+            $table->id();
+            $table->integer('product_id');
+            $table->string('tag_id');
+
+            $table->string('created_by')->nullable();
+            $table->string('updated_by')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -24,8 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('products', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('product_tags');
     }
 };

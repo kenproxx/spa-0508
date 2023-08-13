@@ -11,16 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products', function (Blueprint $table) {
+        Schema::create('product_vouchers', function (Blueprint $table) {
             $table->id();
-            $table->string('title')->nullable();
-            $table->string('gia_goc')->nullable();
-            $table->string('gia_khuyen_mai')->nullable();
-            $table->string('mo_ta_ngan')->nullable();
-            $table->string('mo_ta_chi_tiet')->nullable();
-            $table->string('avatar')->nullable();
-            $table->string('gallery')->nullable();
-            $table->string('user_id')->nullable();
+            $table->string('voucher_id');
+            $table->string('product_id')->nullable();
+            $table->string('agency_id')->nullable();
 
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('products');
+        Schema::dropIfExists('product_vouchers');
     }
 };
