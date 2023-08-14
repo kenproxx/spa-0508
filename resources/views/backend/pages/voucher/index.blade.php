@@ -255,7 +255,8 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
                             aria-label="Close"></button>
                 </div>
-                <form action="">
+                <form action="{{ route('backend.voucher.store') }}" method="post">
+                    @csrf
                     <div class="modal-body">
                         <div class="notes-box">
                             <div class="notes-content">
@@ -263,13 +264,13 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="note-title">
                                             <label>Tên mã</label>
-                                            <input type="text" class="form-control" placeholder="Nhập Tên mã"/>
+                                            <input type="text" class="form-control" placeholder="Nhập Tên mã" name="name"/>
                                         </div>
                                         <div class="note-title">
                                             <label>CODE</label>
                                             <div class="row">
                                                 <div class="col-9">
-                                                    <input type="text" class="form-control" id="code" required
+                                                    <input type="text" class="form-control" id="code" required name="code"
                                                            minlength="5" maxlength="10"
                                                            placeholder="Nhập Mã" oninput="upToCaseCode(this)"/>
                                                 </div>
@@ -280,21 +281,46 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="note-title">
-                                            <label>Bắt đầu</label>
-                                            <input type="datetime-local" class="form-control"/>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label>Bắt đầu</label>
+                                                <input type="datetime-local" class="form-control" name="begin_time"/>
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Kết thúc</label>
+                                                <input type="datetime-local" class="form-control" name="end_time"/>
+                                            </div>
                                         </div>
-                                        <div class="note-title">
-                                            <label>Kết thúc</label>
-                                            <input type="datetime-local" class="form-control"/>
+                                        <div>
+                                            <label>Giá trị áp dụng tối thểu</label>
+                                            <input type="number" min="0" value="0" class="form-control" name="gia_ap_dung_toi_thieu"/>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <label>Phần trăm giảm</label>
+                                                <input type="number" min="0" max="100" class="form-control" name="phan_tram_giam"/>
+                                            </div>
+                                            <div class="col-6">
+                                                <label>Giảm tối đa</label>
+                                                <input type="number" min="0" class="form-control" name="gia_giam_toi_da"/>
+                                            </div>
                                         </div>
                                         <div class="note-title">
                                             <label>Sản phẩm áp dụng</label>
-                                            <input type="text" class="form-control"/>
+                                            <select class="form-select" name="product_id">
+                                                <option value="0">Tất cả sản phẩm</option>
+                                                @foreach($listProduct as $product)
+                                                        <?php
+                                                            $agency = \App\Models\Agency::where('id', $product->agency_id)
+                                                    ->first(['ten_quan_ly', 'ten_co_so'])
+                                                        ?>
+                                                    <option value="{{ $product->id }}">{{ $product->title }} - {{ $agency->ten_quan_ly }} - {{ $agency->ten_co_so }}</option>
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="note-title">
                                             <label>Số lượng</label>
-                                            <input type="number" min="0" class="form-control"
+                                            <input type="number" min="0" class="form-control" name="quantity"
                                                    placeholder="Nhập Số lượng"/>
                                         </div>
                                     </div>
@@ -317,7 +343,7 @@
 
 <script>
     function generateRandomCode() {
-        const length = 8;
+        const length = 10;
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
         let randomCode = '';
         for (let i = 0; i < length; i++) {

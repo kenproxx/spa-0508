@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Enum\UserRole;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class QL_VoucherController extends Controller
 {
@@ -12,8 +16,16 @@ class QL_VoucherController extends Controller
      */
     public function index()
     {
+        $user = Auth::user();
+        $listProduct = Product::query();
 
-        return view('backend/pages/voucher/index');
+        if ($user->role_id == UserRole::ADMIN) {
+            $listProduct->where('user_id', $user->id);
+        }
+
+        $listProduct = $listProduct->get(['id', 'title', 'agency_id']);
+
+        return view('backend/pages/voucher/index', compact('listProduct'));
     }
 
     /**
@@ -29,7 +41,26 @@ class QL_VoucherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $currentDate = now();
+        $existingVoucher = Voucher::where([
+            ['code', '=', $request->input('code')],
+            ['end_time', '>', $currentDate]
+        ])->first();
+
+        if ($existingVoucher) {
+            return redirect()->back()->with('error', 'Mã voucher đã tồn tại trong hệ thống');
+        }
+        $voucher = new Voucher();
+
+        foreach ($request->except(['_token', 'service_id']) as $key => $value) {
+            $voucher->{$key} = $value;
+        }
+        $voucher->created_by = Auth::user()->id;
+
+        $voucher->save();
+
+        return redirect()->back()->with('success', 'Tạo voucher thành công');
+
     }
 
     /**
