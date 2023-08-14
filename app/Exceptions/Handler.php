@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\View;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,5 +27,26 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Exception|Throwable $exception)
+    {
+        if ($this->isHttpException($exception)) {
+            if ($exception->getStatusCode() == 404) {
+                $numLog = 404;
+                $message = "Không tìm thấy trang";
+            }
+            if ($exception->getStatusCode() == 403) {
+                $numLog = 403;
+                $message = "Bạn không có quyền truy cập";
+            }
+            if ($exception->getStatusCode() == 500) {
+                $numLog = 500;
+                $message = "Lỗi server";
+            }
+            return response()->view('backend.widgets.error', compact('numLog', 'message') , $numLog);
+
+        }
+        return parent::render($request, $exception);
     }
 }
