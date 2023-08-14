@@ -47,7 +47,7 @@
                             <td>
                                 <div class="d-flex align-items-center">
                                     <span class="bg-success p-1 rounded-circle"></span>
-                                    <p class="mb-0 ms-2">{{ $product->status }}</p>
+                                    <p class="mb-0 ms-2">{{ $product->status == 1 ? 'Kích hoạt' : 'Hủy kích hoạt'}}</p>
                                 </div>
                             </td>
                             <td><h6 class="mb-0 fs-4">{{ $product->gia_goc }} - {{ $product->gia_khuyen_mai }}</h6></td>

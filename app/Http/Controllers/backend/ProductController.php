@@ -42,6 +42,7 @@ class ProductController extends Controller
         foreach ($request->except(['_token', 'service_id']) as $key => $value) {
             $product->{$key} = $value;
         }
+        $product->created_by = Auth::user()->id;
         $product->save();
 
         $product_service = new ProductMoreservices();
