@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\backend\AgencyController;
-use App\Http\Controllers\backend\BackendController;
 use App\Http\Controllers\backend\DonHangController;
 use App\Http\Controllers\backend\MoreServiceController;
 use App\Http\Controllers\backend\ProductController;
@@ -38,6 +37,7 @@ Route::middleware(['role.admin.super_admin'])->group(function () {
             Route::post('/store', [QL_UserController::class, 'store'])->name('backend.nguoi-dung.store');
             Route::get('/show/{id}', [QL_UserController::class, 'show'])->name('backend.nguoi-dung.show');
             Route::post('/update/{id}', [QL_UserController::class, 'update'])->name('backend.nguoi-dung.update');
+            Route::get('/destroy/{id}', [QL_UserController::class, 'destroy'])->name('backend.nguoi-dung.destroy');
         });
 
         Route::prefix('/dai-ly')->group(function () {

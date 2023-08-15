@@ -2,15 +2,14 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Enum\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Testing\Fluent\Concerns\Has;
 use Prologue\Alerts\Facades\Alert;
 use SebastianBergmann\Diff\Exception;
-use function Laravel\Prompts\alert;
 
 class QL_UserController extends Controller
 {
@@ -20,7 +19,7 @@ class QL_UserController extends Controller
     public function index()
     {
         $listRole = Role::all(['id', 'name']);
-        $listUser = User::all(['id', 'name', 'number_phone', 'email', 'kakao_talk_id', 'role_id']);
+        $listUser = User::all(['id', 'name', 'number_phone', 'email', 'kakao_talk_id', 'role_id', 'avatar', 'status']);
         return view('backend/pages/quan_ly_user/index', compact('listRole', 'listUser'));
     }
 
@@ -55,25 +54,33 @@ class QL_UserController extends Controller
                 }
             }
 
+            if ($request->hasFile('avatar')) {
+                $avatar = $request->file('avatar');
+                $avatarPath = $avatar->store('images', 'public');
+                $user->avatar = $avatarPath;
+            }
+
+            $user->status = UserStatus::ACTIVE;
+
             $result = $user->save();
             if ($result) {
                 return redirect()->route('backend.user.show')->with('success', 'Tạo mới thành công');
             }
-            return redirect()->back();
+            return redirect()->back()->with('error', 'Lỗi thông tin');
         } catch (Exception $exception) {
-            return redirect()->back()->with('error', 'Lỗi');
+            return redirect()->back()->with('error', 'Lỗi thao tác');
         }
     }
-
 
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public
+    function show(string $id)
     {
         try {
-            $user = User::where('id',$id)->first(['id', 'name', 'number_phone', 'email', 'kakao_talk_id', 'zalo_id', 'role_id']);
+            $user = User::where('id', $id)->first(['id', 'name', 'number_phone', 'email', 'kakao_talk_id', 'zalo_id', 'role_id']);
             return response()->json($user);
         } catch (Exception $e) {
             return $e;
@@ -83,7 +90,8 @@ class QL_UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public
+    function edit(string $id)
     {
         //
     }
@@ -91,7 +99,8 @@ class QL_UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public
+    function update(Request $request, string $id)
     {
         try {
             $user = User::first('id', $id);
@@ -121,6 +130,23 @@ class QL_UserController extends Controller
      */
     public function destroy(string $id)
     {
+        $user = User::where('id', $id)->first();
+        if ($user) {
+            switch ($user->status) {
+                case UserStatus::ACTIVE:
+                    $user->status = UserStatus::INACTIVE;
+                    $msg = 'Khóa tài khoản thành công';
+                    break;
+                default:
+                    $user->status = UserStatus::ACTIVE;
+                    $msg = 'Mở khóa tài khoản thành công';
+                    break;
+            }
+            $user->save();
+            return redirect()->back()->with('success', $msg);
+        } else {
+            return redirect()->back()->with('error', 'Lỗi, xin thử lại');
+        }
 
     }
 }

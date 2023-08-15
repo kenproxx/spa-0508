@@ -1,19 +1,24 @@
 @extends('backend.layouts.master')
 @section('title', 'Người dùng')
+
+<?php
+$checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
+?>
 @section('content')
 
     @include('backend.widgets.thong-bao')
 
     <div class="card w-100 position-relative overflow-hidden">
-        <div class="px-4 py-3 border-bottom">
-            <h5 class="card-title fw-semibold mb-0 lh-sm">Quản lý người dùng</h5>
+        <div class="px-4 py-3 border-bottom justify-content-between d-flex">
+            <h5 class="card-title fw-semibold mb-0 lh-sm d-inline-block">Quản lý người dùng</h5>
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-user">
                 Thêm mới
             </button>
         </div>
         <div class="card-body p-4">
             <div class="table-responsive rounded-2 mb-4">
-                <table class="table border text-nowrap customize-table mb-0 align-middle">
+                <table class="table border text-nowrap customize-table mb-0 align-middle ">
+                <table class="table border text-nowrap customize-table mb-0 align-middle ">
                     <thead class="text-dark fs-4">
                     <tr>
                         <th><h6 class="fs-4 fw-semibold mb-0">Họ và tên</h6></th>
@@ -26,11 +31,19 @@
                     </thead>
                     <tbody>
                     @foreach($listUser as $user)
+                        <?php $isDeleted = $user->status == \App\Enum\UserStatus::INACTIVE ?>
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <img src="../../dist/images/profile/user-1.jpg" class="rounded-circle" width="40"
-                                         height="40"/>
+                                    @if($user->avatar)
+                                        <img src="{{ asset('storage/' . $user->avatar) }}" class="rounded-circle"
+                                             width="40"
+                                             height="40"/>
+                                    @else
+                                        <img src="../../dist/images/profile/user-1.jpg" class="rounded-circle"
+                                             width="40"
+                                             height="40"/>
+                                    @endif
                                     <div class="ms-3">
                                         <h6 class="fs-4 fw-semibold mb-0">{{ $user->name }}</h6>
                                     </div>
@@ -45,8 +58,8 @@
                             </td>
                             <td>
                            <span
-                               class="badge <?php echo $user->role_id == '1' ? 'bg-light-primary' : ($user->role_id == '2' ? 'bg-light-secondary' : 'bg-light-danger') ?> rounded-3 py-8 text-primary fw-semibold fs-2">
-                                {{ $user->role_id == '1' ? 'SUPER_ADMIN' : ($user->role_id == '2' ? 'ADMIN' : 'GUEST') }}
+                               class="badge <?php echo $isDeleted ? 'bg-light-danger' : ( $user->role_id == '1' ? 'bg-light-primary' : ($user->role_id == '2' ? 'bg-light-secondary' : 'bg-light-danger')) ?> rounded-3 py-8 text-primary fw-semibold fs-2">
+                                {{ $isDeleted ? 'Deleted' : ($user->role_id == '1' ? 'SUPER_ADMIN' : ($user->role_id == '2' ? 'ADMIN' : 'GUEST')) }}
                            </span>
                             </td>
                             <td>
@@ -61,10 +74,19 @@
                                             <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i
                                                     class="fs-4 ti ti-edit"></i>Sửa</a>
                                         </li>
-{{--                                        <li>--}}
-{{--                                            <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i--}}
-{{--                                                    class="fs-4 ti ti-trash"></i>Xóa</a>--}}
-{{--                                        </li>--}}
+                                        @if($checkRole == 1)
+                                            @if($isDeleted)
+                                                <li>
+                                                    <a class="dropdown-item d-flex align-items-center gap-3" href="{{ route('backend.nguoi-dung.destroy', $user->id) }}"><i
+                                                            class="fs-4 ti ti-trash"></i>Mở khóa</a>
+                                                </li>
+                                            @else
+                                                <li>
+                                                    <a class="dropdown-item d-flex align-items-center gap-3" href="{{ route('backend.nguoi-dung.destroy', $user->id) }}"><i
+                                                            class="fs-4 ti ti-trash"></i>Khóa</a>
+                                                </li>
+                                            @endif
+                                        @endif
                                     </ul>
                                 </div>
                             </td>
@@ -83,28 +105,29 @@
                     <h5 class="modal-title" id="modalLabel">Tạo mới</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form" action="{{ route('backend.nguoi-dung.store') }}" method="post">
+                <form id="form" action="{{ route('backend.nguoi-dung.store') }}" method="post"
+                      enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
                         <div class="note-title">
                             <label>Họ và tên</label>
-                            <input type="text" class="form-control" name="name" id="name"
+                            <input type="text" class="form-control" name="name" id="name" required
                                    placeholder="Nhập Họ và tên"/>
                         </div>
                         <div class="note-title">
                             <label>Email</label>
-                            <input type="text" class="form-control" name="email" id="email"
+                            <input type="text" class="form-control" name="email" id="email" required
                                    placeholder="Nhập Email"/>
                         </div>
                         <div class="note-title">
                             <label>Mật khẩu</label>
-                            <input type="password" class="form-control" name="password" id="password"
+                            <input type="password" class="form-control" minlength="8" name="password" id="password" required
                                    placeholder="Nhập Mật khẩu"/>
                         </div>
                         <div class="note-title">
                             <label>Số điện thoại</label>
-                            <input type="number" class="form-control" name="number_phone" id="number_phone"
-                                   placeholder="Nhập Số điện thoại"/>
+                            <input type="tel" class="form-control" name="number_phone" id="number_phone"
+                                   placeholder="Nhập Số điện thoại" required pattern="^(0\d{9,10})$"/>
                         </div>
                         <div class="note-title">
                             <label>Zalo</label>
@@ -199,9 +222,9 @@
         $('input[type="file"]').val('');
     }
 
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const modalUser = document.getElementById('modal-user');
-        modalUser.addEventListener('hidden.bs.modal', function() {
+        modalUser.addEventListener('hidden.bs.modal', function () {
             resetFormModal();
         });
     });
