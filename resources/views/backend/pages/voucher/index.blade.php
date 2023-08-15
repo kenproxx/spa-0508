@@ -1,6 +1,11 @@
 @extends('backend.layouts.master')
 @section('title', 'Mã giảm giá')
 
+@php
+    $cssClasses = ['note-important', 'note-social', 'note-business'];
+    $classIndex = 0;
+@endphp
+
 @section('content')
     @include('backend.widgets.thong-bao')
 
@@ -31,218 +36,38 @@
     </ul>
     <div class="tab-content">
         <div id="note-full-container" class="note-has-grid row">
-            <div class="col-md-4 single-note-item all-category note-important">
-                <div class="card card-body">
-                    <span class="side-stick"></span>
-                    <h6 class="note-title text-truncate w-75 mb-0" data-noteHeading="Book a Ticket for Movie"> Book a
-                        Ticket for Movie </h6>
-                    <p class="note-date fs-2">11 March 2009</p>
-                    <div class="note-content">
-                        <p class="note-inner-content"
-                           data-noteContent="Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.">
-                            Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis. </p>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <a href="javascript:void(0)" class="link text-danger ms-2">
-                            <i class="ti ti-trash fs-4 remove-note"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 single-note-item all-category note-important">
-                <div class="card card-body">
-                    <span class="side-stick"></span>
-                    <h6 class="note-title text-truncate w-75 mb-0" data-noteHeading="Go for lunch"> Go for lunch </h6>
-                    <p class="note-date fs-2">01 April 2002</p>
-                    <div class="note-content">
-                        <p class="note-inner-content"
-                           data-noteContent="Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.">
-                            Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis. </p>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <a href="javascript:void(0)" class="link me-1">
-                            <i class="ti ti-star fs-4 favourite-note"></i>
-                        </a>
-                        <a href="javascript:void(0)" class="link text-danger ms-2">
-                            <i class="ti ti-trash fs-4 remove-note"></i>
-                        </a>
-                        <div class="ms-auto">
-                            <div class="category-selector btn-group">
-                                <a class="nav-link category-dropdown label-group p-0" data-bs-toggle="dropdown" href="#"
-                                   role="button" aria-haspopup="true" aria-expanded="true">
-                                    <div class="category">
-                                        <div class="category-business"></div>
-                                        <div class="category-social"></div>
-                                        <div class="category-important"></div>
-                                        <span class="more-options text-dark">
-                              <i class="ti ti-dots-vertical fs-5"></i>
-                            </span>
-                                    </div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right category-menu">
-                                    <a class="
-                                  note-business
-                                  badge-group-item badge-business
-                                  dropdown-item
-                                  position-relative
-                                  category-business
-                                  d-flex
-                                  align-items-center
-                                " href="javascript:void(0);">Business</a>
-                                    <a class="
-                                  note-social
-                                  badge-group-item badge-social
-                                  dropdown-item
-                                  position-relative
-                                  category-social
-                                  d-flex
-                                  align-items-center
-                                " href="javascript:void(0);"> Social</a>
-                                    <a class="
-                                  note-important
-                                  badge-group-item badge-important
-                                  dropdown-item
-                                  position-relative
-                                  category-important
-                                  d-flex
-                                  align-items-center
-                                " href="javascript:void(0);"> Important</a>
-                                </div>
-                            </div>
+            @foreach($listVoucher as $voucher)
+                <div class="col-md-4 single-note-item all-category {{ $cssClasses[$classIndex] }}">
+                    <div class="card card-body">
+                        <span class="side-stick"></span>
+                        <h5 class="note-title text-truncate w-75 mb-0"
+                            data-noteHeading="Book a Ticket for Movie">{{ $voucher->name }}</h5>
+                        <p class="note-date fs-2">{{ $voucher->begin_time }} | {{ $voucher->end_time }}</p>
+                        <div class="note-content">
+                            <p class="note-inner-content"
+                               data-noteContent="Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.">
+                                Giá áp dụng tối thiểu: {{ $voucher->gia_ap_dung_toi_thieu ?? '0' }}
+                                <br>
+                                Phần trăm giảm: {{ $voucher->phan_tram_giam ?? '0%' }}
+                                <br>
+                                Giá giảm tối thiểu:{{ $voucher->gia_giam_toi_thieu ?? '0' }}
+                                <br>
+                                Giá giảm tối đa: {{ $voucher->gia_giam_toi_da ?? '0' }}
+                                <br>
+                            </p>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <form action="{{ route('backend.voucher.destroy', $voucher->id) }}" method="post">
+                                @method('delete')
+                                @csrf
+                                <button type="submit" class="btn btn-danger" onclick="return confirmDelete()"><i class="ti ti-trash fs-4 "></i></button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4 single-note-item all-category note-social">
-                <div class="card card-body">
-                    <span class="side-stick"></span>
-                    <h6 class="note-title text-truncate w-75 mb-0" data-noteHeading="Meeting with Mr.Jojo"> Meeting with
-                        Mr.Jojo </h6>
-                    <p class="note-date fs-2">19 October 2021</p>
-                    <div class="note-content">
-                        <p class="note-inner-content"
-                           data-noteContent="Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.">
-                            Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis. </p>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <a href="javascript:void(0)" class="link me-1">
-                            <i class="ti ti-star fs-4 favourite-note"></i>
-                        </a>
-                        <a href="javascript:void(0)" class="link text-danger ms-2">
-                            <i class="ti ti-trash fs-4 remove-note"></i>
-                        </a>
-                        <div class="ms-auto">
-                            <div class="category-selector btn-group">
-                                <a class="nav-link category-dropdown label-group p-0" data-bs-toggle="dropdown" href="#"
-                                   role="button" aria-haspopup="true" aria-expanded="true">
-                                    <div class="category">
-                                        <div class="category-business"></div>
-                                        <div class="category-social"></div>
-                                        <div class="category-important"></div>
-                                        <span class="more-options text-dark">
-                              <i class="ti ti-dots-vertical fs-5"></i>
-                            </span>
-                                    </div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right category-menu">
-                                    <a class="
-                                  note-business
-                                  badge-group-item badge-business
-                                  dropdown-item
-                                  position-relative
-                                  category-business
-                                  d-flex
-                                  align-items-center
-                                " href="javascript:void(0);">Business</a>
-                                    <a class="
-                                  note-social
-                                  badge-group-item badge-social
-                                  dropdown-item
-                                  position-relative
-                                  category-social
-                                  d-flex
-                                  align-items-center
-                                " href="javascript:void(0);"> Social</a>
-                                    <a class="
-                                  note-important
-                                  badge-group-item badge-important
-                                  dropdown-item
-                                  position-relative
-                                  category-important
-                                  d-flex
-                                  align-items-center
-                                " href="javascript:void(0);"> Important</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 single-note-item all-category note-business">
-                <div class="card card-body">
-                    <span class="side-stick"></span>
-                    <h6 class="note-title text-truncate w-75 mb-0" data-noteHeading="Give Review for design"> Give
-                        Review for design </h6>
-                    <p class="note-date fs-2">02 January 2000</p>
-                    <div class="note-content">
-                        <p class="note-inner-content"
-                           data-noteContent="Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis.">
-                            Blandit tempus porttitor aasfs. Integer posuere erat a ante venenatis. </p>
-                    </div>
-                    <div class="d-flex align-items-center">
-                        <a href="javascript:void(0)" class="link me-1">
-                            <i class="ti ti-star fs-4 favourite-note"></i>
-                        </a>
-                        <a href="javascript:void(0)" class="link text-danger ms-2">
-                            <i class="ti ti-trash fs-4 remove-note"></i>
-                        </a>
-                        <div class="ms-auto">
-                            <div class="category-selector btn-group">
-                                <a class="nav-link category-dropdown label-group p-0" data-bs-toggle="dropdown" href="#"
-                                   role="button" aria-haspopup="true" aria-expanded="true">
-                                    <div class="category">
-                                        <div class="category-business"></div>
-                                        <div class="category-social"></div>
-                                        <div class="category-important"></div>
-                                        <span class="more-options text-dark">
-                              <i class="ti ti-dots-vertical fs-5"></i>
-                            </span>
-                                    </div>
-                                </a>
-                                <div class="dropdown-menu dropdown-menu-right category-menu">
-                                    <a class="
-                                  note-business
-                                  badge-group-item badge-business
-                                  dropdown-item
-                                  position-relative
-                                  category-business
-                                  d-flex
-                                  align-items-center
-                                " href="javascript:void(0);">Business</a>
-                                    <a class="
-                                  note-social
-                                  badge-group-item badge-social
-                                  dropdown-item
-                                  position-relative
-                                  category-social
-                                  d-flex
-                                  align-items-center
-                                " href="javascript:void(0);"> Social</a>
-                                    <a class="
-                                  note-important
-                                  badge-group-item badge-important
-                                  dropdown-item
-                                  position-relative
-                                  category-important
-                                  d-flex
-                                  align-items-center
-                                " href="javascript:void(0);"> Important</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                @php
+                    $classIndex = ($classIndex + 1) % count($cssClasses);
+                @endphp            @endforeach
         </div>
     </div>
     <!-- Modal Add notes -->
@@ -264,15 +89,15 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="note-title">
                                             <label>Tên mã</label>
-                                            <input type="text" class="form-control" placeholder="Nhập Tên mã" name="name"/>
+                                            <input type="text" class="form-control" placeholder="Nhập Tên mã"
+                                                   name="name"/>
                                         </div>
                                         <div class="note-title">
                                             <label>CODE</label>
                                             <div class="row">
                                                 <div class="col-9">
-                                                    <input type="text" class="form-control" id="code" required name="code"
-                                                           minlength="5" maxlength="10"
-                                                           placeholder="Nhập Mã" oninput="upToCaseCode(this)"/>
+                                                    <input type="text" class="form-control" id="code" required minlength="7" maxlength="10"
+                                                           name="code">
                                                 </div>
                                                 <div class="col-3">
                                                     <input type="button" class="btn btn-primary form-control"
@@ -284,25 +109,28 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <label>Bắt đầu</label>
-                                                <input type="datetime-local" class="form-control" name="begin_time"/>
+                                                <input type="datetime-local" class="form-control" name="begin_time" id="begin_time" required/>
                                             </div>
                                             <div class="col-6">
                                                 <label>Kết thúc</label>
-                                                <input type="datetime-local" class="form-control" name="end_time"/>
+                                                <input type="datetime-local" class="form-control" name="end_time" id="end_time" required/>
                                             </div>
                                         </div>
                                         <div>
                                             <label>Giá trị áp dụng tối thểu</label>
-                                            <input type="number" min="0" value="0" class="form-control" name="gia_ap_dung_toi_thieu"/>
+                                            <input type="number" min="0" value="0" class="form-control"
+                                                   name="gia_ap_dung_toi_thieu"/>
                                         </div>
                                         <div class="row">
                                             <div class="col-6">
                                                 <label>Phần trăm giảm</label>
-                                                <input type="number" min="0" max="100" value="0" class="form-control" name="phan_tram_giam"/>
+                                                <input type="number" min="0" max="100" value="0" class="form-control"
+                                                       name="phan_tram_giam"/>
                                             </div>
                                             <div class="col-6">
                                                 <label>Giảm tối đa</label>
-                                                <input type="number" min="0" value="0" class="form-control" name="gia_giam_toi_da"/>
+                                                <input type="number" min="0" value="0" class="form-control"
+                                                       name="gia_giam_toi_da"/>
                                             </div>
                                         </div>
                                         <div class="note-title">
@@ -311,16 +139,17 @@
                                                 <option value="0">Tất cả sản phẩm</option>
                                                 @foreach($listProduct as $product)
                                                         <?php
-                                                            $agency = \App\Models\Agency::where('id', $product->agency_id)
-                                                    ->first(['ten_quan_ly', 'ten_co_so'])
+                                                        $agency = \App\Models\Agency::where('id', $product->agency_id)
+                                                            ->first(['ten_quan_ly', 'ten_co_so'])
                                                         ?>
-                                                    <option value="{{ $product->id }}">{{ $product->title }} - {{ $agency->ten_quan_ly }} - {{ $agency->ten_co_so }}</option>
+                                                    <option value="{{ $product->id }}">{{ $product->title }}
+                                                        - {{ $agency->ten_quan_ly }} - {{ $agency->ten_co_so }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="note-title">
                                             <label>Số lượng</label>
-                                            <input type="number" min="0" class="form-control" name="quantity"
+                                            <input type="number" min="1" value="1" class="form-control" name="quantity" required
                                                    placeholder="Nhập Số lượng"/>
                                         </div>
                                     </div>
@@ -337,7 +166,6 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../../dist/js/apps/notes.js"></script>
 @endsection
 
@@ -350,7 +178,6 @@
             const randomIndex = Math.floor(Math.random() * characters.length);
             randomCode += characters.charAt(randomIndex);
         }
-
         document.getElementById('code').value = randomCode;
     }
 
@@ -362,4 +189,23 @@
     function removeVietnameseDiacritics(str) {
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
+
+    function confirmDelete() {
+        return confirm("Bạn muốn xóa Voucher này không");
+    }
+
+    // chưa bắt lỗi ngaày kết thúc < ngày băt đầu
+    const beginTimeInput = document.getElementById('begin_time');
+    const endTimeInput = document.getElementById('end_time');
+
+    endTimeInput.addEventListener('change', function () {
+        const beginTime = new Date(beginTimeInput.value);
+        const endTime = new Date(endTimeInput.value);
+        console.log(beginTime)
+        if (endTime <= beginTime) {
+            endTimeInput.setCustomValidity('Kết thúc phải sau thời gian bắt đầu.');
+        } else {
+            endTimeInput.setCustomValidity('');
+        }
+    });
 </script>
