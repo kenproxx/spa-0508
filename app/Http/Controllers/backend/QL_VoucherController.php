@@ -23,21 +23,28 @@ class QL_VoucherController extends Controller
 
         $listProduct = Product::query();
         $listVoucher = Voucher::query();
+        $listAgency = [];
 
-        if ($user->role_id == UserRole::ADMIN) {
-            $listProduct->where('user_id', $user_id);
+        switch ($user->role_id) {
+            case UserRole::ADMIN:
+                $listProduct->where('user_id', $user_id);
 
-            $agency_id = Agency::where('user_id', $user_id)->first();
-            $listVoucherOfSpa = ProductVouchers::where('agency_id', $agency_id)->pluck('voucher_id');
-            $listVoucher = Voucher::whereIn('id', $listVoucherOfSpa);
+                $agency_id = Agency::where('user_id', $user_id)->first();
+                $listVoucherOfSpa = ProductVouchers::where('agency_id', $agency_id)->pluck('voucher_id');
+                $listVoucher = Voucher::whereIn('id', $listVoucherOfSpa);
+                break;
+            case UserRole::SUPER_ADMIN:
+                $listAgency = Agency::all(['id','ten_co_so','ten_quan_ly', 'user_id']);
+                break;
         }
+
 
         $listProduct = $listProduct->get(['id', 'title', 'agency_id']);
         $listVoucher = $listVoucher->get(['id', 'name', 'code', 'quantity',
             'gia_ap_dung_toi_thieu', 'phan_tram_giam', 'gia_giam_toi_thieu',
             'gia_giam_toi_da', 'begin_time', 'end_time']);
 
-        return view('backend/pages/voucher/index', compact('listProduct', 'listVoucher'));
+        return view('backend/pages/voucher/index', compact('listProduct', 'listVoucher', 'listAgency'));
     }
 
     /**

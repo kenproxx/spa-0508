@@ -60,14 +60,16 @@
                             <form action="{{ route('backend.voucher.destroy', $voucher->id) }}" method="post">
                                 @method('delete')
                                 @csrf
-                                <button type="submit" class="btn btn-danger" onclick="return confirmDelete()"><i class="ti ti-trash fs-4 "></i></button>
+                                <button type="submit" class="btn btn-danger" onclick="return confirmDelete()"><i
+                                        class="ti ti-trash fs-4 "></i></button>
                             </form>
                         </div>
                     </div>
                 </div>
                 @php
                     $classIndex = ($classIndex + 1) % count($cssClasses);
-                @endphp            @endforeach
+                @endphp
+            @endforeach
         </div>
     </div>
     <!-- Modal Add notes -->
@@ -89,14 +91,15 @@
                                     <div class="col-md-12 mb-3">
                                         <div class="note-title">
                                             <label>Tên mã</label>
-                                            <input type="text" class="form-control" placeholder="Nhập Tên mã"
+                                            <input type="text" class="form-control" placeholder="Nhập Tên mã" required
                                                    name="name"/>
                                         </div>
                                         <div class="note-title">
                                             <label>CODE</label>
                                             <div class="row">
                                                 <div class="col-9">
-                                                    <input type="text" class="form-control" id="code" required minlength="7" maxlength="10"
+                                                    <input type="text" class="form-control" id="code" required
+                                                           minlength="7" maxlength="10"
                                                            name="code">
                                                 </div>
                                                 <div class="col-3">
@@ -109,11 +112,13 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <label>Bắt đầu</label>
-                                                <input type="datetime-local" class="form-control" name="begin_time" id="begin_time" required/>
+                                                <input type="datetime-local" class="form-control" name="begin_time"
+                                                       id="begin_time" required/>
                                             </div>
                                             <div class="col-6">
                                                 <label>Kết thúc</label>
-                                                <input type="datetime-local" class="form-control" name="end_time" id="end_time" required/>
+                                                <input type="datetime-local" class="form-control" name="end_time"
+                                                       id="end_time" required/>
                                             </div>
                                         </div>
                                         <div>
@@ -134,22 +139,37 @@
                                             </div>
                                         </div>
                                         <div class="note-title">
-                                            <label>Sản phẩm áp dụng</label>
-                                            <select class="form-select" name="product_id">
-                                                <option value="0">Tất cả sản phẩm</option>
-                                                @foreach($listProduct as $product)
-                                                        <?php
-                                                        $agency = \App\Models\Agency::where('id', $product->agency_id)
-                                                            ->first(['ten_quan_ly', 'ten_co_so'])
-                                                        ?>
-                                                    <option value="{{ $product->id }}">{{ $product->title }}
-                                                        - {{ $agency->ten_quan_ly }} - {{ $agency->ten_co_so }}</option>
-                                                @endforeach
-                                            </select>
+                                            <div class="row">
+                                                <div class="col-sm-6"><label>Áp dụng cho đại lý</label>
+                                                    <select class="form-select" name="product_id">
+                                                        <option value="0">Tất cả đại lý</option>
+                                                        @foreach($listAgency as $agency)
+                                                            <option value="">{{ $agency->ten_quan_ly }}
+                                                                - {{ $agency->ten_co_so }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-sm-6"><label>Áp dụng cho sản phẩm</label>
+                                                    <select class="form-select" name="product_id">
+                                                        <option value="0">Tất cả sản phẩm</option>
+                                                        @foreach($listProduct as $product)
+                                                                <?php
+                                                                $agency = \App\Models\Agency::where('id', $product->agency_id)
+                                                                    ->first(['ten_quan_ly', 'ten_co_so'])
+                                                                ?>
+                                                            <option value="{{ $product->id }}">{{ $product->title }}
+                                                                - {{ $agency->ten_quan_ly }}
+                                                                - {{ $agency->ten_co_so }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+
                                         </div>
                                         <div class="note-title">
                                             <label>Số lượng</label>
-                                            <input type="number" min="1" value="1" class="form-control" name="quantity" required
+                                            <input type="number" min="1" value="1" class="form-control" name="quantity"
+                                                   required
                                                    placeholder="Nhập Số lượng"/>
                                         </div>
                                     </div>
