@@ -1,3 +1,4 @@
+<?php $checkSuper_Admin = \Illuminate\Support\Facades\Auth::user()->role_id == \App\Enum\UserRole::SUPER_ADMIN ?>
 <nav class="sidebar-nav scroll-sidebar" data-simplebar>
     <ul id="sidebarnav"><!-- ============================= -->
         <!-- Home -->
@@ -15,14 +16,6 @@
                     <i class="ti ti-aperture"></i>
                   </span>
                 <span class="hide-menu">Thống kê</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ route('backend.user.show') }}" aria-expanded="false">
-                  <span>
-                    <i class="ti ti-aperture"></i>
-                  </span>
-                <span class="hide-menu">Quản lý người dùng</span>
             </a>
         </li>
         <li class="sidebar-item">
@@ -73,6 +66,17 @@
                 <span class="hide-menu">Dịch vụ thêm</span>
             </a>
         </li>
+
+        @if($checkSuper_Admin)
+        <li class="sidebar-item">
+            <a class="sidebar-link" href="{{ route('backend.user.show') }}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-aperture"></i>
+                  </span>
+                <span class="hide-menu">Quản lý người dùng</span>
+            </a>
+        </li>
+
         <li class="sidebar-item">
             <a class="sidebar-link" href="{{ route('backend.dai-ly.show') }}" aria-expanded="false">
                   <span>
@@ -155,5 +159,6 @@
                 </li>
             </ul>
         </li>
+        @endif
     </ul>
 </nav>
