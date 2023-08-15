@@ -59,6 +59,7 @@ Route::middleware(['role.admin.super_admin'])->group(function () {
         Route::prefix('/ma-giam-gia')->group(function () {
             Route::get('', [QL_VoucherController::class, 'index'])->name('backend.voucher.show');
             Route::post('/store', [QL_VoucherController::class, 'store'])->name('backend.voucher.store');
+            Route::delete('/destroy/{id}', [QL_VoucherController::class, 'destroy'])->name('backend.voucher.destroy');
         });
 
         Route::prefix('/san-pham')->group(function () {
