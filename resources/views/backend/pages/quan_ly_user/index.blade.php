@@ -17,8 +17,7 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
         </div>
         <div class="card-body p-4">
             <div class="table-responsive rounded-2 mb-4">
-                <table class="table border text-nowrap customize-table mb-0 align-middle ">
-                <table class="table border text-nowrap customize-table mb-0 align-middle ">
+                <table class="table border text-nowrap customize-table mb-0 align-middle">
                     <thead class="text-dark fs-4">
                     <tr>
                         <th><h6 class="fs-4 fw-semibold mb-0">Họ và tên</h6></th>

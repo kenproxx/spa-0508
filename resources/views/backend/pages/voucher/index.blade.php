@@ -298,11 +298,11 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <label>Phần trăm giảm</label>
-                                                <input type="number" min="0" max="100" class="form-control" name="phan_tram_giam"/>
+                                                <input type="number" min="0" max="100" value="0" class="form-control" name="phan_tram_giam"/>
                                             </div>
                                             <div class="col-6">
                                                 <label>Giảm tối đa</label>
-                                                <input type="number" min="0" class="form-control" name="gia_giam_toi_da"/>
+                                                <input type="number" min="0" value="0" class="form-control" name="gia_giam_toi_da"/>
                                             </div>
                                         </div>
                                         <div class="note-title">
