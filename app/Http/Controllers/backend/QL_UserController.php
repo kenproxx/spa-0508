@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Prologue\Alerts\Facades\Alert;
 use SebastianBergmann\Diff\Exception;
@@ -80,7 +81,7 @@ class QL_UserController extends Controller
     function show(string $id)
     {
         try {
-            $user = User::where('id', $id)->first(['id', 'name', 'number_phone', 'email', 'kakao_talk_id', 'zalo_id', 'role_id']);
+            $user = User::where('id', $id)->first(['id', 'name', 'number_phone', 'email', 'kakao_talk_id', 'zalo_id', 'role_id', 'password']);
             return response()->json($user);
         } catch (Exception $e) {
             return $e;
@@ -130,6 +131,9 @@ class QL_UserController extends Controller
      */
     public function destroy(string $id)
     {
+        if ($id == Auth::user()->id) {
+            return redirect()->back()->with('error', 'Bạn không thể khóa chính mình =))');
+        }
         $user = User::where('id', $id)->first();
         if ($user) {
             switch ($user->status) {

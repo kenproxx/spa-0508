@@ -4,6 +4,18 @@
 <?php
 $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
 ?>
+
+<style>
+    .field-icon {
+        float: right;
+        margin-left: -25px;
+        margin-top: -25px;
+        position: relative;
+        z-index: 2;
+        padding-right: 30px;
+    }
+</style>
+
 @section('content')
 
     @include('backend.widgets.thong-bao')
@@ -115,13 +127,13 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
                         </div>
                         <div class="note-title">
                             <label>Email</label>
-                            <input type="text" class="form-control" name="email" id="email" required
+                            <input type="email" class="form-control" name="email" id="email" required
                                    placeholder="Nhập Email"/>
                         </div>
                         <div class="note-title">
-                            <label>Mật khẩu</label>
-                            <input type="password" class="form-control" minlength="8" name="password" id="password" required
-                                   placeholder="Nhập Mật khẩu"/>
+                            <label id="labelPassword">Mật khẩu</label>
+                                <input id="password" type="password" class="form-control" minlength="8" name="password" required>
+                                <span class="fa fa-fw fa-eye field-icon toggle-password" id="eyeIcon" onclick="showPassword()"></span>
                         </div>
                         <div class="note-title">
                             <label>Số điện thoại</label>
@@ -130,7 +142,7 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
                         </div>
                         <div class="note-title">
                             <label>Zalo</label>
-                            <input type="tel" class="form-control" name="zalo_id" id="zalo_id"
+                            <input type="tel" class="form-control" name="zalo_id" id="zalo_id" pattern="^(0\d{9,10})$"
                                    placeholder="Nhập Zalo"/>
                         </div>
                         <div class="note-title">
@@ -197,7 +209,8 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
 
         $('#name').val(data.name);
         $('#email').val(data.email).prop('disabled', true);
-        $('#password').val(data.password);
+        $('#password').prop('hidden', true);
+        $('#labelPassword').prop('hidden', true);
         $('#number_phone').val(data.number_phone);
         $('#zalo_id').val(data.zalo_id).prop('disabled', isExistZalo);
         $('#kakao_talk_id').val(data.kakao_talk_id);
@@ -214,7 +227,9 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
     function resetFormModal() {
         $('#modalLabel').text('Thêm mới');
         $('input[type="text"]').val('').prop('disabled', false);
-        $('input[type="password"]').val('');
+        $('input[type="password"]').val('').prop('hidden', false);
+        $('input[type="email"]').val('').prop('disabled', false);
+        $('#labelPassword').prop('hidden', false);
         $('input[type="number"]').val('');
         $('input[type="tel"]').val('').prop('disabled', false);
         $('select').prop('selectedIndex', 0);
@@ -227,5 +242,20 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
             resetFormModal();
         });
     });
+
+
+    function showPassword() {
+        const passwordInput = document.getElementById("password");
+        const eyeIcon = document.getElementById("eyeIcon");
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("fa-eye-slash");
+            eyeIcon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("fa-eye");
+            eyeIcon.classList.add("fa-eye-slash");
+        }
+    }
 
 </script>
