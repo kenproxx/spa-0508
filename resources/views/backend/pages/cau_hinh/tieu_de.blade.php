@@ -22,6 +22,7 @@
                         <textarea type="text" class="form-control" id="validationDefault03" name="123" placeholder="City"></textarea>
                     </div>
                 </div>
+                <input type="hidden" value="{{ \App\Enum\ConfigType::TIEU_DE }}">
                 <button class="btn btn-info rounded-pill px-4 mt-3" type="submit">
                     Lưu
                 </button>
