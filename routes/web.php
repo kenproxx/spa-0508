@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\backend\AgencyController;
+use App\Http\Controllers\backend\CauHinhController;
 use App\Http\Controllers\backend\DonHangController;
 use App\Http\Controllers\backend\MoreServiceController;
 use App\Http\Controllers\backend\ProductController;
@@ -80,6 +81,35 @@ Route::middleware(['role.admin.super_admin'])->group(function () {
 
         Route::prefix('/don-hang')->group(function () {
             Route::get('', [DonHangController::class, 'index'])->name('backend.don-hang.show');
+        });
+
+        Route::prefix('/cau-hinh')->group(function () {
+
+            Route::prefix('/vn-pay')->group(function () {
+                Route::get('', [CauHinhController::class, 'showConfig_apiVnPay'])->name('backend.cau-hinh.show.vn-pay');
+            });
+            Route::prefix('/zalo')->group(function () {
+                Route::get('', [CauHinhController::class, 'showConfig_apiZalo'])->name('backend.cau-hinh.show.zalo');
+            });
+            Route::prefix('/banner')->group(function () {
+                Route::get('', [CauHinhController::class, 'showConfig_bannerTop'])->name('backend.cau-hinh.show.banner');
+            });
+            Route::prefix('/footer')->group(function () {
+                Route::get('', [CauHinhController::class, 'showConfig_footer'])->name('backend.cau-hinh.show.footer');
+            });
+            Route::prefix('/logo')->group(function () {
+                Route::get('', [CauHinhController::class, 'showConfig_logo'])->name('backend.cau-hinh.show.logo');
+            });
+            Route::prefix('/menu')->group(function () {
+                Route::get('', [CauHinhController::class, 'showConfig_menu'])->name('backend.cau-hinh.show.menu');
+            });
+            Route::prefix('/email')->group(function () {
+                Route::get('', [CauHinhController::class, 'showConfig_smtpEmail'])->name('backend.cau-hinh.show.email');
+            });
+            Route::prefix('/tieu-de')->group(function () {
+                Route::get('', [CauHinhController::class, 'showConfig_tieuDe'])->name('backend.cau-hinh.show.tieu-de');
+                Route::post('', [CauHinhController::class, 'showConfig_tieuDe'])->name('backend.cau-hinh.store.tieu-de');
+            });
         });
 
     });

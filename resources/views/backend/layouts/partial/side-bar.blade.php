@@ -94,7 +94,7 @@
             </a>
             <ul aria-expanded="false" class="collapse first-level">
                 <li class="sidebar-item">
-                    <a href="!#" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show.tieu-de') }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -102,7 +102,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="!#" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show.logo') }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -110,7 +110,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="!#" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show.banner') }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -118,7 +118,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="!#" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show.menu') }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -126,7 +126,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="!#" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show.vn-pay') }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -134,7 +134,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="!#" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show.email') }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -142,7 +142,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="!#" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show.zalo') }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -150,7 +150,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="!#" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show.footer') }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
