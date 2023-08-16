@@ -34,12 +34,12 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <label>Giá gốc</label>
-                                        <input type="text" class="form-control" name="gia_goc"
+                                        <input type="number" min="0" class="form-control" name="gia_goc"
                                                placeholder="Nhập Giá gốc"/>
                                     </div>
                                     <div class="col-6">
                                         <label>Giá khuyến mãi</label>
-                                        <input type="text" class="form-control" name="gia_khuyen_mai"
+                                        <input type="number" min="0" class="form-control" name="gia_khuyen_mai"
                                                placeholder="Nhập Giá khuyến mại"/>
                                     </div>
                                 </div>
@@ -48,6 +48,15 @@
                             <div>
                                 <label>Mô tả ngắn</label>
                                 <textarea type="text" class="form-control" name="mo_ta_ngan"></textarea>
+                                <textarea cols="80" id="testedit" name="testedit" rows="10" data-sample="1" data-sample-short>
+                                    &lt;p&gt;The &lt;strong&gt;Basic&lt;/strong&gt; package is perfect for short text fields that require little formatting, such as:&lt;/p&gt;
+
+                                    &lt;ul&gt;
+                                        &lt;li&gt;&lt;a href="https://ckeditor.com/blog/"&gt;Blog&lt;/a&gt; comments.&lt;/li&gt;
+                                        &lt;li&gt;Contact forms.&lt;/li&gt;
+                                        &lt;li&gt;Short text snippets.&lt;/li&gt;
+                                    &lt;/ul&gt;
+                                </textarea>
                             </div>
                             <div>
                                 <label>Mô tả chi tiết</label>
@@ -91,60 +100,106 @@
         <button type="submit" class="btn btn-primary">Lưu</button>
     </form>
 
-    <script>
-        const agencySelect = document.getElementById('agency_id');
-        const serviceSelect = document.getElementById('service_id');
 
-        agencySelect.addEventListener('change', () => {
-            loadServiceFromAgency();
-        });
-
-        loadServiceFromAgency();
-
-        function loadServiceFromAgency() {
-            const selectedAgencyId = agencySelect.value;
-
-            serviceSelect.innerHTML = '';
-
-            let url = '{{ route('backend.dich-vu-them.get-by-agency', ['id' => ':id']) }}'
-            url = url.replace(':id', selectedAgencyId);
-
-            fetch(url)
-                .then(response => response.json())
-                .then(data => {
-                    renderHTMLForMoreService(data)
-                })
-                .catch(error => {
-                    console.error('Error loading additional services');
-                });
-        }
-
-        function renderHTMLForMoreService(data) {
-            if (0 !== data.length) {
-                data.forEach(service => {
-                    const option = document.createElement('option');
-                    option.value = service.id;
-                    option.textContent = service.service_name;
-                    serviceSelect.appendChild(option);
-                });
-            } else {
-                const option = document.createElement('option');
-                option.value = '';
-                option.textContent = 'Chưa có dịch vụ';
-                serviceSelect.appendChild(option);
-            }
-        }
-    </script>
-    <script>
-        const checkboxes = document.querySelectorAll('.form-check-input');
-
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                checkbox.value = checkbox.checked ? '1' : '0';
-                console.log(checkbox.value)
-            });
-        });
-    </script>
 @endsection
 
+<script src="../../dist/libs/ckeditor/ckeditor.js"></script>
+<script src="../../dist/libs/ckeditor/samples/js/sample.js"></script>
+
+<script>
+    const agencySelect = document.getElementById('agency_id');
+    const serviceSelect = document.getElementById('service_id');
+
+    agencySelect.addEventListener('change', () => {
+        loadServiceFromAgency();
+    });
+
+    loadServiceFromAgency();
+
+    function loadServiceFromAgency() {
+        const selectedAgencyId = agencySelect.value;
+
+        serviceSelect.innerHTML = '';
+
+        let url = '{{ route('backend.dich-vu-them.get-by-agency', ['id' => ':id']) }}'
+        url = url.replace(':id', selectedAgencyId);
+
+        fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                renderHTMLForMoreService(data)
+            })
+            .catch(error => {
+                console.error('Error loading additional services');
+            });
+    }
+
+    function renderHTMLForMoreService(data) {
+        if (0 !== data.length) {
+            data.forEach(service => {
+                const option = document.createElement('option');
+                option.value = service.id;
+                option.textContent = service.service_name;
+                serviceSelect.appendChild(option);
+            });
+        } else {
+            const option = document.createElement('option');
+            option.value = '';
+            option.textContent = 'Chưa có dịch vụ';
+            serviceSelect.appendChild(option);
+        }
+    }
+</script>
+<script>
+    const checkboxes = document.querySelectorAll('.form-check-input');
+
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', () => {
+            checkbox.value = checkbox.checked ? '1' : '0';
+            console.log(checkbox.value)
+        });
+    });
+</script>
+<script>
+    //default
+    initSample();
+
+    //inline editor
+    // We need to turn off the automatic editor creation first.
+    CKEDITOR.disableAutoInline = true;
+
+
+    var editor1 = CKEDITOR.replace("editor1", {
+        extraAllowedContent: "div",
+        height: 460,
+    });
+    editor1.on("instanceReady", function () {
+        // Output self-closing tags the HTML4 way, like <br>.
+        this.dataProcessor.writer.selfClosingEnd = ">";
+
+        // Use line breaks for block elements, tables, and lists.
+        var dtd = CKEDITOR.dtd;
+        for (var e in CKEDITOR.tools.extend(
+            {},
+            dtd.$nonBodyContent,
+            dtd.$block,
+            dtd.$listItem,
+            dtd.$tableContent
+        )) {
+            this.dataProcessor.writer.setRules(e, {
+                indent: true,
+                breakBeforeOpen: true,
+                breakAfterOpen: true,
+                breakBeforeClose: true,
+                breakAfterClose: true,
+            });
+        }
+        // Start in source mode.
+        this.setMode("source");
+    });
+
+    CKEDITOR.replace("testedit", {
+        height: 150,
+    });
+</script>
 
