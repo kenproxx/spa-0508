@@ -124,8 +124,8 @@ Route::middleware(['role.admin.super_admin'])->group(function () {
                 Route::get('', [CauHinhController::class, 'showConfig_tieuDe'])->name('backend.cau-hinh.show.tieu-de');
                 Route::post('', [CauHinhController::class, 'saveConfig_tieuDe'])->name('backend.cau-hinh.store.tieu-de');
             });
-        });
 
+        });
     });
 });
 
