@@ -87,43 +87,37 @@ Route::middleware(['role.admin.super_admin'])->group(function () {
 
             Route::prefix('/vn-pay')->group(function () {
                 Route::get('', [CauHinhController::class, 'showConfig_apiVnPay'])->name('backend.cau-hinh.show.vn-pay');
-                Route::post('', [CauHinhController::class, 'saveConfig_apiVnPay'])->name('backend.cau-hinh.store.vn-pay');
             });
 
             Route::prefix('/zalo')->group(function () {
                 Route::get('', [CauHinhController::class, 'showConfig_apiZalo'])->name('backend.cau-hinh.show.zalo');
-                Route::post('', [CauHinhController::class, 'saveConfig_apiZalo'])->name('backend.cau-hinh.store.zalo');
             });
 
             Route::prefix('/banner')->group(function () {
                 Route::get('', [CauHinhController::class, 'showConfig_bannerTop'])->name('backend.cau-hinh.show.banner');
-                Route::post('', [CauHinhController::class, 'saveConfig_bannerTop'])->name('backend.cau-hinh.store.banner');
             });
 
             Route::prefix('/footer')->group(function () {
                 Route::get('', [CauHinhController::class, 'showConfig_footer'])->name('backend.cau-hinh.show.footer');
-                Route::post('', [CauHinhController::class, 'saveConfig_footer'])->name('backend.cau-hinh.store.footer');
             });
 
             Route::prefix('/logo')->group(function () {
                 Route::get('', [CauHinhController::class, 'showConfig_logo'])->name('backend.cau-hinh.show.logo');
-                Route::post('', [CauHinhController::class, 'saveConfig_logo'])->name('backend.cau-hinh.store.logo');
             });
 
             Route::prefix('/menu')->group(function () {
                 Route::get('', [CauHinhController::class, 'showConfig_menu'])->name('backend.cau-hinh.show.menu');
-                Route::post('', [CauHinhController::class, 'saveConfig_menu'])->name('backend.cau-hinh.store.menu');
             });
 
             Route::prefix('/email')->group(function () {
                 Route::get('', [CauHinhController::class, 'showConfig_smtpEmail'])->name('backend.cau-hinh.show.email');
-                Route::post('', [CauHinhController::class, 'saveConfig_smtpEmail'])->name('backend.cau-hinh.store.email');
             });
 
             Route::prefix('/tieu-de')->group(function () {
                 Route::get('', [CauHinhController::class, 'showConfig_tieuDe'])->name('backend.cau-hinh.show.tieu-de');
-                Route::post('', [CauHinhController::class, 'saveConfig_tieuDe'])->name('backend.cau-hinh.store.tieu-de');
             });
+
+            Route::post('', [CauHinhController::class, 'saveOrUpdateConfig'])->name('backend.cau-hinh.store');
 
         });
     });

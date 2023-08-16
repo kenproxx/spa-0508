@@ -4,7 +4,7 @@
 
     <div class="card w-100 position-relative overflow-hidden">
         <div class="card-body p-4">
-            <form action="{{ route('backend.cau-hinh.store.footer') }}" method="post">
+            <form action="{{ route('backend.cau-hinh.store') }}" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mb-3">
@@ -31,7 +31,7 @@
                         <input type="text" class="form-control" id="validationDefault05" name="123" placeholder="Zip"/>
                     </div>
                 </div>
-                <input type="hidden" value="{{ \App\Enum\ConfigType::FOOTER }}">
+                 <input type="hidden" name="type" value="{{ \App\Enum\ConfigType::FOOTER }}">
                 <button class="btn btn-info rounded-pill px-4 mt-3" type="submit">
                     Lưu
                 </button>
