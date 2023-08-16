@@ -93,7 +93,9 @@
         <path d="M281,801 L383,861.025276 L383,979.21169 L281,1037 L179,979.21169 L179,861.025276 L281,801 Z" id="Polygon-5" stroke="#36B455" stroke-width="6" sketch:type="MSShapeGroup"></path>
     </g>
 </svg>
-<div class="message-box">
+
+<div class="message-box" style="margin-top: -280px">
+    <img height="360" src="{{ asset('dist/images/backgrounds/' . $img) }}">
     <h1>{{ $numLog }}</h1>
     <p>{{ $message }}</p>
     <div class="buttons-con">

@@ -2,8 +2,8 @@
 @section('title', 'Dịch vụ thêm')
 @section('content')
    @include('backend.widgets.thong-bao')
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        Launch demo modal
+    <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Tạo mới
     </button>
     <div class="row">
         @foreach($listService as $service)
@@ -44,18 +44,19 @@
                                             <div class="note-title">
                                                 <div class="note-title">
                                                     <label>Tên dịch vụ</label>
-                                                    <input type="text" class="form-control" name="service_name">
+                                                    <input type="text" class="form-control" name="service_name"
+                                                           placeholder="Nhập Tên dịch vụ">
                                                 </div>
                                                 <div class="row">
                                                     <div class="col-6">
                                                         <label>Giá gốc</label>
                                                         <input type="number" class="form-control" name="gia_goc"
-                                                               placeholder="Nhập Mã"/>
+                                                               placeholder="Nhập Giá gốc"/>
                                                     </div>
                                                     <div class="col-6">
                                                         <label>Giá khuyến mãi</label>
                                                         <input type="number" class="form-control" name="gia_khuyen_mai"
-                                                               placeholder="Nhập Mã"/>
+                                                               placeholder="Nhập Giá khuyến mãi"/>
                                                     </div>
 
                                                 </div>
@@ -80,8 +81,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
                     </div>
                 </form>
             </div>
