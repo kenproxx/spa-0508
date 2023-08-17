@@ -85,39 +85,8 @@ Route::middleware(['role.admin.super_admin'])->group(function () {
 
         Route::prefix('/cau-hinh')->group(function () {
 
-            Route::prefix('/vn-pay')->group(function () {
-                Route::get('', [CauHinhController::class, 'showConfig_apiVnPay'])->name('backend.cau-hinh.show.vn-pay');
-            });
-
-            Route::prefix('/zalo')->group(function () {
-                Route::get('', [CauHinhController::class, 'showConfig_apiZalo'])->name('backend.cau-hinh.show.zalo');
-            });
-
-            Route::prefix('/banner')->group(function () {
-                Route::get('', [CauHinhController::class, 'showConfig_bannerTop'])->name('backend.cau-hinh.show.banner');
-            });
-
-            Route::prefix('/footer')->group(function () {
-                Route::get('', [CauHinhController::class, 'showConfig_footer'])->name('backend.cau-hinh.show.footer');
-            });
-
-            Route::prefix('/logo')->group(function () {
-                Route::get('', [CauHinhController::class, 'showConfig_logo'])->name('backend.cau-hinh.show.logo');
-            });
-
-            Route::prefix('/menu')->group(function () {
-                Route::get('', [CauHinhController::class, 'showConfig_menu'])->name('backend.cau-hinh.show.menu');
-            });
-
-            Route::prefix('/email')->group(function () {
-                Route::get('', [CauHinhController::class, 'showConfig_smtpEmail'])->name('backend.cau-hinh.show.email');
-            });
-
-            Route::prefix('/tieu-de')->group(function () {
-                Route::get('', [CauHinhController::class, 'showConfig_tieuDe'])->name('backend.cau-hinh.show.tieu-de');
-            });
-
-            Route::post('', [CauHinhController::class, 'saveOrUpdateConfig'])->name('backend.cau-hinh.store');
+            Route::get('/{view}', [CauHinhController::class, 'index'])->name('backend.cau-hinh.show');
+            Route::post('', [CauHinhController::class, 'store'])->name('backend.cau-hinh.store');
 
         });
     });

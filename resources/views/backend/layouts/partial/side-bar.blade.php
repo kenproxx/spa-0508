@@ -1,4 +1,8 @@
-<?php $checkSuper_Admin = \Illuminate\Support\Facades\Auth::user()->role_id == \App\Enum\UserRole::SUPER_ADMIN ?>
+@php
+use App\Enum\ConfigType;
+$checkSuper_Admin = \Illuminate\Support\Facades\Auth::user()->role_id == \App\Enum\UserRole::SUPER_ADMIN
+@endphp
+
 <nav class="sidebar-nav scroll-sidebar" data-simplebar>
     <ul id="sidebarnav"><!-- ============================= -->
         <!-- Home -->
@@ -94,7 +98,7 @@
             </a>
             <ul aria-expanded="false" class="collapse first-level">
                 <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show.tieu-de') }}" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show', ConfigType::TIEU_DE) }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -102,7 +106,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show.logo') }}" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show', ConfigType::LOGO) }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -110,7 +114,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show.banner') }}" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show', ConfigType::BANNER_TOP) }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -118,7 +122,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show.menu') }}" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show', ConfigType::MENU) }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -126,7 +130,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show.vn-pay') }}" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show', ConfigType::API_VNPAY) }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -134,7 +138,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show.email') }}" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show', ConfigType::SMTP_EMAIL) }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -142,7 +146,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show.zalo') }}" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show', ConfigType::API_ZALO) }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
@@ -150,7 +154,7 @@
                     </a>
                 </li>
                 <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show.footer') }}" class="sidebar-link">
+                    <a href="{{ route('backend.cau-hinh.show', ConfigType::FOOTER) }}" class="sidebar-link">
                         <div class="round-16 d-flex align-items-center justify-content-center">
                             <i class="ti ti-circle"></i>
                         </div>
