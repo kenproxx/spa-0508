@@ -1,5 +1,6 @@
 @extends('backend.layouts.master')
 @section('title', 'Tạo sản phẩm')
+
 @section('content')
     <form action="{{ route('backend.san-pham.store') }}" method="post" enctype="multipart/form-data">
         @csrf
@@ -15,7 +16,7 @@
                             <div class="row">
                                 <div class="col-sm-6">
                                     <label>Chọn Spa</label>
-                                    <select class="form-control" name="agency_id" id="agency_id">
+                                    <select class="form-control" name="agency_id" id="agency_id" onchange="loadServiceFromAgency()">
                                         @foreach($listSpa as $spa)
                                             <option value="{{ $spa->id }}">
                                                 {{ $spa->ten_quan_ly }} - {{ $spa->ten_co_so }}
@@ -47,20 +48,11 @@
 
                             <div>
                                 <label>Mô tả ngắn</label>
-                                <textarea type="text" class="form-control" name="mo_ta_ngan"></textarea>
-                                <textarea cols="80" id="testedit" name="testedit" rows="10" data-sample="1" data-sample-short>
-                                    &lt;p&gt;The &lt;strong&gt;Basic&lt;/strong&gt; package is perfect for short text fields that require little formatting, such as:&lt;/p&gt;
-
-                                    &lt;ul&gt;
-                                        &lt;li&gt;&lt;a href="https://ckeditor.com/blog/"&gt;Blog&lt;/a&gt; comments.&lt;/li&gt;
-                                        &lt;li&gt;Contact forms.&lt;/li&gt;
-                                        &lt;li&gt;Short text snippets.&lt;/li&gt;
-                                    &lt;/ul&gt;
-                                </textarea>
+                                <textarea cols="80" name="mo_ta_ngan" rows="10" data-sample="1" data-sample-short></textarea>
                             </div>
                             <div>
                                 <label>Mô tả chi tiết</label>
-                                <textarea type="text" class="form-control" name="mo_ta_chi_tiet"></textarea>
+                                <textarea cols="80" name="mo_ta_chi_tiet" rows="10" data-sample="1" data-sample-short></textarea>
                             </div>
                             <div>
                                 <label>Ảnh Thumbnail</label>
@@ -100,23 +92,28 @@
         <button type="submit" class="btn btn-primary">Lưu</button>
     </form>
 
+    <script src="../../dist/libs/ckeditor/ckeditor.js"></script>
+    <script src="../../dist/libs/ckeditor/samples/js/sample.js"></script>
+    <script data-sample="1">
+        CKEDITOR.replace("mo_ta_ngan", {
+            height: 150,
+        });
+        CKEDITOR.replace("mo_ta_chi_tiet", {
+            height: 150,
+        });
+    </script>
 
 @endsection
-
-<script src="../../dist/libs/ckeditor/ckeditor.js"></script>
-<script src="../../dist/libs/ckeditor/samples/js/sample.js"></script>
-
 <script>
-    const agencySelect = document.getElementById('agency_id');
-    const serviceSelect = document.getElementById('service_id');
-
-    agencySelect.addEventListener('change', () => {
+    let serviceSelect;
+    let agencySelect;
+    document.addEventListener("DOMContentLoaded", function() {
         loadServiceFromAgency();
     });
 
-    loadServiceFromAgency();
-
     function loadServiceFromAgency() {
+         serviceSelect = document.getElementById('service_id');
+         agencySelect = document.getElementById('agency_id');
         const selectedAgencyId = agencySelect.value;
 
         serviceSelect.innerHTML = '';
@@ -135,6 +132,7 @@
     }
 
     function renderHTMLForMoreService(data) {
+
         if (0 !== data.length) {
             data.forEach(service => {
                 const option = document.createElement('option');
@@ -160,46 +158,6 @@
         });
     });
 </script>
-<script>
-    //default
-    initSample();
-
-    //inline editor
-    // We need to turn off the automatic editor creation first.
-    CKEDITOR.disableAutoInline = true;
 
 
-    var editor1 = CKEDITOR.replace("editor1", {
-        extraAllowedContent: "div",
-        height: 460,
-    });
-    editor1.on("instanceReady", function () {
-        // Output self-closing tags the HTML4 way, like <br>.
-        this.dataProcessor.writer.selfClosingEnd = ">";
-
-        // Use line breaks for block elements, tables, and lists.
-        var dtd = CKEDITOR.dtd;
-        for (var e in CKEDITOR.tools.extend(
-            {},
-            dtd.$nonBodyContent,
-            dtd.$block,
-            dtd.$listItem,
-            dtd.$tableContent
-        )) {
-            this.dataProcessor.writer.setRules(e, {
-                indent: true,
-                breakBeforeOpen: true,
-                breakAfterOpen: true,
-                breakBeforeClose: true,
-                breakAfterClose: true,
-            });
-        }
-        // Start in source mode.
-        this.setMode("source");
-    });
-
-    CKEDITOR.replace("testedit", {
-        height: 150,
-    });
-</script>
 

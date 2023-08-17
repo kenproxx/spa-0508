@@ -1,8 +1,10 @@
 @extends('backend.layouts.master')
 @section('title', 'Sản phẩm')
 @section('content')
+
+    @include('backend.widgets.thong-bao')
     <a href="{{ route('backend.san-pham.create') }}">
-    <button type="button" class="btn btn-primary">
+    <button type="button" class="btn btn-primary mb-3">
         Thêm mới
     </button>
     </a>

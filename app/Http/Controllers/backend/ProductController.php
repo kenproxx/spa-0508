@@ -53,7 +53,7 @@ class ProductController extends Controller
         $product_service->service_id = implode(',', $request->service_id);
 
         $product_service->save();
-        dd($product_service);
+        return redirect()->route('backend.san-pham.show')->with('success', 'Thêm sản phẩm thành công');
     }
 
     /**
