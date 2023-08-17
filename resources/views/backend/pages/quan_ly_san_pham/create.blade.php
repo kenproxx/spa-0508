@@ -127,7 +127,7 @@
                 renderHTMLForMoreService(data)
             })
             .catch(error => {
-                console.error('Error loading additional services');
+                alert('Lỗi server, xin thử lại');
             });
     }
 

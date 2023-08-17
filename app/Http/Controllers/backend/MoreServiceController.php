@@ -16,7 +16,7 @@ class MoreServiceController extends Controller
     public function index()
     {
         $listDaiLy = Agency::all();
-        $listService = MoreService::get(['service_name', 'agencys_id']);
+        $listService = MoreService::get(['id', 'service_name', 'agencys_id']);
         return view('backend/pages/dich_vu_them/index', compact('listDaiLy', 'listService'));
     }
 
@@ -40,18 +40,22 @@ class MoreServiceController extends Controller
      */
     public function store(Request $request)
     {
+        $id = $request->input('id');
+        if (!$id) {
         $service = new MoreService();
-
+            $msg = 'Tạo dịch vụ thành công';
+        } else {
+            $service = MoreService::where('id', $id)->first();
+            $msg = 'Sửa dịch vụ thành công';
+        }
         $arrInput = $request->input();
-        foreach (array_keys($request->input()) as $key) {
-            if ($key != '_token') {
-                $service->{$key} = $arrInput[$key];
-            }
+        foreach ($request->except(['_token', 'id']) as $key => $value) {
+            $service->{$key} = $arrInput[$key];
         }
 
         $service->save();
 
-        return redirect()->back()->with('success', 'Tạo dịch vụ thành công');
+        return redirect()->back()->with('success', $msg);
 
     }
 
@@ -60,7 +64,8 @@ class MoreServiceController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $service = MoreService::where('id', $id)->first(['id', 'gia_goc', 'gia_khuyen_mai', 'service_name', 'agencys_id']);
+        return response()->json($service);
     }
 
     /**
