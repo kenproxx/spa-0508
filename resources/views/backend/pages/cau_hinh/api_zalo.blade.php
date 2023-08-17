@@ -8,33 +8,33 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="url">url</label>
-                        <input type="text" class="form-control" id="url" name="url"/>
+                        <label for="url">URL</label>
+                        <input type="text" class="form-control" id="url" name="url" value="{{ $arrConfig['url'] ?? '' }}"/>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="method">method</label>
-                        <input type="text" class="form-control" id="method" name="method"/>
+                        <label for="method">Method</label>
+                        <input type="text" class="form-control" id="method" name="method" value="{{ $arrConfig['method'] ?? '' }}"/>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="params">params</label>
-                        <input type="text" class="form-control" id="params" name="params"/>
+                        <label for="params">Params</label>
+                        <input type="text" class="form-control" id="params" name="params" value="{{ $arrConfig['params'] ?? '' }}"/>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="body">body</label>
-                        <input type="text" class="form-control" id="body" name="body"/>
+                        <label for="body">Body</label>
+                        <input type="text" class="form-control" id="body" name="body" value="{{ $arrConfig['body'] ?? '' }}"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="headers">headers</label>
-                        <input type="text" class="form-control" id="headers" name="headers"/>
+                        <label for="headers">Headers</label>
+                        <input type="text" class="form-control" id="headers" name="headers" value="{{ $arrConfig['headers'] ?? '' }}"/>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="files">files</label>
-                        <input type="text" class="form-control" id="files" name="files"/>
+                        <label for="files">Files</label>
+                        <input type="text" class="form-control" id="files" name="files" value="{{ $arrConfig['files'] ?? '' }}"/>
                     </div>
                 </div>
 

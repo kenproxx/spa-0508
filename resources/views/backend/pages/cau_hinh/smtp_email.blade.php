@@ -9,30 +9,30 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="MAIL_DRIVER">MAIL DRIVER</label>
-                        <input type="text" class="form-control" id="MAIL_DRIVER" name="MAIL_DRIVER"/>
+                        <input type="text" class="form-control" id="MAIL_DRIVER" name="MAIL_DRIVER" value="{{ $arrConfig['MAIL_DRIVER'] ?? '' }}"/>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="MAIL_HOST">MAIL HOST</label>
-                        <input type="text" class="form-control" id="MAIL_HOST" name="MAIL_HOST"/>
+                        <input type="text" class="form-control" id="MAIL_HOST" name="MAIL_HOST" value="{{ $arrConfig['MAIL_HOST'] ?? '' }}"/>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-3 mb-3">
                         <label for="MAIL_PORT">MAIL PORT</label>
-                        <input type="text" class="form-control" id="MAIL_PORT" name="MAIL_PORT"/>
+                        <input type="text" class="form-control" id="MAIL_PORT" name="MAIL_PORT" value="{{ $arrConfig['MAIL_PORT'] ?? '' }}"/>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="MAIL_USERNAME">MAIL USERNAME</label>
-                        <input type="text" class="form-control" id="MAIL_USERNAME" name="MAIL_USERNAME"/>
+                        <input type="text" class="form-control" id="MAIL_USERNAME" name="MAIL_USERNAME" value="{{ $arrConfig['MAIL_USERNAME'] ?? '' }}"/>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="MAIL_PASSWORD">MAIL PASSWORD</label>
-                        <input type="text" class="form-control" id="MAIL_PASSWORD" name="MAIL_PASSWORD"/>
+                        <input type="text" class="form-control" id="MAIL_PASSWORD" name="MAIL_PASSWORD" value="{{ $arrConfig['MAIL_PASSWORD'] ?? '' }}"/>
                     </div>
                     <div class="col-md-3 mb-3">
                         <label for="MAIL_ENCRYPTION">MAIL ENCRYPTION</label>
-                        <input type="text" class="form-control" id="MAIL_ENCRYPTION" name="MAIL_ENCRYPTION"/>
+                        <input type="text" class="form-control" id="MAIL_ENCRYPTION" name="MAIL_ENCRYPTION" value="{{ $arrConfig['MAIL_ENCRYPTION'] ?? '' }}"/>
                     </div>
                 </div>
                  <input type="hidden" name="type" value="{{ \App\Enum\ConfigType::SMTP_EMAIL }}">

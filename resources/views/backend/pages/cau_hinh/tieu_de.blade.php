@@ -11,17 +11,17 @@
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label for="tieu_de">Tiêu đề</label>
-                        <input type="text" class="form-control" id="tieu_de" name="tieu_de" placeholder="Nhập tiêu đề" value="{{ $arrConfig['tieu_de'] }}"/>
+                        <input type="text" class="form-control" id="tieu_de" name="tieu_de" placeholder="Nhập tiêu đề" value="{{ $arrConfig['tieu_de'] ?? '' }}"/>
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="mo_ta_web">Mô tả web</label>
-                        <input type="text" class="form-control" id="mo_ta_web" name="mo_ta_web" placeholder="Nhập mô tả web" value="{{ $arrConfig['mo_ta_web'] }}"/>
+                        <input type="text" class="form-control" id="mo_ta_web" name="mo_ta_web" placeholder="Nhập mô tả web" value="{{ $arrConfig['mo_ta_web'] ?? '' }}"/>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-12 mb-3">
                         <label for="script_code">Mã script</label>
-                        <textarea type="text" class="form-control" id="script_code" name="script_code" placeholder="Nhập mã script" >{{ $arrConfig['script_code'] }}</textarea>
+                        <textarea type="text" class="form-control" id="script_code" name="script_code" placeholder="Nhập mã script" >{{ $arrConfig['script_code'] ?? '' }}</textarea>
                     </div>
                 </div>
                  <input type="hidden" name="type" value="{{ \App\Enum\ConfigType::TIEU_DE }}">
