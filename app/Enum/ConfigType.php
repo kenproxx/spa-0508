@@ -6,12 +6,12 @@ use Illuminate\Validation\Rules\Enum;
 
 final class ConfigType extends Enum
 {
-    const TIEU_DE = "TIEU_DE";
-    const API_VNPAY = "API_VNPAY";
-    const API_ZALO = "API_ZALO";
-    const BANNER_TOP = "BANNER_TOP";
-    const FOOTER = "FOOTER";
-    const LOGO = "LOGO";
-    const MENU = "MENU";
-    const SMTP_EMAIL = "SMTP_EMAIL";
+    const TIEU_DE = "tieu_de";
+    const API_VNPAY = "api_vn_pay";
+    const API_ZALO = "api_zalo";
+    const BANNER_TOP = "banner_top";
+    const FOOTER = "footer";
+    const LOGO = "logo";
+    const MENU = "menu";
+    const SMTP_EMAIL = "smtp_email";
 }
