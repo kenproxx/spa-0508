@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chats', function (Blueprint $table) {
-            $table->id();
-            $table->string('content')->nullable();
-            $table->string('user_from')->nullable();
-            $table->string('agencys_id')->nullable();
-
-            $table->timestamps();
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropColumn(['mo_ta_ngan', 'mo_ta_chi_tiet']);
         });
     }
 
@@ -26,6 +21,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('chat');
+        //
     }
 };
