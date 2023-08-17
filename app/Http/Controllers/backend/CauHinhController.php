@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers\backend;
 
-use App\Enum\ConfigType;
 use App\Http\Controllers\Controller;
 use App\Models\Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class CauHinhController extends Controller
 {

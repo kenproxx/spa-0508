@@ -8,29 +8,38 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="validationDefault01">First name</label>
-                        <input type="text" class="form-control" id="validationDefault01" name="123" placeholder="First name"/>
+                        <label for="url">url</label>
+                        <input type="text" class="form-control" id="url" name="url"/>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="validationDefault02">Last name</label>
-                        <input type="text" class="form-control" id="validationDefault02" name="123" placeholder="Last name"/>
+                        <label for="method">method</label>
+                        <input type="text" class="form-control" id="method" name="method"/>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="validationDefault03">City</label>
-                        <input type="text" class="form-control" id="validationDefault03" name="123" placeholder="City"/>
+                        <label for="params">params</label>
+                        <input type="text" class="form-control" id="params" name="params"/>
                     </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="validationDefault04">State</label>
-                        <input type="text" class="form-control" id="validationDefault04" name="123" placeholder="State"/>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="validationDefault05">Zip</label>
-                        <input type="text" class="form-control" id="validationDefault05" name="123" placeholder="Zip"/>
+                    <div class="col-md-6 mb-3">
+                        <label for="body">body</label>
+                        <input type="text" class="form-control" id="body" name="body"/>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="headers">headers</label>
+                        <input type="text" class="form-control" id="headers" name="headers"/>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="files">files</label>
+                        <input type="text" class="form-control" id="files" name="files"/>
+                    </div>
+                </div>
+
+
+
                  <input type="hidden" name="type" value="{{ \App\Enum\ConfigType::API_ZALO }}">
                 <button class="btn btn-info rounded-pill px-4 mt-3" type="submit">
                     Lưu

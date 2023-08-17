@@ -8,27 +8,31 @@
                 @csrf
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <label for="validationDefault01">First name</label>
-                        <input type="text" class="form-control" id="validationDefault01" name="123" placeholder="First name"/>
+                        <label for="MAIL_DRIVER">MAIL DRIVER</label>
+                        <input type="text" class="form-control" id="MAIL_DRIVER" name="MAIL_DRIVER"/>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <label for="validationDefault02">Last name</label>
-                        <input type="text" class="form-control" id="validationDefault02" name="123" placeholder="Last name"/>
+                        <label for="MAIL_HOST">MAIL HOST</label>
+                        <input type="text" class="form-control" id="MAIL_HOST" name="MAIL_HOST"/>
                     </div>
 
                 </div>
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationDefault03">City</label>
-                        <input type="text" class="form-control" id="validationDefault03" name="123" placeholder="City"/>
+                    <div class="col-md-3 mb-3">
+                        <label for="MAIL_PORT">MAIL PORT</label>
+                        <input type="text" class="form-control" id="MAIL_PORT" name="MAIL_PORT"/>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label for="validationDefault04">State</label>
-                        <input type="text" class="form-control" id="validationDefault04" name="123" placeholder="State"/>
+                        <label for="MAIL_USERNAME">MAIL USERNAME</label>
+                        <input type="text" class="form-control" id="MAIL_USERNAME" name="MAIL_USERNAME"/>
                     </div>
                     <div class="col-md-3 mb-3">
-                        <label for="validationDefault05">Zip</label>
-                        <input type="text" class="form-control" id="validationDefault05" name="123" placeholder="Zip"/>
+                        <label for="MAIL_PASSWORD">MAIL PASSWORD</label>
+                        <input type="text" class="form-control" id="MAIL_PASSWORD" name="MAIL_PASSWORD"/>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label for="MAIL_ENCRYPTION">MAIL ENCRYPTION</label>
+                        <input type="text" class="form-control" id="MAIL_ENCRYPTION" name="MAIL_ENCRYPTION"/>
                     </div>
                 </div>
                  <input type="hidden" name="type" value="{{ \App\Enum\ConfigType::SMTP_EMAIL }}">
