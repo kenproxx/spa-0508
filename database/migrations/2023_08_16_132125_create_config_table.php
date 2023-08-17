@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('configs', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->mediumText('value');
-            $table->string('type');
+            $table->string('name')->nullable();
+            $table->mediumText('value')->nullable();
+            $table->string('type')->nullable();
 
             $table->string('created_by')->nullable();
             $table->string('updated_by')->nullable();
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('config');
+        Schema::dropIfExists('configs');
     }
 };
