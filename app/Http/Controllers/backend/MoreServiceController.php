@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Agency;
 use App\Models\MoreService;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class MoreServiceController extends Controller
 {
@@ -41,11 +41,14 @@ class MoreServiceController extends Controller
     public function store(Request $request)
     {
         $id = $request->input('id');
+        $user_id = Auth::user()->id;
         if (!$id) {
-        $service = new MoreService();
+            $service = new MoreService();
+            $service->created_by = $user_id;
             $msg = 'Tạo dịch vụ thành công';
         } else {
             $service = MoreService::where('id', $id)->first();
+            $service->updated_by = $user_id;
             $msg = 'Sửa dịch vụ thành công';
         }
         $arrInput = $request->input();
