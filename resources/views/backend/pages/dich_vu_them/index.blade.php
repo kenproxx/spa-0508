@@ -19,7 +19,23 @@
                                 ?>
                             <span class="fs-2 d-flex align-items-center"><i class="ti ti-map-pin text-dark fs-3 me-1"></i>{{ $daiLyIn4->ten_quan_ly }} - {{ $daiLyIn4->ten_co_so }}</span>
                         </div>
-                        <button class="btn btn-outline-primary py-1 px-2 ms-auto" onclick="showInfoService({{ $service->id }})" data-bs-toggle="modal" data-bs-target="#modal-more_service">Sửa</button>
+                        <div class="dropdown dropstart py-1 px-2 ms-auto">
+                            <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="ti ti-dots fs-5"></i>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-3"
+                                       onclick="showInfoService({{ $service->id }})" data-bs-toggle="modal"
+                                       data-bs-target="#modal-more_service"><i class="fs-4 ti ti-edit"></i>Sửa</a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center gap-3"
+                                       href="{{ route('backend.dich-vu-them.destroy', $service->id) }}">
+                                        <i class="fs-4 ti ti-trash"></i>Xóa</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -88,47 +104,49 @@
             </div>
         </div>
     </div>
+
+   <script>
+
+       function showInfoService(id) {
+           let url = '{{ route('backend.dich-vu-them.show.id', ['id' => ':id']) }}'
+           url = url.replace(':id', id);
+
+           fetch(url)
+               .then(response => response.json())
+               .then(data => {
+                   importDataToModal(data)
+               })
+               .catch(error => {
+                   alert('Lỗi server, xin thử lại');
+               });
+       }
+
+       let arrKeyId = [];
+
+       function importDataToModal(data) {
+           for (var key in data) {
+               if (data.hasOwnProperty(key)) {
+                   var value = data[key];
+                   arrKeyId.push(key);
+                   $('#' + key).val(value);
+               }
+           }
+       }
+
+       function resetFormModal() {
+           arrKeyId.forEach(function (id) {
+               $('#' + id).val('');
+           });
+       }
+
+       document.addEventListener("DOMContentLoaded", function () {
+           const modalUser = document.getElementById('modal-more_service');
+           modalUser.addEventListener('hidden.bs.modal', function () {
+               resetFormModal();
+           });
+       });
+
+   </script>
 @endsection
 
-<script>
 
-    function showInfoService(id) {
-        let url = '{{ route('backend.dich-vu-them.show.id', ['id' => ':id']) }}'
-        url = url.replace(':id', id);
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                importDataToModal(data)
-            })
-            .catch(error => {
-                alert('Lỗi server, xin thử lại');
-            });
-    }
-
-    let arrKeyId = [];
-
-    function importDataToModal(data) {
-        for (var key in data) {
-            if (data.hasOwnProperty(key)) {
-                var value = data[key];
-                arrKeyId.push(key);
-                $('#' + key).val(value);
-            }
-        }
-    }
-
-    function resetFormModal() {
-        arrKeyId.forEach(function (id) {
-            $('#' + id).val('');
-        });
-    }
-
-    document.addEventListener("DOMContentLoaded", function () {
-        const modalUser = document.getElementById('modal-more_service');
-        modalUser.addEventListener('hidden.bs.modal', function () {
-            resetFormModal();
-        });
-    });
-
-</script>

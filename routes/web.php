@@ -74,6 +74,7 @@ Route::middleware(['role.admin.super_admin'])->group(function () {
             Route::post('/store', [MoreServiceController::class, 'store'])->name('backend.dich-vu-them.store');
             Route::get('/get-by-agency/{id}', [MoreServiceController::class, 'getAllByAgency'])->name('backend.dich-vu-them.get-by-agency');
             Route::get('/{id}', [MoreServiceController::class, 'show'])->name('backend.dich-vu-them.show.id');
+            Route::get('/destroy/{id}', [MoreServiceController::class, 'destroy'])->name('backend.dich-vu-them.destroy');
         });
 
         Route::prefix('/trang-ca-nhan')->group(function () {

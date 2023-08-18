@@ -92,6 +92,11 @@ class MoreServiceController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $service = MoreService::where('id', $id)->first();
+        if ($service) {
+            $service->delete();
+            return redirect()->back()->with('success', 'Xóa thành công');
+        }
+        return redirect()->back()->with('success', 'Lỗi, xin thử lại');
     }
 }
