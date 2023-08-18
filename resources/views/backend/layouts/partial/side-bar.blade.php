@@ -19,7 +19,7 @@ $checkSuper_Admin = \Illuminate\Support\Facades\Auth::user()->role_id == \App\En
                   <span>
                     <i class="ti ti-aperture"></i>
                   </span>
-                <span class="hide-menu">Thống kê</span>
+                <span class="hide-menu">Dashboard</span>
             </a>
         </li>
         <li class="sidebar-item">
@@ -59,7 +59,7 @@ $checkSuper_Admin = \Illuminate\Support\Facades\Auth::user()->role_id == \App\En
                   <span>
                     <i class="ti ti-playlist"></i>
                   </span>
-                <span class="hide-menu">Sản phẩm</span>
+                <span class="hide-menu">Quản lý sản phẩm</span>
             </a>
         </li>
         <li class="sidebar-item">
@@ -77,7 +77,7 @@ $checkSuper_Admin = \Illuminate\Support\Facades\Auth::user()->role_id == \App\En
                   <span>
                     <i class="ti ti-aperture"></i>
                   </span>
-                <span class="hide-menu">Quản lý người dùng</span>
+                <span class="hide-menu">Quản lý user</span>
             </a>
         </li>
 
@@ -86,7 +86,7 @@ $checkSuper_Admin = \Illuminate\Support\Facades\Auth::user()->role_id == \App\En
                   <span>
                     <i class="ti ti-playlist"></i>
                   </span>
-                <span class="hide-menu">Đại lý</span>
+                <span class="hide-menu">Quản lý spa</span>
             </a>
         </li>
         <li class="sidebar-item">
