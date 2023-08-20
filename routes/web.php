@@ -12,6 +12,7 @@ use App\Http\Controllers\backend\QL_VoucherController;
 use App\Http\Controllers\backend\QLEmailController;
 use App\Http\Controllers\backend\ThongKeController;
 use App\Http\Controllers\backend\TinNhanController;
+use App\Http\Controllers\frontend\HomePageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -90,6 +91,10 @@ Route::middleware(['role.admin.super_admin'])->group(function () {
             Route::post('', [CauHinhController::class, 'store'])->name('backend.cau-hinh.store');
         });
     });
+});
+
+Route::prefix('/frontend')->group(function () {
+    Route::get('', [HomePageController::class, 'index'])->name('frontend.index');
 });
 
 

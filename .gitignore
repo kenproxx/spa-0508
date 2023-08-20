@@ -1,3 +1,5 @@
+package-lock.json
+composer.lock
 /.phpunit.cache
 /node_modules
 /public/build
@@ -17,7 +19,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-
 
 # Created by https://www.toptal.com/developers/gitignore/api/laravel,phpstorm
 # Edit at https://www.toptal.com/developers/gitignore?templates=laravel,phpstorm
