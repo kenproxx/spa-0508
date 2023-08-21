@@ -7,28 +7,9 @@
             <form action="{{ route('backend.cau-hinh.store') }}" method="post">
                 @csrf
                 <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationDefault01">First name</label>
-                        <input type="text" class="form-control" id="validationDefault01" name="123"/>
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="validationDefault02">Last name</label>
-                        <input type="text" class="form-control" id="validationDefault02" name="123"/>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="validationDefault03">City</label>
-                        <input type="text" class="form-control" id="validationDefault03" name="123"/>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="validationDefault04">State</label>
-                        <input type="text" class="form-control" id="validationDefault04" name="123"/>
-                    </div>
-                    <div class="col-md-3 mb-3">
-                        <label for="validationDefault05">Zip</label>
-                        <input type="text" class="form-control" id="validationDefault05" name="123" placeholder="Zip"/>
+                    <div class="col-md-12 mb-3">
+                        <label for="validationDefault01">Thông tin</label>
+                        <textarea cols="80" name="thong_tin" rows="10" data-sample="1" data-sample-short></textarea>
                     </div>
                 </div>
                  <input type="hidden" name="type" value="{{ \App\Enum\ConfigType::FOOTER }}">
@@ -39,5 +20,12 @@
         </div>
     </div>
 
+    <script src="../../dist/libs/ckeditor/ckeditor.js"></script>
+    <script src="../../dist/libs/ckeditor/samples/js/sample.js"></script>
+    <script data-sample="1">
+        CKEDITOR.replace("thong_tin", {
+            height: 150,
+        });
+    </script>
 @endsection
 
