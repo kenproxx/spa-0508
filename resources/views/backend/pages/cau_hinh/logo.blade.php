@@ -148,8 +148,8 @@
                 <input type="hidden" name="type" value="{{ \App\Enum\ConfigType::LOGO }}">
 
                 <label for="file-upload" id="file-drag">
-                    <img id="file-image" src="#" alt="Preview" class="hidden">
-                    <div id="start">
+                    <img id="file-image" src="{{ asset( 'storage/' . $arrConfig['logo']) }}" alt="Preview">
+                    <div id="start" class="hidden">
                         <i class="fa fa-download" aria-hidden="true"></i>
                         <div>Chọn hoặc kéo file vào đây</div>
                         <div id="notimage" class="hidden">Please select an image</div>

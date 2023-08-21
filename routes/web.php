@@ -89,6 +89,7 @@ Route::middleware(['role.admin.super_admin'])->group(function () {
         Route::prefix('/cau-hinh')->group(function () {
             Route::get('/{view}', [CauHinhController::class, 'index'])->name('backend.cau-hinh.show');
             Route::post('', [CauHinhController::class, 'store'])->name('backend.cau-hinh.store');
+            Route::post('/logo', [CauHinhController::class, 'saveLogoConfig'])->name('backend.cau-hinh.logo.store');
         });
     });
 });

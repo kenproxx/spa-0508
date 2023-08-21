@@ -26,22 +26,57 @@ class CauHinhController extends Controller
         $user_id = Auth::user()->id;
 
         foreach ($request->except(['_token', 'type']) as $key => $value) {
+            $isExitsKey = Config::where([['name', '=', $key], ['type', '=', $type]])->first();
+            if ($isExitsKey) {
+                $isExitsKey->value = $value;
+                $isExitsKey->updated_by = $user_id;
+
+                $isExitsKey->save();
+            } else {
+                $config = new Config();
+                $config->name = $key;
+                $config->value = $value;
+                $config->type = $type;
+                $config->created_by = $user_id;
+
+                $config->save();
+            }
+        }
+        return redirect()->back()->with('success', 'Sửa thành công');
+    }
+
+    public function saveLogoConfig(Request $request)
+    {
+        $type = $request->input('type');
+        $user_id = Auth::user()->id;
+
+        if ($request->file()) {
+
+            foreach ($request->except(['_token', 'type']) as $key => $value) {
+
+                if ($request->hasFile($key)) {
+                    $file = $request->file($key);
+                    $filePath = $file->store('config', 'public');
+                }
+
                 $isExitsKey = Config::where([['name', '=', $key], ['type', '=', $type]])->first();
                 if ($isExitsKey) {
-                    $isExitsKey->value = $value;
+                    $isExitsKey->value = $filePath;
                     $isExitsKey->updated_by = $user_id;
 
                     $isExitsKey->save();
                 } else {
                     $config = new Config();
                     $config->name = $key;
-                    $config->value = $value;
+                    $config->value = $filePath;
                     $config->type = $type;
                     $config->created_by = $user_id;
 
                     $config->save();
                 }
+            }
         }
+
         return redirect()->back()->with('success', 'Sửa thành công');
     }
 }
