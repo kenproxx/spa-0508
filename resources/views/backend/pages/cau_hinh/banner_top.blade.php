@@ -2,6 +2,8 @@
 @section('title', 'Cấu hình Banner')
 @section('content')
 
+    @include('backend.widgets.thong-bao')
+
     <div class="card w-100 position-relative overflow-hidden">
         <div class="card-body p-4">
             <form action="{{ route('backend.cau-hinh.store') }}" method="post">
