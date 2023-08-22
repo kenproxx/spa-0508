@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\frontend\HomePageController;
+use App\Http\Controllers\frontend\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/san-pham')->group(function () {
     Route::get('', [HomePageController::class, 'index'])->name('frontend.san-pham.show');
+    Route::get('{id}', [ProductController::class, 'getProductByID'])->name('frontend.san-pham.id');
+
 });
 
 
