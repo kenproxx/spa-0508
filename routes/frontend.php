@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('/san-pham')->group(function () {
     Route::get('', [HomePageController::class, 'index'])->name('frontend.san-pham.show');
-    Route::get('{id}', [ProductController::class, 'getProductByID'])->name('frontend.san-pham.id');
+    Route::get('/id/{id}', [ProductController::class, 'getProductByID'])->name('frontend.san-pham.id');
+    Route::get('/thuoc-tinh/{thuoc_tinh}', [ProductController::class, 'getListSanPhamHot'])->name('frontend.san-pham.thuoc-tinh');
 
 });
 

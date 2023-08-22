@@ -69,9 +69,9 @@
                                            placeholder="Nhập Số lượng" name="ban_chay"/>
                                 </div>
                                 <div class="col-sm-3">
-                                    <label>Sản phẩm yêu thích</label>
+                                    <label>Sản phẩm thịnh hành</label>
                                     <input type="checkbox" class="form-check-input"
-                                           placeholder="Nhập Số lượng" name="yeu_thich"/>
+                                           placeholder="Nhập Số lượng" name="thinh_hanh"/>
                                 </div>
                                 <div class="col-sm-3">
                                     <label>Sản phẩm HOT</label>

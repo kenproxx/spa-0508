@@ -30,4 +30,32 @@ class ProductController extends Controller
             return response()->json($response);
         }
     }
+
+    public function getListSanPhamHot($thuoc_tinh = '')
+    {
+        $HOT = 'hot';
+        $FLASH_SALE = 'flash_sale';
+        $GIA_TOT = 'gia_tot';
+        $THINH_HANH = 'thinh_hanh';
+        $BAN_CHAY = 'ban_chay';
+        $ON = 'on';
+        $response = new Response();
+        try {
+            $columns = [$HOT, $FLASH_SALE, $GIA_TOT, $THINH_HANH, $BAN_CHAY];
+
+            if (in_array($thuoc_tinh, $columns)) {
+                $listProduct = Product::where($thuoc_tinh, $ON)
+                    ->orderBy('created_at' , 'desc')
+                    ->get();
+            } else {
+                $listProduct = '';
+            }
+
+            $response->setContent($listProduct);
+            return response()->json($response);
+        } catch (Exception $exception) {
+            $response->setContent($exception->getMessage());
+            return response()->json($response);
+        }
+    }
 }
