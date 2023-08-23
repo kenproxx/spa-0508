@@ -44,22 +44,27 @@
                 </div>
                 <div class="app-invoice">
                     <ul class="overflow-auto invoice-users" style="height: calc(100vh - 262px)" data-simplebar>
-                        <li>
-                            <a href="javascript:void(0)"
-                               class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user bg-light"
-                               id="invoice-123" data-invoice-id="123">
-                                <div
-                                    class="btn btn-primary round rounded-circle d-flex align-items-center justify-content-center">
-                                    <i class="ti ti-user fs-6"></i>
-                                </div>
-                                <div class="ms-3 d-inline-block w-75">
-                                    <h6 class="mb-0 invoice-customer">James Anderson</h6>
+                        @foreach($listOrder as $order)
+                            <li>
+                                <a href="javascript:void(0)"
+                                   class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user bg-light"
+                                   id="invoice-123" data-invoice-id="123">
+                                    <div
+                                        class="btn btn-primary round rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="ti ti-user fs-6"></i>
+                                    </div>
+                                    <div class="ms-3 d-inline-block w-75">
+                                        @php
+                                        $user = \App\Models\User::where('id', $order->id_nguoi_dat)->first(['name']);
+                                        @endphp
+                                        <h6 class="mb-0 invoice-customer">{{ $user->name }}</h6>
 
-                                    <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">Id: #123</span>
-                                    <span class="fs-3 invoice-date text-nowrap text-body-color d-block">9 Fab 2020</span>
-                                </div>
-                            </a>
-                        </li>
+                                        <span class="fs-3 invoice-id text-truncate text-body-color d-block w-85">Id: #{{ $order->ma_don_hang }}</span>
+                                        <span class="fs-3 invoice-date text-nowrap text-body-color d-block">{{ $order->ngay_dat }}</span>
+                                    </div>
+                                </a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>

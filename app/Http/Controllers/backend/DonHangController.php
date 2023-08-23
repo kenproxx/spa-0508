@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class DonHangController extends Controller
@@ -12,7 +13,8 @@ class DonHangController extends Controller
      */
     public function index()
     {
-        return view('backend/pages/don_hang/index');
+        $listOrder = Order::all(['id', 'ma_don_hang', 'ngay_dat', 'id_nguoi_dat']);
+        return view('backend/pages/don_hang/index', compact('listOrder'));
     }
 
     /**
