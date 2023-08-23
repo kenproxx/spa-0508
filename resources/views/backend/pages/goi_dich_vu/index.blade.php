@@ -68,7 +68,7 @@
                                         <p class="mb-0 ms-2">{{ $item->status == 1 ? 'Kích hoạt' : 'Hủy kích hoạt'}}</p>
                                     </div>
                                 </td>
-                                <td><a class="fs-6 text-muted" href="javascript:void(0)" data-bs-toggle="tooltip"
+                                <td><a class="fs-6 text-muted" href="{{route('backend.goi-dich-vu.detail', $item->id)}}" data-bs-toggle="tooltip"
                                        data-bs-placement="top" data-bs-title="Edit"><i class="ti ti-dots-vertical"></i></a>
                                 </td>
                             </tr>

@@ -88,9 +88,9 @@ Route::prefix('/goi-dich-vu')->group(function () {
     Route::get('/list', [GoiDichVuController::class, 'index'])->name('backend.goi-dich-vu.show');
     Route::get('/create', [GoiDichVuController::class, 'create'])->name('backend.goi-dich-vu.create');
     Route::post('/create', [GoiDichVuController::class, 'store'])->name('backend.goi-dich-vu.store');
-    Route::get('/{id}', [GoiDichVuController::class, 'saveLogoConfig'])->name('backend.goi-dich-vu.detail');
-    Route::put('/{id}', [GoiDichVuController::class, 'saveLogoConfig'])->name('backend.goi-dich-vu.update');
-    Route::delete('/{id}', [GoiDichVuController::class, 'saveLogoConfig'])->name('backend.goi-dich-vu.delete');
+    Route::get('/{id}', [GoiDichVuController::class, 'detail'])->name('backend.goi-dich-vu.detail');
+    Route::post('/{id}', [GoiDichVuController::class, 'update'])->name('backend.goi-dich-vu.update');
+    Route::delete('/{id}', [GoiDichVuController::class, 'delete'])->name('backend.goi-dich-vu.delete');
 });
 
 

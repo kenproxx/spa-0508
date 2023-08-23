@@ -35,15 +35,45 @@ class GoiDichVuController extends Controller
             $success = $productService->save();
             return redirect(route('backend.goi-dich-vu.show'));
         } catch (\Exception $exception) {
-            dd($exception);
+            return back();
         }
     }
 
-    public function detail($id){
+    public function detail($id)
+    {
         $productService = ProductService::where([
             ['status', '!=', ProductServiceStatus::DELETED],
             ['id', $id]
         ])->first();
-        return view('backend.pages.goi_dich_vu.detail', compact('productService'));
+        $products = Product::all();
+        return view('backend.pages.goi_dich_vu.detail', compact('productService', 'products'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        try {
+            $productService = ProductService::find($id);
+            foreach ($request->except(['_token']) as $key => $value) {
+                $productService->{$key} = $value;
+            }
+            $productService->updated_at = Auth::user()->id;
+            $productService->status = ProductServiceStatus::ACTIVE;
+            $success = $productService->save();
+            return redirect(route('backend.goi-dich-vu.show'));
+        } catch (\Exception $exception) {
+            return back();
+        }
+    }
+
+    public function delete($id)
+    {
+        try {
+            $productService = ProductService::find($id);
+            $productService->status = ProductServiceStatus::DELETED;
+            $success = $productService->save();
+            return redirect(route('backend.goi-dich-vu.show'));
+        } catch (\Exception $exception) {
+            return back();
+        }
     }
 }
