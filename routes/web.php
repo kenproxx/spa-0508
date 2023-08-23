@@ -31,6 +31,7 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('log-out');
 
 
 Route::group(['prefix' => 'backend', 'middleware' => 'role.admin.super_admin'], function () {
+    Route::get('/', [HomePageController::class, 'index'])->name('index');
     require_once __DIR__ . '/backend.php';
 });
 

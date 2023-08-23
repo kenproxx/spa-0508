@@ -3,6 +3,7 @@
 use App\Http\Controllers\backend\AgencyController;
 use App\Http\Controllers\backend\CauHinhController;
 use App\Http\Controllers\backend\DonHangController;
+use App\Http\Controllers\backend\GoiDichVuController;
 use App\Http\Controllers\backend\MoreServiceController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\ProfileController;
@@ -81,6 +82,15 @@ Route::prefix('/cau-hinh')->group(function () {
     Route::get('/{view}', [CauHinhController::class, 'index'])->name('backend.cau-hinh.show');
     Route::post('', [CauHinhController::class, 'store'])->name('backend.cau-hinh.store');
     Route::post('/logo', [CauHinhController::class, 'saveLogoConfig'])->name('backend.cau-hinh.logo.store');
+});
+
+Route::prefix('/goi-dich-vu')->group(function () {
+    Route::get('/list', [GoiDichVuController::class, 'index'])->name('backend.goi-dich-vu.show');
+    Route::get('/create', [GoiDichVuController::class, 'create'])->name('backend.goi-dich-vu.create');
+    Route::post('/create', [GoiDichVuController::class, 'store'])->name('backend.goi-dich-vu.store');
+    Route::get('/{id}', [GoiDichVuController::class, 'detail'])->name('backend.goi-dich-vu.detail');
+    Route::post('/{id}', [GoiDichVuController::class, 'update'])->name('backend.goi-dich-vu.update');
+    Route::delete('/{id}', [GoiDichVuController::class, 'delete'])->name('backend.goi-dich-vu.delete');
 });
 
 
