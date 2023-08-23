@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\frontend\DanhGiaSanPhamController;
 use App\Http\Controllers\frontend\HomePageController;
 use App\Http\Controllers\frontend\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -22,6 +23,9 @@ Route::prefix('/san-pham')->group(function () {
     Route::get('/thuoc-tinh/{thuoc_tinh}', [ProductController::class, 'getListSanPhamHot'])->name('frontend.san-pham.thuoc-tinh');
 
 });
+
+Route::post('/danh-gia-san-pham', [DanhGiaSanPhamController::class, 'store'])->name('frontend.danh-gia-san-pham.create');
+
 
 
 

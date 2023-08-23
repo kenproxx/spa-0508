@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\backend\AgencyController;
 use App\Http\Controllers\backend\CauHinhController;
+use App\Http\Controllers\backend\DanhGiaSanPhamController;
 use App\Http\Controllers\backend\DonHangController;
 use App\Http\Controllers\backend\GoiDichVuController;
 use App\Http\Controllers\backend\MoreServiceController;
@@ -91,6 +92,13 @@ Route::prefix('/goi-dich-vu')->group(function () {
     Route::get('/{id}', [GoiDichVuController::class, 'detail'])->name('backend.goi-dich-vu.detail');
     Route::post('/{id}', [GoiDichVuController::class, 'update'])->name('backend.goi-dich-vu.update');
     Route::delete('/{id}', [GoiDichVuController::class, 'delete'])->name('backend.goi-dich-vu.delete');
+});
+
+Route::prefix('/danh-gia-san-pham')->group(function () {
+    Route::get('/list', [DanhGiaSanPhamController::class, 'index'])->name('backend.danh-gia-san-pham.show');
+    Route::get('/{id}', [DanhGiaSanPhamController::class, 'detail'])->name('backend.danh-gia-san-pham.detail');
+    Route::post('/{id}', [DanhGiaSanPhamController::class, 'update'])->name('backend.danh-gia-san-pham.update');
+    Route::delete('/{id}', [DanhGiaSanPhamController::class, 'delete'])->name('backend.danh-gia-san-pham.delete');
 });
 
 
