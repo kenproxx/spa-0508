@@ -38,7 +38,7 @@ class DonHangController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $order = Order::where('id', $id)->first();
     }
 
     /**

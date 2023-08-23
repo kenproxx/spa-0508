@@ -47,8 +47,8 @@
                         @foreach($listOrder as $order)
                             <li>
                                 <a href="javascript:void(0)"
-                                   class="p-3 bg-hover-light-black border-bottom d-flex align-items-start invoice-user listing-user bg-light"
-                                   id="invoice-123" data-invoice-id="123">
+                                   class="p-3  border-bottom d-flex align-items-start invoice-user listing-user bg-light"
+                                    data-invoice-id="123">
                                     <div
                                         class="btn btn-primary round rounded-circle d-flex align-items-center justify-content-center">
                                         <i class="ti ti-user fs-6"></i>
