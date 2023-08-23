@@ -1,6 +1,6 @@
 @php
-use App\Enum\ConfigType;
-$checkSuper_Admin = \Illuminate\Support\Facades\Auth::user()->role_id == \App\Enum\UserRole::SUPER_ADMIN
+    use App\Enum\ConfigType;
+    $checkSuper_Admin = \Illuminate\Support\Facades\Auth::user()->role_id == \App\Enum\UserRole::SUPER_ADMIN
 @endphp
 
 <nav class="sidebar-nav scroll-sidebar" data-simplebar>
@@ -72,97 +72,107 @@ $checkSuper_Admin = \Illuminate\Support\Facades\Auth::user()->role_id == \App\En
         </li>
 
         @if($checkSuper_Admin)
-        <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ route('backend.user.show') }}" aria-expanded="false">
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ route('backend.user.show') }}" aria-expanded="false">
                   <span>
                     <i class="ti ti-aperture"></i>
                   </span>
-                <span class="hide-menu">Quản lý user</span>
-            </a>
-        </li>
+                    <span class="hide-menu">Quản lý user</span>
+                </a>
+            </li>
 
-        <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ route('backend.dai-ly.show') }}" aria-expanded="false">
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ route('backend.dai-ly.show') }}" aria-expanded="false">
                   <span>
                     <i class="ti ti-playlist"></i>
                   </span>
-                <span class="hide-menu">Quản lý spa</span>
-            </a>
-        </li>
-        <li class="sidebar-item">
-            <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
+                    <span class="hide-menu">Quản lý spa</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ route('backend.goi-dich-vu.show') }}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-playlist"></i>
+                  </span>
+                    <span class="hide-menu">Quản lý Gói dịch vụ</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
                   <span class="d-flex">
                     <i class="ti ti-chart-donut-3"></i>
                   </span>
-                <span class="hide-menu">Cấu hình chung</span>
-            </a>
-            <ul aria-expanded="false" class="collapse first-level">
-                <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show', ConfigType::TIEU_DE) }}" class="sidebar-link">
-                        <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-circle"></i>
-                        </div>
-                        <span class="hide-menu">Cấu hình tiêu đề</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show', ConfigType::LOGO) }}" class="sidebar-link">
-                        <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-circle"></i>
-                        </div>
-                        <span class="hide-menu">Cấu hình Logo</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show', ConfigType::BANNER_TOP) }}" class="sidebar-link">
-                        <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-circle"></i>
-                        </div>
-                        <span class="hide-menu">Cấu hình banner top</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show', ConfigType::MENU) }}" class="sidebar-link">
-                        <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-circle"></i>
-                        </div>
-                        <span class="hide-menu">Cấu hình Menu</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show', ConfigType::API_VNPAY) }}" class="sidebar-link">
-                        <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-circle"></i>
-                        </div>
-                        <span class="hide-menu">Cấu hình API VNPAY</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show', ConfigType::SMTP_EMAIL) }}" class="sidebar-link">
-                        <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-circle"></i>
-                        </div>
-                        <span class="hide-menu">Cấu hình SMTP Email</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show', ConfigType::API_ZALO) }}" class="sidebar-link">
-                        <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-circle"></i>
-                        </div>
-                        <span class="hide-menu">Cấu hình API Zalo</span>
-                    </a>
-                </li>
-                <li class="sidebar-item">
-                    <a href="{{ route('backend.cau-hinh.show', ConfigType::FOOTER) }}" class="sidebar-link">
-                        <div class="round-16 d-flex align-items-center justify-content-center">
-                            <i class="ti ti-circle"></i>
-                        </div>
-                        <span class="hide-menu">Cấu hình Footer</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
+                    <span class="hide-menu">Cấu hình chung</span>
+                </a>
+                <ul aria-expanded="false" class="collapse first-level">
+                    <li class="sidebar-item">
+                        <a href="{{ route('backend.cau-hinh.show', ConfigType::TIEU_DE) }}" class="sidebar-link">
+                            <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                            </div>
+                            <span class="hide-menu">Cấu hình tiêu đề</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('backend.cau-hinh.show', ConfigType::LOGO) }}" class="sidebar-link">
+                            <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                            </div>
+                            <span class="hide-menu">Cấu hình Logo</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('backend.cau-hinh.show', ConfigType::BANNER_TOP) }}" class="sidebar-link">
+                            <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                            </div>
+                            <span class="hide-menu">Cấu hình banner top</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('backend.cau-hinh.show', ConfigType::MENU) }}" class="sidebar-link">
+                            <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                            </div>
+                            <span class="hide-menu">Cấu hình Menu</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('backend.cau-hinh.show', ConfigType::API_VNPAY) }}" class="sidebar-link">
+                            <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                            </div>
+                            <span class="hide-menu">Cấu hình API VNPAY</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('backend.cau-hinh.show', ConfigType::SMTP_EMAIL) }}" class="sidebar-link">
+                            <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                            </div>
+                            <span class="hide-menu">Cấu hình SMTP Email</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('backend.cau-hinh.show', ConfigType::API_ZALO) }}" class="sidebar-link">
+                            <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                            </div>
+                            <span class="hide-menu">Cấu hình API Zalo</span>
+                        </a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="{{ route('backend.cau-hinh.show', ConfigType::FOOTER) }}" class="sidebar-link">
+                            <div class="round-16 d-flex align-items-center justify-content-center">
+                                <i class="ti ti-circle"></i>
+                            </div>
+                            <span class="hide-menu">Cấu hình Footer</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
         @endif
     </ul>
 </nav>
