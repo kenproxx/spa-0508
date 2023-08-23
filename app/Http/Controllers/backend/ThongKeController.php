@@ -3,6 +3,12 @@
 namespace App\Http\Controllers\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
+use App\Models\Product;
+use App\Models\ProductFeedback;
+use App\Models\ProductService;
+use App\Models\Role;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ThongKeController extends Controller
@@ -12,7 +18,19 @@ class ThongKeController extends Controller
      */
     public function index()
     {
-        return view('backend/pages/thong-ke/index');
+        $users = User::all();
+        $products = Product::where('status', 1)->get();
+        $orders = Order::all();
+        $services = ProductService::all();
+        $feedbacks = ProductFeedback::all();
+        $roleSpa = Role::where('name', 'ADMIN')->first();
+        $spas = User::where('role_id', $roleSpa->id)->get();
+        return view('backend/pages/thong-ke/index', compact(
+            'users',
+            'spas',
+            'products',
+            'orders',
+            'services', 'feedbacks'));
     }
 
     /**
