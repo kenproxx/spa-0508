@@ -36,7 +36,9 @@ Route::prefix('/nguoi-dung')->group(function () {
 });
 
 Route::prefix('/dai-ly')->group(function () {
-    Route::get('', [AgencyController::class, 'index'])->name('backend.dai-ly.show');
+    Route::get('', [AgencyController::class, 'index'])->name('backend.dai-ly.index');
+    Route::get('{id}', [AgencyController::class, 'show'])->name('backend.dai-ly.show');
+    Route::post('{id}', [AgencyController::class, 'update'])->name('backend.dai-ly.update');
 });
 
 Route::prefix('/thong-ke')->group(function () {

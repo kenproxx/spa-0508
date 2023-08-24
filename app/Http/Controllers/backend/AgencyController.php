@@ -38,7 +38,15 @@ class AgencyController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try {
+            $agency = Agency::where('id', $id)->first();
+            if ($agency) {
+                return response()->json($agency);
+            }
+            return back()->with('error', 'Lỗi, thử lại');
+        } catch (\Exception $exception) {
+
+        }
     }
 
     /**

@@ -82,7 +82,7 @@
             </li>
 
             <li class="sidebar-item">
-                <a class="sidebar-link" href="{{ route('backend.dai-ly.show') }}" aria-expanded="false">
+                <a class="sidebar-link" href="{{ route('backend.dai-ly.index') }}" aria-expanded="false">
                   <span>
                     <i class="ti ti-playlist"></i>
                   </span>
