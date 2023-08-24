@@ -36,6 +36,8 @@ class AuthController extends Controller
                         $request->session()->put('login', $emailLogin);
                         $login = $request->session()->get('login');
                         return redirect()->route('backend.thong-ke.show');
+                    } else {
+                        return back()->with('error', 'Sai thông tin tài khoản hoặc mật khẩu');
                     }
                 default:
                     return back()->with('error', 'Tài khoản của bạn bị xóa');

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Enum\UserRole;
 use App\Enum\UserStatus;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
@@ -104,8 +106,7 @@ class QL_UserController extends Controller
     function update(Request $request, string $id)
     {
         try {
-            $user = User::first('id', $id);
-
+            $user = User::where('id', $id)->first();
             foreach ($request->except('_token') as $key => $value) {
                 if ($key == 'password') {
                     if ($value) {
@@ -118,6 +119,9 @@ class QL_UserController extends Controller
 
             $result = $user->save();
             if ($result) {
+                if ($id == Auth::user()->id && $user->role_id != UserRole::SUPER_ADMIN) {
+                    return (new AuthController())->logout();
+                }
                 return redirect()->route('backend.user.show')->with('success', 'Sửa thành công');
             }
             return redirect()->back();

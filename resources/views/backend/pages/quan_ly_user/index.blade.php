@@ -195,7 +195,6 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
                 importDataToModal(response, id);
             },
             error: function (xhr, status, error) {
-                console.error("Error resetting form:", error);
             }
         });
     }
@@ -209,8 +208,7 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
 
         $('#name').val(data.name);
         $('#email').val(data.email).prop('disabled', true);
-        $('#password').prop('hidden', true);
-        $('#labelPassword').prop('hidden', true);
+        $('#password').val('').prop('required', false);
         $('#number_phone').val(data.number_phone);
         $('#zalo_id').val(data.zalo_id).prop('disabled', isExistZalo);
         $('#kakao_talk_id').val(data.kakao_talk_id);
@@ -227,9 +225,9 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
     function resetFormModal() {
         $('#modalLabel').text('Thêm mới');
         $('input[type="text"]').val('').prop('disabled', false);
-        $('input[type="password"]').val('').prop('hidden', false);
+        $('input[type="password"]').val('').prop('required', true);
         $('input[type="email"]').val('').prop('disabled', false);
-        $('#labelPassword').prop('hidden', false);
+        $('#labelPassword');
         $('input[type="number"]').val('');
         $('input[type="tel"]').val('').prop('disabled', false);
         $('select').prop('selectedIndex', 0);
