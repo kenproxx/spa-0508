@@ -36,7 +36,7 @@
                                     @php
                                         $user = \App\Models\User::find($item->user_id)
                                     @endphp
-                                    <p class="mb-0">{{ $user->name }}p</p>
+                                    <p class="mb-0">{{ $user->name ?? '' }}p</p>
                                 </td>
                                 <td>
                                     <p class="mb-0">{{ $item->fullName }}p</p>
