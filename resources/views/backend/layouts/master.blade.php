@@ -22,7 +22,6 @@
     <!-- Core Css -->
     <link id="themeColors" rel="stylesheet" href="../../dist/css/style.min.css"/>
 
-
 </head>
 <body>
 <!-- Preloader -->
@@ -389,6 +388,29 @@
 <script src="../../dist/js/app-style-switcher.js"></script>
 <script src="../../dist/js/sidebarmenu.js"></script>
 <script src="../../dist/js/custom.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('.agency').change(function() {
+            var agencyId = $(this).val();
+
+            $.ajax({
+                url: '{{ route("getProductsByAgency") }}',
+                type: 'GET',
+                data: { agency_id: agencyId },
+                success: function(response) {
+                    var productSelect = $('.product');
+                    productSelect.empty();
+                    productSelect.append('<option value="0">Tất cả sản phẩm</option>');
+
+                    $.each(response, function(index, product) {
+                        productSelect.append('<option value="' + product.id + '">' + product.title + '</option>');
+                    });
+                }
+            });
+        });
+    });
+</script>
 
 
 </body>

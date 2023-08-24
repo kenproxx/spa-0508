@@ -141,26 +141,17 @@
                                         <div class="note-title">
                                             <div class="row">
                                                 <div class="col-sm-6"><label>Áp dụng cho đại lý</label>
-                                                    <select class="form-select" name="product_id">
+                                                    <select class="form-select agency" name="product_id">
                                                         <option value="0">Tất cả đại lý</option>
                                                         @foreach($listAgency as $agency)
-                                                            <option value="">{{ $agency->ten_quan_ly }}
+                                                            <option value="{{ $agency->id }}">{{ $agency->ten_quan_ly }}
                                                                 - {{ $agency->ten_co_so }}</option>
                                                         @endforeach
                                                     </select>
                                                 </div>
                                                 <div class="col-sm-6"><label>Áp dụng cho sản phẩm</label>
-                                                    <select class="form-select" name="product_id">
+                                                    <select class="form-select product" name="product_id">
                                                         <option value="0">Tất cả sản phẩm</option>
-                                                        @foreach($listProduct as $product)
-                                                                <?php
-                                                                $agency = \App\Models\Agency::where('id', $product->agency_id)
-                                                                    ->first(['ten_quan_ly', 'ten_co_so'])
-                                                                ?>
-                                                            <option value="{{ $product->id }}">{{ $product->title }}
-                                                                - {{ $agency->ten_quan_ly }}
-                                                                - {{ $agency->ten_co_so }}</option>
-                                                        @endforeach
                                                     </select>
                                                 </div>
                                             </div>
@@ -187,9 +178,11 @@
     </div>
 
     <script src="../../dist/js/apps/notes.js"></script>
+
 @endsection
 
 <script>
+
     function generateRandomCode() {
         const length = 10;
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789';
