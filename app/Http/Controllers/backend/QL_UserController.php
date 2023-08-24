@@ -6,6 +6,7 @@ use App\Enum\UserRole;
 use App\Enum\UserStatus;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
+use App\Models\Agency;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,7 +24,8 @@ class QL_UserController extends Controller
     {
         $listRole = Role::all(['id', 'name']);
         $listUser = User::all(['id', 'name', 'number_phone', 'email', 'kakao_talk_id', 'role_id', 'avatar', 'status']);
-        return view('backend/pages/quan_ly_user/index', compact('listRole', 'listUser'));
+        $listSpa = Agency::where('user_id', '')->get(['id', 'ten_co_so', 'nganh_nghe']);
+        return view('backend/pages/quan_ly_user/index', compact('listRole', 'listUser', 'listSpa'));
     }
 
     /**
@@ -49,11 +51,21 @@ class QL_UserController extends Controller
 
             $user = new User();
 
+            $isAdminSpa = false;
+            $spaId = '';
             foreach ($request->except('_token') as $key => $value) {
-                if ($key == 'password') {
-                    $user->{$key} = Hash::make($value);
-                } else {
-                    $user->{$key} = $value;
+                switch ($key) {
+                    case 'password':
+                        $user->{$key} = Hash::make($value);
+                        break;
+                    case 'spa_id':
+                        if ($value != 0) {
+                            $isAdminSpa = true;
+                            $spaId = $value;
+                        }
+                        break;
+                    default:
+                        $user->{$key} = $value;
                 }
             }
 
@@ -66,6 +78,13 @@ class QL_UserController extends Controller
             $user->status = UserStatus::ACTIVE;
 
             $result = $user->save();
+
+            if ($isAdminSpa) {
+                $agency = Agency::where('id', $spaId)->first();
+                $agency->user_id = $user->id;
+                $agency->save();
+            }
+
             if ($result) {
                 return redirect()->route('backend.user.show')->with('success', 'Tạo mới thành công');
             }
@@ -107,17 +126,34 @@ class QL_UserController extends Controller
     {
         try {
             $user = User::where('id', $id)->first();
+            $isAdminSpa = false;
+            $spaId = '';
             foreach ($request->except('_token') as $key => $value) {
-                if ($key == 'password') {
-                    if ($value) {
-                        $user->{$key} = Hash::make($value);
-                    }
-                } else {
-                    $user->{$key} = $value;
+                switch ($key) {
+                    case 'password':
+                        if ($value) {
+                            $user->{$key} = Hash::make($value);
+                        }
+                        break;
+                    case 'spa_id':
+                        if ($value != 0) {
+                            $isAdminSpa = true;
+                            $spaId = $value;
+                        }
+                        break;
+                    default:
+                        $user->{$key} = $value;
                 }
             }
 
             $result = $user->save();
+
+            if ($isAdminSpa) {
+                $agency = Agency::where('id', $spaId)->first();
+                $agency->user_id = $user->id;
+                $agency->save();
+            }
+
             if ($result) {
                 if ($id == Auth::user()->id && $user->role_id != UserRole::SUPER_ADMIN) {
                     return (new AuthController())->logout();

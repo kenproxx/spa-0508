@@ -102,4 +102,22 @@ class AgencyController extends Controller
             return redirect()->back()->with('error', 'Lỗi');
         }
     }
+
+    public function getAgencyByUserIdAndSpaNoAdmin($id)
+    {
+        $agency_user = Agency::whereIn('user_id', [$id, ''])->get();
+        if ($agency_user) {
+            return response()->json($agency_user);
+        }
+        return response()->json('');
+    }
+
+    public function getListAgencyNoAdmin()
+    {
+        $listSpa = Agency::where('user_id', '')->get(['id', 'ten_co_so', 'nganh_nghe']);
+        if ($listSpa) {
+            return response()->json($listSpa);
+        }
+        return response()->json('');
+    }
 }

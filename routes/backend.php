@@ -40,6 +40,8 @@ Route::prefix('/dai-ly')->group(function () {
     Route::get('{id}', [AgencyController::class, 'show'])->name('backend.dai-ly.show');
     Route::post('/update/{id}', [AgencyController::class, 'update'])->name('backend.dai-ly.update');
     Route::get('/destroy/{id}', [AgencyController::class, 'destroy'])->name('backend.dai-ly.destroy');
+    Route::get('/get-by-user-id/{id}', [AgencyController::class, 'getAgencyByUserIdAndSpaNoAdmin'])->name('backend.dai-ly.get-by-user-id');
+    Route::get('/get-list-agency', [AgencyController::class, 'getListAgencyNoAdmin'])->name('backend.dai-ly.get-list-agency');
 });
 
 Route::prefix('/thong-ke')->group(function () {

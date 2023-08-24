@@ -101,11 +101,11 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
                             <td>
                            <span
                                class="badge <?php echo $isDeleted ? 'bg-light-danger'
-                                    : ( $user->role_id == '1' ? 'bg-light-primary'
+                                    : ($user->role_id == '1' ? 'bg-light-primary'
                                     : ($user->role_id == '2' ? 'bg-light-secondary'
                                     : 'bg-light-danger')) ?>
                                  rounded-3 py-8 text-primary fw-semibold fs-2">
-                                {{ $isDeleted ? 'Deleted' : $role_str }}
+                                {{ $role_str }}
                            </span>
                             </td>
                             <td>
@@ -194,19 +194,34 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
                             <input type="text" class="form-control" name="address" id="address"
                                    placeholder="Nhập Địa chỉ"/>
                         </div>
-                        <div class="note-title">
-                            <label>Phân quyền</label>
-                            <select class="form-select" aria-label="Default select example" name="role_id" id="role_id">
-                                @foreach($listRole as $role)
-                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="row">
+                            <div class="note-title col-sm-6">
+                                <label>Phân quyền</label>
+                                <select class="form-select" aria-label="Default select example" name="role_id"
+                                        id="role_id">
+                                    @foreach($listRole as $role)
+                                        <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="note-title col-sm-6">
+                                <label>Quản lý spa</label>
+                                <select class="form-select" aria-label="Default select example" name="spa_id"
+                                        id="spa_id">
+                                    <option value="0">Không quản lý</option>
+                                    @foreach($listSpa as $spa)
+                                        <option value="{{ $spa->id }}">{{ $spa->ten_co_so ?? '' }}
+                                            - {{ $spa->nganh_nghe ?? '' }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <div class="note-title">
                             <label>Ảnh đại diện</label>
-                            <input type="file" class="form-control" name="avatar"
+                            <input type="file" class="form-control" name="avatar" accept="image/*"
                                    placeholder="Title"/>
                         </div>
+
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -222,24 +237,41 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
 <script>
 
     let isFormAdd = true
+    let agency;
 
-    function editUser(id) {
+    async function editUser(id) {
         $('#modalLabel').text('Chỉnh sửa');
         let url = '{{ route('backend.nguoi-dung.show', ['id' => ':id']) }}'
         url = url.replace(':id', id);
 
-        $.ajax({
+        const response = await $.ajax({
             url: url,
-            type: "GET",
-            success: function (response) {
-                importDataToModal(response, id);
-            },
-            error: function (xhr, status, error) {
-            }
+            type: "GET"
+        });
+
+        agency = await getAgencyByUserId(id);
+        await importDataToModal(response, id);
+    }
+
+    function getAgencyByUserId(id) {
+        let url = '{{ route('backend.dai-ly.get-by-user-id', ['id' => ':id']) }}'
+        url = url.replace(':id', id);
+        return $.ajax({
+            url: url,
+            type: "GET"
+        });
+    }
+
+    function getListAgency() {
+        let url = '{{ route('backend.dai-ly.get-list-agency') }}'
+        return $.ajax({
+            url: url,
+            type: "GET"
         });
     }
 
     function importDataToModal(data, id) {
+
         let isExistZalo = false
 
         if (data.zalo_id) {
@@ -255,6 +287,18 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
         $('#address').val(data.address);
         $('#role_id').val(data.role_id);
 
+        const spaSelect = document.getElementById('spa_id');
+        spaSelect.innerHTML = '';
+
+        const defaultOption = new Option('Không quản lý', 0);
+        spaSelect.appendChild(defaultOption);
+
+        for (const obj of agency) {
+            const optionElement = new Option(`${obj.ten_co_so} - ${obj.nganh_nghe}`, obj.id);
+            spaSelect.appendChild(optionElement);
+        }
+
+
         let url = '{{ route('backend.nguoi-dung.update', ['id' => ':id']) }}';
         url = url.replace(':id', id);
         document.getElementById('form').action = url;
@@ -262,7 +306,7 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
     }
 
 
-    function resetFormModal() {
+    async function resetFormModal() {
         $('#modalLabel').text('Thêm mới');
         $('input[type="text"]').val('').prop('disabled', false);
         $('input[type="password"]').val('').prop('required', true);
@@ -272,6 +316,17 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
         $('input[type="tel"]').val('').prop('disabled', false);
         $('select').prop('selectedIndex', 0);
         $('input[type="file"]').val('');
+
+        const spaSelect = document.getElementById('spa_id');
+        spaSelect.innerHTML = '';
+
+        const defaultOption = new Option('Không quản lý', 0);
+        spaSelect.appendChild(defaultOption);
+
+        for (const obj of listAgency) {
+            const optionElement = new Option(`${obj.ten_co_so} - ${obj.nganh_nghe}`, obj.id);
+            spaSelect.appendChild(optionElement);
+        }
     }
 
     document.addEventListener("DOMContentLoaded", function () {
