@@ -36,13 +36,14 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
                         <th><h6 class="fs-4 fw-semibold mb-0">Số điện thoại</h6></th>
                         <th><h6 class="fs-4 fw-semibold mb-0">Email</h6></th>
                         <th><h6 class="fs-4 fw-semibold mb-0">Kakao</h6></th>
+                        <th><h6 class="fs-4 fw-semibold mb-0">Trạng thái</h6></th>
                         <th><h6 class="fs-4 fw-semibold mb-0">Loại User</h6></th>
                         <th></th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($listUser as $user)
-                        <?php $isDeleted = $user->status == \App\Enum\UserStatus::INACTIVE ?>
+                            <?php $isDeleted = $user->status == \App\Enum\UserStatus::INACTIVE ?>
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
@@ -67,10 +68,44 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
                             <td>
                                 <p class="mb-0 fw-normal">{{ $user->kakao_talk_id }}</p>
                             </td>
+                            @php
+                                $trang_thai = '';
+                                    switch ($user->status){
+                                        case \App\Enum\UserStatus::ACTIVE:
+                                            $trang_thai = 'Kích hoạt';
+                                        break;
+                                        case \App\Enum\UserStatus::INACTIVE:
+                                            $trang_thai = 'Đang khóa';
+                                        break;
+                                        case \App\Enum\UserStatus::DELETED:
+                                            $trang_thai = 'Đã xóa';
+                                        break;
+                                    };
+                                $role_str = '';
+                                    switch ($user->role_id){
+                                          case \App\Enum\UserRole::SUPER_ADMIN:
+                                            $role_str = 'SUPER_ADMIN';
+                                            break;
+                                          case \App\Enum\UserRole::ADMIN:
+                                            $role_str = 'ADMIN';
+                                            break;
+                                          case \App\Enum\UserRole::GUEST:
+                                            $role_str = 'GUEST';
+                                            break;
+                                    }
+
+                            @endphp
+                            <td>
+                                <p class="mb-0 fw-normal">{{ $trang_thai }}</p>
+                            </td>
                             <td>
                            <span
-                               class="badge <?php echo $isDeleted ? 'bg-light-danger' : ( $user->role_id == '1' ? 'bg-light-primary' : ($user->role_id == '2' ? 'bg-light-secondary' : 'bg-light-danger')) ?> rounded-3 py-8 text-primary fw-semibold fs-2">
-                                {{ $isDeleted ? 'Deleted' : ($user->role_id == '1' ? 'SUPER_ADMIN' : ($user->role_id == '2' ? 'ADMIN' : 'GUEST')) }}
+                               class="badge <?php echo $isDeleted ? 'bg-light-danger'
+                                    : ( $user->role_id == '1' ? 'bg-light-primary'
+                                    : ($user->role_id == '2' ? 'bg-light-secondary'
+                                    : 'bg-light-danger')) ?>
+                                 rounded-3 py-8 text-primary fw-semibold fs-2">
+                                {{ $isDeleted ? 'Deleted' : $role_str }}
                            </span>
                             </td>
                             <td>
@@ -85,15 +120,17 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
                                             <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i
                                                     class="fs-4 ti ti-edit"></i>Sửa</a>
                                         </li>
-                                        @if($checkRole == 1)
+                                        @if($checkRole == \App\Enum\UserRole::SUPER_ADMIN)
                                             @if($isDeleted)
                                                 <li>
-                                                    <a class="dropdown-item d-flex align-items-center gap-3" href="{{ route('backend.nguoi-dung.destroy', $user->id) }}"><i
+                                                    <a class="dropdown-item d-flex align-items-center gap-3"
+                                                       href="{{ route('backend.nguoi-dung.destroy', $user->id) }}"><i
                                                             class="fs-4 ti ti-trash"></i>Mở khóa</a>
                                                 </li>
                                             @else
                                                 <li>
-                                                    <a class="dropdown-item d-flex align-items-center gap-3" href="{{ route('backend.nguoi-dung.destroy', $user->id) }}"><i
+                                                    <a class="dropdown-item d-flex align-items-center gap-3"
+                                                       href="{{ route('backend.nguoi-dung.destroy', $user->id) }}"><i
                                                             class="fs-4 ti ti-trash"></i>Khóa</a>
                                                 </li>
                                             @endif
@@ -132,8 +169,10 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
                         </div>
                         <div class="note-title">
                             <label id="labelPassword">Mật khẩu</label>
-                                <input id="password" type="password" class="form-control" minlength="8" name="password" required>
-                                <span class="fa fa-fw fa-eye field-icon toggle-password" id="eyeIcon" onclick="showPassword()"></span>
+                            <input id="password" type="password" class="form-control" minlength="8" name="password"
+                                   required>
+                            <span class="fa fa-fw fa-eye field-icon toggle-password" id="eyeIcon"
+                                  onclick="showPassword()"></span>
                         </div>
                         <div class="note-title">
                             <label>Số điện thoại</label>
@@ -177,6 +216,7 @@ $checkRole = \Illuminate\Support\Facades\Auth::user()->role_id
             </div>
         </div>
     </div>
+
 @endsection
 
 <script>
