@@ -19,13 +19,13 @@
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                             </div>
                         </th>
-                        <th scope="col">Name</th>
-                        <th scope="col">Time</th>
-                        <th scope="col">Products</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Old Price</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Tên gói dịch vụ</th>
+                        <th scope="col">Thời gian</th>
+                        <th scope="col">Sản phẩm</th>
+                        <th scope="col">Giá hiện tại</th>
+                        <th scope="col">Giá cũng</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Hành động</th>
                     </tr>
                     </thead>
                     <tbody>

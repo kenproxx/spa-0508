@@ -14,13 +14,13 @@
                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                             </div>
                         </th>
-                        <th scope="col">User</th>
-                        <th scope="col">FullName</th>
+                        <th scope="col">Ngừoi đánh giá</th>
+                        <th scope="col">Họ Têm</th>
                         <th scope="col">Email</th>
-                        <th scope="col">Products</th>
-                        <th scope="col">Star</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Sản phẩm</th>
+                        <th scope="col">Mức độ</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Hành động</th>
                     </tr>
                     </thead>
                     <tbody>

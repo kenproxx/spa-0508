@@ -13,6 +13,7 @@ use App\Http\Controllers\backend\QLEmailController;
 use App\Http\Controllers\backend\ThongKeController;
 use App\Http\Controllers\backend\TinNhanController;
 use App\Http\Controllers\frontend\HomePageController;
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,7 +30,7 @@ Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('sign-in');
 Route::get('/logout', [AuthController::class, 'logout'])->name('log-out');
 
-Route::get('/sendmail', [\App\Http\Controllers\SendMailController::class, 'sendEmail']);
+Route::get('/sendmail', [HomeController::class, 'sendMail']);
 
 
 Route::group(['prefix' => 'backend', 'middleware' => 'role.admin.super_admin'], function () {
