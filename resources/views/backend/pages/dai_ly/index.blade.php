@@ -2,6 +2,8 @@
 @section('title', 'Sản phẩm')
 @section('content')
 
+    @include('backend.widgets.thong-bao')
+
     <div class="card w-100 position-relative overflow-hidden">
         <div class="card-body p-4">
             <div class="table-responsive rounded-2">
@@ -11,6 +13,7 @@
                         <th><h6 class="fs-4 fw-semibold mb-0">Tên cơ sở</h6></th>
                         <th><h6 class="fs-4 fw-semibold mb-0">Ngành nghề</h6></th>
                         <th><h6 class="fs-4 fw-semibold mb-0">Địa chỉ</h6></th>
+                        <th><h6 class="fs-4 fw-semibold mb-0">Trạng thái</h6></th>
                         <th></th>
                     </tr>
                     </tr>
@@ -33,6 +36,7 @@
                                 </div>
                             </td>
                             <td><p class="mb-0 fw-normal">{{ $daiLy->address }}</p></td>
+                            <td>{{ $daiLy->status }}</td>
                             <td>
                                 <div class="dropdown dropstart">
                                     <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -42,7 +46,7 @@
                                         <li data-bs-toggle="modal" data-bs-target="#modal-dai-ly" onclick="getInfoSpa({{ $daiLy->id }})">
                                             <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-edit"></i>Sửa</a>
                                         </li>
-                                        <li>
+                                        <li onclick="lockSpa({{ $daiLy->id }})">
                                             <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Xóa</a>
                                         </li>
                                     </ul>
@@ -61,10 +65,10 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Tạo mới</h5>
+                    <h5 class="modal-title" id="modalLabel">Chỉnh sửa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form" action="{{ route('backend.dai-ly.update') }}" method="post"
+                <form id="form" action="" method="post"
                       enctype="multipart/form-data">
                     @csrf
                     <div class="modal-body">
@@ -122,6 +126,20 @@
         function getInfoSpa(id) {
             $('#modalLabel').text('Chỉnh sửa');
             let url = '{{ route('backend.dai-ly.show', ['id' => ':id']) }}'
+            url = url.replace(':id', id);
+
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (response) {
+                },
+                error: function (xhr, status, error) {
+                }
+            });
+        }
+
+        function lockSpa(id) {
+            let url = '{{ route('backend.dai-ly.destroy', ['id' => ':id']) }}'
             url = url.replace(':id', id);
 
             $.ajax({

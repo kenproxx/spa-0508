@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\backend;
 
+use App\Enum\AgencyStatus;
+use App\Enum\UserStatus;
 use App\Http\Controllers\Controller;
 use App\Models\Agency;
+use App\Models\User;
 use Illuminate\Http\Request;
+use SebastianBergmann\Diff\Exception;
 
 class AgencyController extends Controller
 {
@@ -13,7 +17,7 @@ class AgencyController extends Controller
      */
     public function index()
     {
-        $listDaiLy = Agency::where('status', 1)->get(['id', 'ten_co_so', 'ten_quan_ly']);
+        $listDaiLy = Agency::where('status', 1)->get(['id', 'ten_co_so', 'ten_quan_ly', 'status']);
         return view('backend/pages/dai_ly/index', compact('listDaiLy'));
     }
 
@@ -62,7 +66,17 @@ class AgencyController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        try {
+            $agency = Agency::where('id', $id)->first();
+            foreach ($request->except('_token') as $key => $value) {
+                $agency->{$key} = $value;
+            }
+
+            $result = $agency->save();
+            return redirect()->route('backend.dai-ly.index')->with('success', 'Sửa thành công');
+        } catch (Exception $exception) {
+            return redirect()->back()->with('error', 'Lỗi');
+        }
     }
 
     /**
@@ -70,6 +84,22 @@ class AgencyController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        try {
+            $agency = Agency::where('id', $id)->first();
+
+            if ($agency) {
+                $agency->status = AgencyStatus::DELETED;
+                if ($agency->user_id) {
+                    $user = User::where('id', $agency->user_id)->first();
+                    if ($user) {
+                        $user->status = UserStatus::DELETED;
+                    }
+                }
+                return redirect()->route('backend.dai-ly.index')->with('success', 'Đã khóa');
+            }
+            return redirect()->back()->with('error', 'Lỗi, thử lại');
+        } catch (Exception $exception) {
+            return redirect()->back()->with('error', 'Lỗi');
+        }
     }
 }
