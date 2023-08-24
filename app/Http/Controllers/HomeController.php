@@ -65,6 +65,11 @@ class HomeController extends Controller
         //
     }
 
+    public function sendMail()
+    {
+        (new SendMailController())->sendEmail('ngodaix5tp@gmail.com', 'abc123@gmail.com', 'Alooo', 'Hello World');
+    }
+
 
     public function checkAdminRole()
     {
