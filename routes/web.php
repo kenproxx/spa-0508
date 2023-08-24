@@ -29,6 +29,8 @@ Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login'])->name('sign-in');
 Route::get('/logout', [AuthController::class, 'logout'])->name('log-out');
 
+Route::get('/sendmail', [\App\Http\Controllers\SendMailController::class, 'sendEmail']);
+
 
 Route::group(['prefix' => 'backend', 'middleware' => 'role.admin.super_admin'], function () {
     Route::get('/', [HomePageController::class, 'index'])->name('index');

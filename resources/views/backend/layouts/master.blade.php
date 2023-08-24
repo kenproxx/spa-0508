@@ -37,9 +37,22 @@
         <!-- Sidebar scroll-->
         <div>
             <div class="brand-logo d-flex align-items-center justify-content-between">
+                @php
+                    $tieude = \App\Models\Config::where([
+                        ['type', 'TIEU_DE'],
+                        ['name', 'tieu_de']
+                    ])->first();
+                    $logo = \App\Models\Config::where([
+                        ['type', 'logo'],
+                        ['name', 'logo']
+                    ])->first();
+                @endphp
                 <a href="./index.html" class="text-nowrap logo-img">
-                    <img src="../../dist/images/logos/dark-logo.svg" class="dark-logo" width="180" alt=""/>
-                    <img src="../../dist/images/logos/light-logo.svg" class="light-logo" width="180" alt=""/>
+                    <img src="{{asset('storage/' . $logo->value)}}" class="dark-logo" width="180" alt=""/>
+                    <img src="{{asset('storage/' . $logo->value)}}" class="light-logo" width="180" alt=""/>
+                </a>
+                <a href="#" class="text-nowrap">
+                    {{$tieude->value}}
                 </a>
                 <div class="close-btn d-lg-none d-block sidebartoggler cursor-pointer" id="sidebarCollapse">
                     <i class="ti ti-x fs-8"></i>
