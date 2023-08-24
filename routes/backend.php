@@ -58,6 +58,7 @@ Route::prefix('/email')->group(function () {
 
 Route::prefix('/ma-giam-gia')->group(function () {
     Route::get('', [QL_VoucherController::class, 'index'])->name('backend.voucher.show');
+    Route::get('/get-products-by-agency', [QL_VoucherController::class, 'getProductsByAgency'])->name('getProductsByAgency');
     Route::post('/store', [QL_VoucherController::class, 'store'])->name('backend.voucher.store');
     Route::delete('/destroy/{id}', [QL_VoucherController::class, 'destroy'])->name('backend.voucher.destroy');
 });

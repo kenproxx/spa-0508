@@ -138,4 +138,12 @@ class QL_VoucherController extends Controller
             return redirect()->back()->with('error', 'Lỗi, thử lại');
         }
     }
+
+    public function getProductsByAgency(Request $request) {
+        $agencyId = $request->input('agency_id');
+
+        $products = Product::where('agency_id', $agencyId)->get();
+
+        return response()->json($products);
+    }
 }
