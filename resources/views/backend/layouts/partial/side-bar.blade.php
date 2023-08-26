@@ -73,6 +73,14 @@
 
         @if($checkSuper_Admin)
             <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ route('backend.tags.index') }}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-aperture"></i>
+                  </span>
+                    <span class="hide-menu">Thẻ Tags</span>
+                </a>
+            </li>
+            <li class="sidebar-item">
                 <a class="sidebar-link" href="{{ route('backend.user.show') }}" aria-expanded="false">
                   <span>
                     <i class="ti ti-aperture"></i>

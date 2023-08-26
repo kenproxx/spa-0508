@@ -11,6 +11,7 @@ use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\backend\QL_UserController;
 use App\Http\Controllers\backend\QL_VoucherController;
 use App\Http\Controllers\backend\QLEmailController;
+use App\Http\Controllers\backend\TagsController;
 use App\Http\Controllers\backend\ThongKeController;
 use App\Http\Controllers\backend\TinNhanController;
 use Illuminate\Support\Facades\Route;
@@ -105,6 +106,13 @@ Route::prefix('/danh-gia-san-pham')->group(function () {
     Route::get('/{id}', [DanhGiaSanPhamController::class, 'detail'])->name('backend.danh-gia-san-pham.detail');
     Route::post('/{id}', [DanhGiaSanPhamController::class, 'update'])->name('backend.danh-gia-san-pham.update');
     Route::delete('/{id}', [DanhGiaSanPhamController::class, 'delete'])->name('backend.danh-gia-san-pham.delete');
+});
+
+Route::prefix('/tags')->group(function () {
+    Route::get('', [TagsController::class, 'index'])->name('backend.tags.index');
+    Route::post('/store', [TagsController::class, 'store'])->name('backend.tags.store');
+    Route::get('/show/{id}', [TagsController::class, 'show'])->name('backend.tags.show');
+    Route::get('/destroy/{id}', [TagsController::class, 'destroy'])->name('backend.tags.destroy');
 });
 
 
