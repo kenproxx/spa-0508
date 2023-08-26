@@ -25,6 +25,7 @@ Route::prefix('/san-pham')->group(function () {
 });
 
 Route::post('/danh-gia-san-pham', [DanhGiaSanPhamController::class, 'store'])->name('frontend.danh-gia-san-pham.create');
+Route::post('/danh-gia-san-pham', [DanhGiaSanPhamController::class, 'store'])->name('frontend.danh-gia-san-pham.create');
 
 
 

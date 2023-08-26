@@ -23,7 +23,9 @@
                         <tr>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <img src="<?php echo $daiLy->avatar ? $daiLy->avatar : '../../dist/images/blog/blog-img1.jpg'?>" class="rounded-2" width="42" height="42" />
+                                    <img
+                                        src="<?php echo $daiLy->avatar ? $daiLy->avatar : '../../dist/images/blog/blog-img1.jpg'?>"
+                                        class="rounded-2" width="42" height="42"/>
                                     <div class="ms-3">
                                         <h6 class="fw-semibold mb-1">{{ $daiLy->ten_co_so }}</h6>
                                         <span class="fw-normal">{{ $daiLy->ten_quan_ly }}</span>
@@ -32,29 +34,33 @@
                             </td>
                             <td>
                                 <div class="d-flex align-items-center gap-2">
-                                    <span class="badge bg-light-danger text-danger rounded-3 fw-semibold fs-2">{{ $daiLy->nganh_nghe }}</span>
+                                    <span
+                                        class="badge bg-light-danger text-danger rounded-3 fw-semibold fs-2">{{ $daiLy->nganh_nghe }}</span>
                                 </div>
                             </td>
                             <td><p class="mb-0 fw-normal">{{ $daiLy->address }}</p></td>
                             <td>{{ $daiLy->status }}</td>
                             <td>
                                 <div class="dropdown dropstart">
-                                    <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <a href="#" class="text-muted" id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                       aria-expanded="false">
                                         <i class="ti ti-dots fs-5"></i>
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <li data-bs-toggle="modal" data-bs-target="#modal-dai-ly" onclick="getInfoSpa({{ $daiLy->id }})">
-                                            <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-edit"></i>Sửa</a>
+                                        <li data-bs-toggle="modal" data-bs-target="#modal-dai-ly"
+                                            onclick="getInfoSpa({{ $daiLy->id }})">
+                                            <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i
+                                                    class="fs-4 ti ti-edit"></i>Sửa</a>
                                         </li>
                                         <li onclick="lockSpa({{ $daiLy->id }})">
-                                            <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i class="fs-4 ti ti-trash"></i>Xóa</a>
+                                            <a class="dropdown-item d-flex align-items-center gap-3" href="#"><i
+                                                    class="fs-4 ti ti-trash"></i>Xóa</a>
                                         </li>
                                     </ul>
                                 </div>
                             </td>
                         </tr>
                     @endforeach
-
                     </tbody>
                 </table>
             </div>
@@ -68,56 +74,7 @@
                     <h5 class="modal-title" id="modalLabel">Chỉnh sửa</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="form" action="" method="post"
-                      enctype="multipart/form-data">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="note-title">
-                            <label>Họ và tên</label>
-                            <input type="text" class="form-control" name="name" id="name" required
-                                   placeholder="Nhập Họ và tên"/>
-                        </div>
-                        <div class="note-title">
-                            <label>Email</label>
-                            <input type="email" class="form-control" name="email" id="email" required
-                                   placeholder="Nhập Email"/>
-                        </div>
-                        <div class="note-title">
-                            <label id="labelPassword">Mật khẩu</label>
-                            <input id="password" type="password" class="form-control" minlength="8" name="password" required>
-                            <span class="fa fa-fw fa-eye field-icon toggle-password" id="eyeIcon" onclick="showPassword()"></span>
-                        </div>
-                        <div class="note-title">
-                            <label>Số điện thoại</label>
-                            <input type="tel" class="form-control" name="number_phone" id="number_phone"
-                                   placeholder="Nhập Số điện thoại" required pattern="^(0\d{9,10})$"/>
-                        </div>
-                        <div class="note-title">
-                            <label>Zalo</label>
-                            <input type="tel" class="form-control" name="zalo_id" id="zalo_id" pattern="^(0\d{9,10})$"
-                                   placeholder="Nhập Zalo"/>
-                        </div>
-                        <div class="note-title">
-                            <label>Kakao</label>
-                            <input type="text" class="form-control" name="kakao_talk_id" id="kakao_talk_id"
-                                   placeholder="Nhập Kakao"/>
-                        </div>
-                        <div class="note-title">
-                            <label>Địa chỉ</label>
-                            <input type="text" class="form-control" name="address" id="address"
-                                   placeholder="Nhập Địa chỉ"/>
-                        </div>
-                        <div class="note-title">
-                            <label>Ảnh đại diện</label>
-                            <input type="file" class="form-control" name="avatar"
-                                   placeholder="Title"/>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                        <button type="submit" class="btn btn-primary">Lưu</button>
-                    </div>
-                </form>
+                <div id="modal-body"></div>
             </div>
         </div>
     </div>
@@ -132,6 +89,7 @@
                 url: url,
                 type: "GET",
                 success: function (response) {
+                    document.getElementById('modal-body').innerHTML = response;
                 },
                 error: function (xhr, status, error) {
                 }
@@ -146,7 +104,6 @@
                 url: url,
                 type: "GET",
                 success: function (response) {
-                    console.log(response)
                 },
                 error: function (xhr, status, error) {
                 }
