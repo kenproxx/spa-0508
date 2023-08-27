@@ -45,9 +45,6 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Chọn Sticker</label>
-                                    <select class="form-control" name="sticker" id="sticker">
-                                        <option value="">Chưa có dịch vụ</option>
-                                    </select>
                                 </div>
                             </div>
                             <div>
