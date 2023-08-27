@@ -14,26 +14,17 @@
                 <table class="table align-middle text-nowrap mb-0">
                     <thead>
                     <tr>
-                        <th scope="col">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            </div>
-                        </th>
-                        <th scope="col">Products</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Actions</th>
+
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Giá gốc - Giá khuyến mại</th>
+                        <th scope="col">Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($listProduct as $product)
                         <tr>
-                            <td>
-                                <div class="form-check mb-0">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                </div>
-                            </td>
                             <td>
                                 <div class="d-flex align-items-center">
                                     @if($product->avatar)
@@ -43,7 +34,7 @@
                                     @endif
                                     <div class="ms-3">
                                         <h6 class="fw-semibold mb-0 fs-4">{{ $product->title }}</h6>
-                                        <p class="mb-0">books</p>
+{{--                                        <p class="mb-0">books</p>--}}
                                     </div>
                                 </div>
                             </td>

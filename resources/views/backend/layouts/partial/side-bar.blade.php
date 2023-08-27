@@ -3,7 +3,7 @@
     $checkSuper_Admin = \Illuminate\Support\Facades\Auth::user()->role_id == \App\Enum\UserRole::SUPER_ADMIN
 @endphp
 
-<nav class="sidebar-nav scroll-sidebar" data-simplebar>
+<nav class="sidebar-nav scroll-sidebar h-100" data-simplebar >
     <ul id="sidebarnav"><!-- ============================= -->
         <!-- Home -->
         <!-- ============================= -->
