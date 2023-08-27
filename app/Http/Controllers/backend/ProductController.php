@@ -19,8 +19,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $listProduct = Product::get(['id','title','created_at',
-            'avatar','gia_goc','gia_khuyen_mai', 'status']);
+        $listProduct = Product::get(['id', 'title', 'created_at',
+            'avatar', 'gia_goc', 'gia_khuyen_mai', 'status']);
         return view('backend/pages/quan_ly_san_pham/index',
             compact('listProduct'));
 
@@ -43,8 +43,23 @@ class ProductController extends Controller
     {
         $product = new Product();
         foreach ($request->except(['_token', 'service_id']) as $key => $value) {
-            $product->{$key} = $value;
+            if ($request->hasFile($key)) {
+                $file = $request->file($key);
+                if ($file) {
+                    $product->{$key} = $this->handleImage($file);
+                }
+            } else {
+                if ($key == 'sticker') {
+                    $pattern = '/\/storage\/([^,"]+),?/';
+                    $matches = '';
+                    preg_match_all($pattern, $request->input($key), $matches);
+                    $product->{$key} = $matches[1][0];
+                } else {
+                    $product->{$key} = $value;
+                }
+            }
         }
+
         $product->created_by = Auth::user()->id;
         $product->save();
 
@@ -89,5 +104,15 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function handleImage($input)
+    {
+        $arrResult = array();
+        foreach ($input as $item) {
+            $filePath = $item->store('images', 'public');
+            array_push($arrResult, $filePath);
+        }
+        return implode(',', $arrResult);
     }
 }

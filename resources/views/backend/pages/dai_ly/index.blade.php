@@ -16,7 +16,6 @@
                         <th><h6 class="fs-4 fw-semibold mb-0">Trạng thái</h6></th>
                         <th></th>
                     </tr>
-                    </tr>
                     </thead>
                     <tbody>
                     @foreach($listDaiLy as $daiLy)
