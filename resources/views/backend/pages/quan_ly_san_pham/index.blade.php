@@ -36,7 +36,11 @@
                             </td>
                             <td>
                                 <div class="d-flex align-items-center">
-                                    <img src="../../dist/images/products/s1.jpg" class="rounded-circle" alt="..." width="56" height="56">
+                                    @if($product->avatar)
+                                        <img src="{{ asset( 'storage/' . $product->avatar ) }}" class="rounded-circle" alt="..." width="56" height="56">
+                                    @else
+                                        <img src="../../dist/images/products/s1.jpg" class="rounded-circle" alt="..." width="56" height="56">
+                                    @endif
                                     <div class="ms-3">
                                         <h6 class="fw-semibold mb-0 fs-4">{{ $product->title }}</h6>
                                         <p class="mb-0">books</p>
