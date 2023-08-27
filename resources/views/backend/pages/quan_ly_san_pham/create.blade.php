@@ -45,6 +45,15 @@
                                 </div>
                                 <div class="col-md-6">
                                     <label>Chọn Sticker</label>
+                                    <div class="input-group">
+   <span class="input-group-btn">
+     <a id="lfm" data-input="thumbnail" data-preview="holder" class="btn btn-primary">
+       <i class="fa fa-picture-o"></i> Choose
+     </a>
+   </span>
+                                        <input id="thumbnail" class="form-control" type="text" name="filepath">
+                                    </div>
+                                    <img id="holder" style="margin-top:15px;max-height:100px;">
                                 </div>
                             </div>
                             <div>
@@ -106,6 +115,7 @@
         <button type="submit" class="btn btn-primary">Lưu</button>
     </form>
 
+    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
     <script src="../../dist/libs/ckeditor/ckeditor.js"></script>
     <script src="../../dist/libs/ckeditor/samples/js/sample.js"></script>
     <script data-sample="1">
@@ -115,6 +125,10 @@
         CKEDITOR.replace("mo_ta_chi_tiet", {
             height: 150,
         });
+    </script>
+    <script>
+        $('#lfm').filemanager('image');
+
     </script>
 
 @endsection
