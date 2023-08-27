@@ -109,6 +109,15 @@
             </li>
 
             <li class="sidebar-item">
+                <a class="sidebar-link" href="{{ route('backend.admin.log.mail.show') }}" aria-expanded="false">
+                  <span>
+                    <i class="ti ti-activity-heartbeat"></i>
+                  </span>
+                    <span class="hide-menu">Gửi Email</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
                 <a class="sidebar-link has-arrow" href="#" aria-expanded="false">
                   <span class="d-flex">
                     <i class="ti ti-chart-donut-3"></i>

@@ -2,19 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Config;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class SendMailController extends Controller
 {
-    public function sendEmail($mailTo, $mailFrom, $message, $subject)
+    public function sendEmail($mailTo, $mailFrom, $subject, $content)
     {
-        Mail::send([], [], function ($message) use ($mailTo, $message, $mailFrom, $subject) {
+        Mail::send([], [], function ($message) use ($mailTo, $content, $mailFrom, $subject) {
             $message->to($mailTo)
                 ->subject($subject);
 
             $message->from($mailFrom->value, config('mail.from.name'));
-            $message->text($message);
+            $message->text($content);
         });
 
         return response()->json(['message' => 'Email sent successfully']);
@@ -31,5 +31,23 @@ class SendMailController extends Controller
             $message->to($email, $subject)->subject($subject);
             $message->from($mailFrom, $title);
         });
+    }
+
+    public function sendEmailFromRequest(Request $request)
+    {
+        $mailFrom = $request->input('mail_from');
+        $mailTo = $request->input('mail_to');
+        $subject = $request->input('title');
+        $content = $request->input('message');
+
+        Mail::send([], [], function ($message) use ($mailTo, $content, $mailFrom, $subject) {
+            $message->to($mailTo, $subject)
+                ->subject($subject);
+
+            $message->from($mailFrom, $subject);
+            $message->text($content);
+        });
+
+        return response()->json(['message' => 'Email sent successfully']);
     }
 }

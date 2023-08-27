@@ -5,6 +5,8 @@ use App\Http\Controllers\backend\CauHinhController;
 use App\Http\Controllers\backend\DanhGiaSanPhamController;
 use App\Http\Controllers\backend\DonHangController;
 use App\Http\Controllers\backend\GoiDichVuController;
+use App\Http\Controllers\backend\MailController;
+use App\Http\Controllers\backend\MailLogController;
 use App\Http\Controllers\backend\MoreServiceController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\ProfileController;
@@ -105,6 +107,12 @@ Route::prefix('/danh-gia-san-pham')->group(function () {
     Route::get('/{id}', [DanhGiaSanPhamController::class, 'detail'])->name('backend.danh-gia-san-pham.detail');
     Route::post('/{id}', [DanhGiaSanPhamController::class, 'update'])->name('backend.danh-gia-san-pham.update');
     Route::delete('/{id}', [DanhGiaSanPhamController::class, 'delete'])->name('backend.danh-gia-san-pham.delete');
+});
+
+Route::prefix('/mail')->group(function () {
+    Route::get('/log', [MailLogController::class, 'index'])->name('backend.admin.log.mail.show');
+    Route::get('', [MailController::class, 'sendMail'])->name('backend.admin.mail.processCreate');
+    Route::post('', [MailLogController::class, 'store'])->name('backend.admin.log.mail.create');
 });
 
 
