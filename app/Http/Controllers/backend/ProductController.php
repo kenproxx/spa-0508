@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Agency;
 use App\Models\Product;
 use App\Models\ProductMoreservices;
+use App\Models\Tags;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +23,7 @@ class ProductController extends Controller
             'avatar','gia_goc','gia_khuyen_mai', 'status']);
         return view('backend/pages/quan_ly_san_pham/index',
             compact('listProduct'));
+
     }
 
     /**
@@ -30,7 +32,8 @@ class ProductController extends Controller
     public function create()
     {
         $listSpa = Agency::where('status', 1)->get(['id', 'ten_quan_ly', 'ten_co_so', 'user_id']);
-        return view('backend/pages/quan_ly_san_pham/create', compact('listSpa'));
+        $listTag = Tags::all(['id', 'name']);
+        return view('backend/pages/quan_ly_san_pham/create', compact('listSpa', 'listTag'));
     }
 
     /**
