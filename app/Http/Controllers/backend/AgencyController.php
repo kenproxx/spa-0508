@@ -45,7 +45,7 @@ class AgencyController extends Controller
         try {
             $agency = Agency::where('id', $id)->first();
             if ($agency) {
-                return response()->json($agency);
+                return view('backend.pages.dai_ly.modal-info-dai-ly', compact('agency'));
             }
             return back()->with('error', 'Lỗi, thử lại');
         } catch (\Exception $exception) {

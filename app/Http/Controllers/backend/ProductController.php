@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Agency;
 use App\Models\Product;
 use App\Models\ProductMoreservices;
+use App\Models\Tags;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,10 +19,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $listProduct = Product::get(['id','title','created_at',
-            'avatar','gia_goc','gia_khuyen_mai', 'status']);
+        $listProduct = Product::get(['id', 'title', 'created_at',
+            'avatar', 'gia_goc', 'gia_khuyen_mai', 'status']);
         return view('backend/pages/quan_ly_san_pham/index',
             compact('listProduct'));
+
     }
 
     /**
@@ -30,7 +32,8 @@ class ProductController extends Controller
     public function create()
     {
         $listSpa = Agency::where('status', 1)->get(['id', 'ten_quan_ly', 'ten_co_so', 'user_id']);
-        return view('backend/pages/quan_ly_san_pham/create', compact('listSpa'));
+        $listTag = Tags::all(['id', 'name']);
+        return view('backend/pages/quan_ly_san_pham/create', compact('listSpa', 'listTag'));
     }
 
     /**
@@ -40,8 +43,23 @@ class ProductController extends Controller
     {
         $product = new Product();
         foreach ($request->except(['_token', 'service_id']) as $key => $value) {
-            $product->{$key} = $value;
+            if ($request->hasFile($key)) {
+                $file = $request->file($key);
+                if ($file) {
+                    $product->{$key} = $this->handleImage($file);
+                }
+            } else {
+                if ($key == 'sticker') {
+                    $pattern = '/\/storage\/([^,"]+),?/';
+                    $matches = '';
+                    preg_match_all($pattern, $request->input($key), $matches);
+                    $product->{$key} = $matches[1][0];
+                } else {
+                    $product->{$key} = $value;
+                }
+            }
         }
+
         $product->created_by = Auth::user()->id;
         $product->save();
 
@@ -86,5 +104,15 @@ class ProductController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function handleImage($input)
+    {
+        $arrResult = array();
+        foreach ($input as $item) {
+            $filePath = $item->store('images', 'public');
+            array_push($arrResult, $filePath);
+        }
+        return implode(',', $arrResult);
     }
 }

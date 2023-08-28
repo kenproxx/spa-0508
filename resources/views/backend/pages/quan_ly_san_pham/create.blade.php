@@ -31,6 +31,31 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Chọn thẻ Tag</label>
+                                    <select class="form-control" name="tag_id" id="tag_id">
+                                        <option value="">Không có tag</option>
+                                        @foreach($listTag as $tag)
+                                            <option value="{{ $tag->id }}">
+                                                {{ $tag->name }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Chọn Sticker</label>
+                                    <div class="input-group">
+                                       <span class="input-group-btn">
+                                         <a id="lfm" data-input="sticker" data-preview="holder" class="btn btn-primary">
+                                           <i class="fa fa-picture-o"></i> Choose
+                                         </a>
+                                       </span>
+                                        <input id="sticker" class="form-control" type="text" name="sticker">
+                                    </div>
+                                    <img id="holder" style="margin-top:15px;max-height:100px;">
+                                </div>
+                            </div>
                             <div>
                                 <div class="row">
                                     <div class="col-6">
@@ -54,13 +79,11 @@
                                 <label>Mô tả chi tiết</label>
                                 <textarea cols="80" name="mo_ta_chi_tiet" rows="10" data-sample="1" data-sample-short></textarea>
                             </div>
-                            <div>
-                                <label>Ảnh Thumbnail</label>
-                                <input type="file" class="form-control" accept="image/*" name="avatar"/>
-                            </div>
-                            <div>
-                                <label>Ảnh Gallery</label>
-                                <input type="file" multiple name="gallery[]" accept="image/*" class="form-control"/>
+                            <div class="row">
+                                <div class="col-md-6"> <label>Ảnh Thumbnail</label>
+                                    <input type="file" class="form-control" accept="image/*" name="avatar"/></div>
+                                <div class="col-md-6"> <label>Ảnh Gallery</label>
+                                    <input type="file" multiple name="gallery[]" accept="image/*" class="form-control"/></div>
                             </div>
                             <div class="row">
                                 <div class="col-sm-3">
@@ -92,6 +115,7 @@
         <button type="submit" class="btn btn-primary">Lưu</button>
     </form>
 
+    <script src="/vendor/laravel-filemanager/js/stand-alone-button.js"></script>
     <script src="../../dist/libs/ckeditor/ckeditor.js"></script>
     <script src="../../dist/libs/ckeditor/samples/js/sample.js"></script>
     <script data-sample="1">
@@ -101,6 +125,10 @@
         CKEDITOR.replace("mo_ta_chi_tiet", {
             height: 150,
         });
+    </script>
+    <script>
+        $('#lfm').filemanager('image');
+
     </script>
 
 @endsection

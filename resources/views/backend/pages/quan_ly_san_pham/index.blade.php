@@ -14,32 +14,27 @@
                 <table class="table align-middle text-nowrap mb-0">
                     <thead>
                     <tr>
-                        <th scope="col">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                            </div>
-                        </th>
-                        <th scope="col">Products</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Actions</th>
+
+                        <th scope="col">Tên sản phẩm</th>
+                        <th scope="col">Ngày tạo</th>
+                        <th scope="col">Trạng thái</th>
+                        <th scope="col">Giá gốc - Giá khuyến mại</th>
+                        <th scope="col">Thao tác</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($listProduct as $product)
                         <tr>
                             <td>
-                                <div class="form-check mb-0">
-                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                                </div>
-                            </td>
-                            <td>
                                 <div class="d-flex align-items-center">
-                                    <img src="../../dist/images/products/s1.jpg" class="rounded-circle" alt="..." width="56" height="56">
+                                    @if($product->avatar)
+                                        <img src="{{ asset( 'storage/' . $product->avatar ) }}" class="rounded-circle" alt="..." width="56" height="56">
+                                    @else
+                                        <img src="../../dist/images/products/s1.jpg" class="rounded-circle" alt="..." width="56" height="56">
+                                    @endif
                                     <div class="ms-3">
                                         <h6 class="fw-semibold mb-0 fs-4">{{ $product->title }}</h6>
-                                        <p class="mb-0">books</p>
+{{--                                        <p class="mb-0">books</p>--}}
                                     </div>
                                 </div>
                             </td>

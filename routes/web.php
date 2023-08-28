@@ -42,7 +42,9 @@ Route::group(['prefix' => 'frontend'], function () {
     require_once __DIR__ . '/frontend.php';
 });
 
-
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 
 

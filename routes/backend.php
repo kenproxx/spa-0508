@@ -5,6 +5,7 @@ use App\Http\Controllers\backend\CauHinhController;
 use App\Http\Controllers\backend\DanhGiaSanPhamController;
 use App\Http\Controllers\backend\DonHangController;
 use App\Http\Controllers\backend\GoiDichVuController;
+use App\Http\Controllers\backend\ImageStickersController;
 use App\Http\Controllers\backend\MailController;
 use App\Http\Controllers\backend\MailLogController;
 use App\Http\Controllers\backend\MoreServiceController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\backend\ProfileController;
 use App\Http\Controllers\backend\QL_UserController;
 use App\Http\Controllers\backend\QL_VoucherController;
 use App\Http\Controllers\backend\QLEmailController;
+use App\Http\Controllers\backend\TagsController;
 use App\Http\Controllers\backend\ThongKeController;
 use App\Http\Controllers\backend\TinNhanController;
 use Illuminate\Support\Facades\Route;
@@ -113,6 +115,19 @@ Route::prefix('/mail')->group(function () {
     Route::get('/log', [MailLogController::class, 'index'])->name('backend.admin.log.mail.show');
     Route::get('', [MailController::class, 'sendMail'])->name('backend.admin.mail.processCreate');
     Route::post('', [MailLogController::class, 'store'])->name('backend.admin.log.mail.create');
+});
+
+Route::prefix('/tags')->group(function () {
+    Route::get('', [TagsController::class, 'index'])->name('backend.tags.index');
+    Route::post('/store', [TagsController::class, 'store'])->name('backend.tags.store');
+    Route::get('/show/{id}', [TagsController::class, 'show'])->name('backend.tags.show');
+    Route::get('/destroy/{id}', [TagsController::class, 'destroy'])->name('backend.tags.destroy');
+});
+
+Route::prefix('/files')->group(function () {
+    Route::get('', [ImageStickersController::class, 'index'])->name('backend.files.index');
+    Route::post('/store', [ImageStickersController::class, 'store'])->name('backend.files.store');
+    Route::get('/destroy/{id}', [ImageStickersController::class, 'destroy'])->name('backend.files.destroy');
 });
 
 
