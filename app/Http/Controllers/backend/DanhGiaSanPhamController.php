@@ -32,6 +32,8 @@ class DanhGiaSanPhamController extends Controller
             if (!$feedback || $feedback->status == ProductFeedbackStatus::DELETED) {
                 return back();
             }
+            $feedback->content = $request->input('content');
+            $feedback->star_number = $request->input('star_number');
             $feedback->status = $request->input('status');
             $feedback->save();
             return redirect(route('backend.danh-gia-san-pham.show'));

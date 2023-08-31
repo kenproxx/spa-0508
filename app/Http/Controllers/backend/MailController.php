@@ -13,10 +13,6 @@ class MailController extends Controller
     public function sendMail()
     {
         $users = User::where('status', '!=', UserStatus::DELETED)->get();
-        $emailFrom = Config::where([
-            ['name', 'MAIL_USERNAME'],
-            ['type', 'smtp_email']
-        ])->first();
-        return view('backend.pages.email.send-mail', compact('users', 'emailFrom'));
+        return view('backend.pages.email.send-mail', compact('users'));
     }
 }
