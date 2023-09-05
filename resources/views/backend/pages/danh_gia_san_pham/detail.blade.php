@@ -28,9 +28,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="description">Nội dung đánh giá</label>
-                <input disabled type="text" class="form-control" id="description" placeholder="description"
-                       value="{{$feedback->content}}">
+                <label for="content">Nội dung đánh giá</label>
+                <textarea class="form-control" id="content" rows="3" name="content">{{$feedback->content}}</textarea>
             </div>
 
             <div class="form-row row">
@@ -42,9 +41,9 @@
                     <input disabled type="text" class="form-control" value="{{$product->name}}">
                 </div>
                 <div class="form-group col-md-3">
-                    <label for="old_price">Mức độ</label>
-                    <input disabled type="text" class="form-control"
-                           value="{{$feedback->star_number}}">
+                    <label for="star_number">Mức độ</label>
+                    <input id="star_number" name="star_number" type="number" class="form-control"
+                           value="{{$feedback->star_number}}" max="5" min="1">
                 </div>
                 <div class="form-group col-md-6">
                     <label for="status">Trạng thái</label>

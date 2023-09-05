@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\frontend\DanhGiaSanPhamController;
+use App\Http\Controllers\frontend\DonHangController;
 use App\Http\Controllers\frontend\HomePageController;
 use App\Http\Controllers\frontend\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -27,7 +28,7 @@ Route::prefix('/san-pham')->group(function () {
 Route::post('/danh-gia-san-pham', [DanhGiaSanPhamController::class, 'store'])->name('frontend.danh-gia-san-pham.create');
 Route::post('/danh-gia-san-pham', [DanhGiaSanPhamController::class, 'store'])->name('frontend.danh-gia-san-pham.create');
 
-
+Route::post('/order', [DonHangController::class, 'create'])->name('frontend.order.create');
 
 
 

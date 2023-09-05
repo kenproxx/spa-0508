@@ -39,7 +39,7 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a class="sidebar-link" href="{{ route('backend.email.show') }}" aria-expanded="false">
+            <a class="sidebar-link" href="{{ route('backend.admin.mail.processCreate') }}" aria-expanded="false">
                   <span>
                     <i class="ti ti-cpu"></i>
                   </span>

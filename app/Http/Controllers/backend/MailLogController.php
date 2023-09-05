@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Enum\MailLogStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\SendMailController;
+use App\Models\Config;
 use App\Models\MailLog;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +21,11 @@ class MailLogController extends Controller
     public function store(Request $request)
     {
         try {
-            $mailFrom = $request->input('mail_from');
+            $emailFrom = Config::where([
+                ['name', 'MAIL_USERNAME'],
+                ['type', 'smtp_email']
+            ])->first();
+            $mailFrom = $emailFrom->value;
             $mailTo = $request->input('mail_to');
             $title = $request->input('title');
 

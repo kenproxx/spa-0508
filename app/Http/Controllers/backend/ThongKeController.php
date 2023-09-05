@@ -7,15 +7,14 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductFeedback;
 use App\Models\ProductService;
+use App\Models\Revenue;
 use App\Models\Role;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class ThongKeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $users = User::all();
@@ -33,51 +32,16 @@ class ThongKeController extends Controller
             'services', 'feedbacks'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function getAllRevenueOrder()
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $orders = Order::where('created_at', '>', Carbon::now()->addMonths(-1))->orderBy('created_at', 'desc')->get();
+        $numbers = null;
+        $datetime = null;
+        foreach ($orders as $item) {
+            $numbers[] = $item->price;
+            $datetime[] = $item->created_at ;
+        }
+        $myArray[] = [$numbers, $datetime];
+        return $myArray;
     }
 }
