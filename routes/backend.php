@@ -50,6 +50,7 @@ Route::prefix('/dai-ly')->group(function () {
 
 Route::prefix('/thong-ke')->group(function () {
     Route::get('', [ThongKeController::class, 'index'])->name('backend.thong-ke.show');
+    Route::get('/order', [ThongKeController::class, 'getAllRevenueOrder'])->name('backend.thong-ke.order');
 });
 
 Route::prefix('/tin-nhan')->group(function () {
@@ -81,12 +82,15 @@ Route::prefix('/dich-vu-them')->group(function () {
     Route::get('/destroy/{id}', [MoreServiceController::class, 'destroy'])->name('backend.dich-vu-them.destroy');
 });
 
-Route::prefix('/trang-ca-nhan')->group(function () {
-    Route::get('', [ProfileController::class, 'index'])->name('backend.trang-ca-nhan.show');
-});
-
 Route::prefix('/don-hang')->group(function () {
     Route::get('', [DonHangController::class, 'index'])->name('backend.don-hang.show');
+    Route::get('/{id}', [DonHangController::class, 'show'])->name('backend.don-hang.detail');
+    Route::put('/{id}', [DonHangController::class, 'update'])->name('backend.don-hang.update');
+    Route::delete('/{id}', [DonHangController::class, 'destroy'])->name('backend.don-hang.delete');
+});
+
+Route::prefix('/trang-ca-nhan')->group(function () {
+    Route::get('', [ProfileController::class, 'index'])->name('backend.trang-ca-nhan.show');
 });
 
 Route::prefix('/cau-hinh')->group(function () {
